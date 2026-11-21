@@ -240,175 +240,20 @@
             📋 Copy Recommended Firestore Rules
           </button>
         </div>
-        <div class="flex items-center justify-between gap-2 text-[11px] text-slate-400">
-          <span>Status: <strong id="fbModalStatusLabel" class="text-amber-300">Local Preview Mode</strong></span>
-          <button type="button" id="resetFirebaseConfigBtn" class="text-rose-300 hover:underline">Clear Custom Config</button>
-        </div>
-      </div>
 
-      <div class="flex justify-end gap-2 pt-2">
-        <button type="button" id="cancelFirebaseModalBtn" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-700">Cancel</button>
-        <button type="button" id="saveFirebaseConfigBtn" class="px-5 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-400 to-purple-500 text-slate-950 hover:brightness-110">
-          Connect Firebase
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ======================================================================= -->
-  <!-- TOP NAVIGATION BAR                                                      -->
-  <!-- ======================================================================= -->
-  <header class="sticky top-0 z-30 bg-[#03050c]/85 backdrop-blur-xl border-b border-cyan-500/15">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-3">
-      <!-- Cosmic Brand Emblem -->
-      <div class="flex items-center gap-3">
-        <button id="brandHomeBtn" type="button" class="flex items-center gap-3 text-left group focus:outline-none">
-          <div class="relative w-10 h-10 rounded-2xl bg-gradient-to-br from-cyan-400 via-indigo-500 to-purple-600 flex items-center justify-center plasma-glow group-hover:scale-105 transition-transform">
-            <span class="orbit-ring absolute -inset-1 rounded-2xl border border-dashed border-cyan-300/40 pointer-events-none"></span>
-            <svg class="w-5 h-5 text-slate-950" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M12 2L14.8 8.6L22 9.3L16.5 14L18.2 21L12 17.3L5.8 21L7.5 14L2 9.3L9.2 8.6L12 2Z" />
-            </svg>
-          </div>
-          <div>
-            <div class="flex items-center gap-2">
-              <span class="font-display font-black text-lg sm:text-xl tracking-wider text-white">M3RCURY</span>
-              <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-400/35">
-                STUD!O
-              </span>
-            </div>
-            <p class="text-[11px] text-slate-400 hidden sm:block">100+ 2D &amp; 3D Worlds • Bot-Populated Servers • Zero Chat</p>
-          </div>
-        </button>
-      </div>
-
-      <!-- Primary Workspace Tabs -->
-      <nav class="flex items-center gap-1 bg-slate-950/90 p-1 rounded-2xl border border-slate-800/90 overflow-x-auto max-w-full" aria-label="Workspace Navigation">
-        <button type="button" data-nav="hub" class="nav-tab-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap bg-cyan-400/20 text-cyan-300 border border-cyan-400/40 transition">
-          🚀 Cosmic Hub
-        </button>
-        <button type="button" data-nav="studio" class="nav-tab-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap text-slate-400 hover:text-white border border-transparent transition">
-          ⚡ M3rcury Stud!o
-        </button>
-        <button type="button" data-nav="friends" class="nav-tab-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap text-slate-400 hover:text-white border border-transparent transition">
-          🛸 Friends &amp; Servers
-        </button>
-        <button type="button" data-nav="profile" class="nav-tab-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap text-slate-400 hover:text-white border border-transparent transition">
-          🪐 Commander Profile
-        </button>
-      </nav>
-
-      <!-- Firebase Status + Commander Account Pill -->
-      <div class="flex items-center gap-2">
-        <button id="openFirebaseSettingsBtn" type="button" title="Configure Firebase Connection" class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-950/90 border border-slate-800 hover:border-purple-400/50 text-[11px] font-mono text-slate-300 transition">
-          <span id="fbIndicatorDot" class="w-2 h-2 rounded-full bg-amber-400"></span>
-          <span id="fbIndicatorText">Local Preview Mode</span>
-        </button>
-        <div id="headerAccountSlot"></div>
-      </div>
-    </div>
-  </header>
-
-  <!-- ======================================================================= -->
-  <!-- MAIN WORKSPACE CONTAINER                                                -->
-  <!-- ======================================================================= -->
-  <main class="relative z-10 flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
-
-    <!-- Guest Save-Lock Notice Bar (Visible only when browsing as Guest) -->
-    <div id="guestWarningBanner" class="hidden rounded-2xl bg-gradient-to-r from-amber-500/15 via-purple-500/15 to-cyan-500/15 border border-amber-400/35 px-4 py-3 flex flex-wrap items-center justify-between gap-3">
-      <div class="flex items-center gap-2.5 text-xs sm:text-sm">
-        <span class="text-base">🔒</span>
-        <span class="text-amber-100">
-          <strong>Guest Orbit Active:</strong> Progress saving, avatar customization, and adding friends are locked until you sign in or create an account.
-        </span>
-      </div>
-      <button id="bannerSignInBtn" type="button" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-amber-400 text-slate-950 hover:bg-amber-300 transition shrink-0">
-        Create Free Account
-      </button>
-    </div>
-
-    <!-- ===================================================================== -->
-    <!-- VIEW 1: COSMIC HUB (Live 3D/2D Stage + Multiplayer Servers + 108 Games)-->
-    <!-- ===================================================================== -->
-    <section id="view-hub" class="workspace-view space-y-6 animate-panel">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        <!-- Interactive 2D / 3D WebGL Game Viewport (8 Columns) -->
-        <div class="lg:col-span-8 cosmic-glass rounded-3xl p-4 sm:p-5 space-y-4">
-          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/90 pb-3.5">
-            <div>
-              <div class="flex flex-wrap items-center gap-2">
-                <span id="stageDimBadge" class="text-[11px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/40">
-                  3D WEBGL • NAMETAGS ON
-                </span>
-                <span id="stageGenreBadge" class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-400/35">
-                  3D Space Flight
-                </span>
-                <span id="stageMpBadge" class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-                  Multiplayer Server Ready
-                </span>
-              </div>
-              <h1 id="stageTitle" class="font-display text-xl sm:text-2xl font-extrabold text-white mt-1.5 tracking-wide">
-                Nebula Starfighter 3D
-              </h1>
-              <p id="stageDescription" class="text-xs sm:text-sm text-slate-300 mt-0.5">
-                Pilot your starfighter through asteroid rings in 3D space with floating player nametags! Steer with WASD/Arrows or drag.
-              </p>
-            </div>
-
-            <div class="flex items-center gap-2">
-              <button id="stageLaunchBtn" type="button" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950 hover:brightness-110 transition shadow-lg shadow-cyan-500/25">
-                ▶ Launch / Restart
-              </button>
-              <button id="stagePauseBtn" type="button" class="px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900/90 text-slate-200 border border-slate-700 hover:border-slate-500 transition">
-                Pause
-              </button>
-            </div>
-          </div>
-
-          <!-- Telemetry HUD Strip -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-            <div class="rounded-2xl bg-slate-950/90 border border-slate-800/90 px-3.5 py-2">
-              <div class="text-[10px] font-mono uppercase text-slate-400">Live Score</div>
-              <div id="hudScoreVal" class="font-display text-lg sm:text-xl font-bold text-cyan-300">0</div>
-            </div>
-            <div class="rounded-2xl bg-slate-950/90 border border-slate-800/90 px-3.5 py-2">
-              <div class="text-[10px] font-mono uppercase text-slate-400">Saved Best</div>
-              <div id="hudBestVal" class="font-display text-lg sm:text-xl font-bold text-purple-300">0</div>
-            </div>
-            <div class="rounded-2xl bg-slate-950/90 border border-slate-800/90 px-3.5 py-2">
-              <div class="text-[10px] font-mono uppercase text-slate-400">Active Server</div>
-              <div id="hudRoomVal" class="font-mono text-xs font-bold text-emerald-300 truncate mt-1">Solo Orbit</div>
-            </div>
-            <div class="rounded-2xl bg-slate-950/90 border border-slate-800/90 px-3.5 py-2">
-              <div class="text-[10px] font-mono uppercase text-slate-400">Players in Room</div>
-              <div id="hudPeersVal" class="font-mono text-xs font-bold text-amber-300 truncate mt-1">1 Active</div>
-            </div>
-          </div>
-
-          <!-- Dual-Engine Game Stage Container (2D Canvas + 3D WebGL Canvas + Floating Nametags Overlay) -->
-          <div id="gameViewportContainer" class="relative rounded-2xl bg-[#02040a] border border-cyan-500/25 overflow-hidden aspect-video w-full shadow-inner">
-            <canvas id="canvas2DStage" class="w-full h-full block touch-none"></canvas>
-            <div id="stage3DContainer" class="hidden absolute inset-0 w-full h-full touch-none"></div>
-            <!-- Projected 3D & 2D Floating Player Nametags Layer -->
-            <div id="nametagOverlayLayer" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
-
-            <!-- Launch / Game Over Overlay -->
-            <div id="stageOverlay" class="absolute inset-0 bg-[#030612]/80 backdrop-blur-sm flex flex-col items-center justify-center p-5 text-center z-10">
-              <span id="overlayKicker" class="text-[11px] font-mono uppercase tracking-widest text-cyan-300 mb-1">M3RCURY ENGINE READY</span>
-              <h2 id="overlayHeadline" class="font-display text-xl sm:text-3xl font-black text-white">Nebula Starfighter 3D</h2>
-              <p id="overlaySubtext" class="text-xs sm:text-sm text-slate-300 max-w-md mt-1.5">
-                Use WASD / Arrow Keys (or drag/touch) to steer. Floating nametags show you and any friends in your server.
-              </p>
-              <button id="overlayStartBtn" type="button" class="mt-4 px-6 py-3 rounded-2xl text-xs sm:text-sm font-bold bg-gradient-to-r from-cyan-400 via-sky-400 to-purple-500 text-slate-950 hover:scale-105 transition-transform shadow-xl shadow-cyan-500/30">
-                🚀 Engage Thrusters
-              </button>
-            </div>
-          </div>
-
-          <!-- Mobile Touch Controls -->
-          <div class="flex sm:hidden items-center justify-between gap-2 pt-1">
-            <button id="mobileLeftBtn" type="button" class="flex-1 py-3 rounded-xl bg-slate-900 border border-slate-700 active:bg-cyan-500/25 font-mono text-xs font-bold text-cyan-300">◀ LEFT</button>
-            <button id="mobileActionBtn" type="button" class="flex-1 py-3 rounded-xl bg-slate-900 border border-purple-500/40 active:bg-purple-500/25 font-mono text-xs font-bold text-purple-300">⚡ BOOST / JUMP</button>
-            <button id="mobileRightBtn" type="button" class="flex-1 py-3 rounded-xl bg-slate-900 border border-slate-700 active:bg-cyan-500/25 font-mono text-xs font-bold text-cyan-300">RIGHT ▶</button>
+        <div class="space-y-2">
+          <label for="firebaseConfigTextarea" class="block text-[11px] font-mono uppercase tracking-wider text-slate-300">
+            Firebase Web Config JSON
+          </label>
+          <textarea id="firebaseConfigTextarea" rows="7" spellcheck="false" placeholder='{"apiKey":"...","authDomain":"...","projectId":"..."}' class="w-full rounded-xl bg-slate-950/95 border border-slate-800 focus:border-purple-400 p-3 font-mono text-xs text-cyan-100 outline-none"></textarea>
+          <div class="flex items-center justify-between gap-2 text-[11px] text-slate-400">
+            <span class="inline-flex items-center gap-1.5">
+              <span id="fbIndicatorDot" class="w-2 h-2 rounded-full bg-amber-400"></span>
+              <span id="fbIndicatorText">Local Preview Mode</span>
+              <span>•</span>
+              <strong id="fbModalStatusLabel" class="text-amber-300">Local Preview Mode</strong>
+            </span>
+            <button type="button" id="resetFirebaseConfigBtn" class="text-rose-300 hover:underline">Clear Custom Config</button>
           </div>
         </div>
 
@@ -459,12 +304,6 @@
         </aside>
       </div>
 
-      <!-- 108+ Distinct Playable Games Catalog -->
-      <section class="cosmic-glass rounded-3xl p-4 sm:p-6 space-y-5">
-        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-slate-800 pb-4">
-      <!-- 100 Exact Playable Games Catalog -->
-      <section class="cosmic-glass rounded-3xl p-4 sm:p-6 space-y-5">
-        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-slate-800 pb-4">
       <!-- 100 Exact Playable Games Catalog -->
       <section class="cosmic-glass rounded-3xl p-4 sm:p-6 space-y-5">
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-slate-800 pb-4">
@@ -904,19 +743,55 @@ service cloud.firestore {
       return DEFAULT_FIREBASE_CONFIG;
     }
 
+    // =========================================================================
+    // TOAST NOTIFICATIONS
+    // =========================================================================
+    let toastTimer = null;
+    function showToast(message, kind = "info") {
+      const card = document.getElementById("toastCard");
+      const icon = document.getElementById("toastIcon");
+      const msg = document.getElementById("toastMsg");
+      if (!card || !icon || !msg) return;
+
+      icon.textContent = kind === "error" ? "⚠️" : kind === "lock" ? "🔒" : kind === "success" ? "🚀" : "✨";
+      msg.textContent = message;
+      card.className =
+        "pointer-events-auto rounded-2xl px-4 py-3 border backdrop-blur-xl shadow-2xl flex items-center justify-between gap-3 text-xs sm:text-sm font-medium transition-all " +
+        (kind === "error"
+          ? "bg-rose-950/95 border-rose-500/50 text-rose-100"
+          : kind === "lock"
+          ? "bg-amber-950/95 border-amber-400/50 text-amber-100"
+          : kind === "success"
+          ? "bg-emerald-950/95 border-emerald-400/50 text-emerald-100"
+          : "bg-slate-900/95 border-cyan-400/45 text-cyan-100");
+      card.classList.remove("hidden");
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        card.classList.add("hidden");
+      }, 3600);
+    }
+
+    document.getElementById("toastCloseBtn")?.addEventListener("click", () => {
+      document.getElementById("toastCard")?.classList.add("hidden");
+    });
+
     function initFirebaseIfConfigured() {
       const cfg = getSavedFirebaseConfig();
       const dot = document.getElementById("fbIndicatorDot");
       const label = document.getElementById("fbIndicatorText");
       const modalLabel = document.getElementById("fbModalStatusLabel");
+      const footerSync = document.getElementById("footerSyncStatus");
 
       if (!cfg || !cfg.apiKey || !cfg.projectId) {
         isFirebaseLive = false;
-        dot.className = "w-2 h-2 rounded-full bg-amber-400";
-        label.textContent = "Local Preview Mode";
-        modalLabel.textContent = "Local Preview Mode (Paste Firebase config to go live)";
-        modalLabel.className = "text-amber-300";
-        document.getElementById("footerSyncStatus").textContent = "100 Exact Worlds • Local Preview Mode • Zero Chat";
+        if (dot) dot.className = "w-2 h-2 rounded-full bg-amber-400";
+        if (label) label.textContent = "Local Preview Mode";
+        if (modalLabel) {
+          modalLabel.textContent = "Local Preview Mode (Paste Firebase config to go live)";
+          modalLabel.className = "text-amber-300";
+        }
+        if (footerSync) footerSync.textContent = "100 Exact Worlds • Local Preview Mode • Zero Chat";
         return false;
       }
 
@@ -926,11 +801,13 @@ service cloud.firestore {
         fbDb = getFirestore(fbApp);
         isFirebaseLive = true;
 
-        dot.className = "w-2 h-2 rounded-full bg-emerald-400";
-        label.textContent = `Firebase Live (${cfg.projectId})`;
-        modalLabel.textContent = `Firebase Live • ${cfg.projectId}`;
-        modalLabel.className = "text-emerald-300";
-        document.getElementById("footerSyncStatus").textContent = `100 Exact Worlds • Firebase Live (${cfg.projectId})`;
+        if (dot) dot.className = "w-2 h-2 rounded-full bg-emerald-400";
+        if (label) label.textContent = `Firebase Live (${cfg.projectId})`;
+        if (modalLabel) {
+          modalLabel.textContent = `Firebase Live • ${cfg.projectId}`;
+          modalLabel.className = "text-emerald-300";
+        }
+        if (footerSync) footerSync.textContent = `100 Exact Worlds • Firebase Live (${cfg.projectId})`;
 
         onAuthStateChanged(fbAuth, async (user) => {
           if (authOperationInProgress) return;
@@ -947,8 +824,8 @@ service cloud.firestore {
       } catch (err) {
         console.error("Firebase init failed:", err);
         isFirebaseLive = false;
-        dot.className = "w-2 h-2 rounded-full bg-rose-400";
-        label.textContent = "Firebase Config Error";
+        if (dot) dot.className = "w-2 h-2 rounded-full bg-rose-400";
+        if (label) label.textContent = "Firebase Config Error";
         showToast("Firebase config error — check your JSON keys", "error");
         return false;
       }
@@ -1081,110 +958,107 @@ service cloud.firestore {
     function build100ExactGames() {
       return EXACT_100_GAMES_RAW.map(([num, title, dim, mode, description], idx) => {
         const isMp = mode.toLowerCase().includes("multi");
-      const pal = PALETTES[idx % PALETTES.length];
-      const speedMult = Number((0.88 + ((idx % 6) * 0.12)).toFixed(2));
-      const density = 3 + (idx % 5);
+        const pal = PALETTES[idx % PALETTES.length];
+        const speedMult = Number((0.88 + ((idx % 6) * 0.12)).toFixed(2));
+        const density = 3 + (idx % 5);
 
-      let mechanicType = "generic_2d";
-      if (num === 1) mechanicType = "cargo_logistics_3d";
-      else if (num === 2) mechanicType = "mushroom_terrarium_2d";
-      else if (num === 3) mechanicType = "galactic_laundromat_3d";
-      else if (num === 4) mechanicType = "clockwork_toymaker_3d";
-      else if (num === 5) mechanicType = "trench_research_2d";
-      else if (num === 6) mechanicType = "amber_museum_3d";
-      else if (num === 7) mechanicType = "haunted_hotel_3d";
-      else if (num === 8) mechanicType = "bonsai_sanctuary_3d";
-      else if (num === 9) mechanicType = "dimensional_post_3d";
-      else if (num === 10) mechanicType = "volcanic_glass_3d";
-      else if (dim === "3D") {
-        mechanicType = idx % 3 === 0 ? "flight3d" : idx % 3 === 1 ? "obby3d" : "arena3d";
-      } else {
-        mechanicType = idx % 3 === 0 ? "shooter2d" : idx % 3 === 1 ? "runner2d" : "gravity2d";
-      }
+        let mechanicType = "generic_2d";
+        if (num === 1) mechanicType = "cargo_logistics_3d";
+        else if (num === 2) mechanicType = "mushroom_terrarium_2d";
+        else if (num === 3) mechanicType = "galactic_laundromat_3d";
+        else if (num === 4) mechanicType = "clockwork_toymaker_3d";
+        else if (num === 5) mechanicType = "trench_research_2d";
+        else if (num === 6) mechanicType = "amber_museum_3d";
+        else if (num === 7) mechanicType = "haunted_hotel_3d";
+        else if (num === 8) mechanicType = "bonsai_sanctuary_3d";
+        else if (num === 9) mechanicType = "dimensional_post_3d";
+        else if (num === 10) mechanicType = "volcanic_glass_3d";
+        else if (dim === "3D") {
+          mechanicType = idx % 3 === 0 ? "flight3d" : idx % 3 === 1 ? "obby3d" : "arena3d";
+        } else {
+          mechanicType = idx % 3 === 0 ? "shooter2d" : idx % 3 === 1 ? "runner2d" : "gravity2d";
+        }
 
-      return {
-        id: `m3-exact-${String(num).padStart(3, "0")}`,
-        number: num,
-        title,
-        dim,
-        mode,
-        multiplayer: isMp,
-        engine: mechanicType,
-        genre: `${dim} • ${mode}`,
-        studio: isMp ? "M3rcury Squad Lab" : "M3rcury Solo Forge",
-        rating: (4.4 + ((idx % 6) * 0.1)).toFixed(1),
-        palette: pal,
-        speedMult,
-        density,
-        description,
-        isCustomStudio: false,
-      };
+        return {
+          id: `m3-exact-${String(num).padStart(3, "0")}`,
+          number: num,
+          title,
+          dim,
+          mode,
+          multiplayer: isMp,
+          engine: mechanicType,
+          genre: `${dim} • ${mode}`,
+          studio: isMp ? "M3rcury Squad Lab" : "M3rcury Solo Forge",
+          rating: (4.4 + ((idx % 6) * 0.1)).toFixed(1),
+          palette: pal,
+          speedMult,
+          density,
+          description,
+          isCustomStudio: false,
+        };
+      });
     }
 
     const BUILTIN_100_GAMES = build100ExactGames();
 
     // =========================================================================
-    // 4. APPLICATION STATE (ZERO Fake Friends, Friend Removal, Bots, Live FB)
+    // PERSISTENT STORAGE & SESSION STATE (ZERO FAKE PRELOADED FRIENDS)
     // =========================================================================
+    function createDefaultLocalDb() {
+      return {
+        accounts: {}, // key: email -> { handle, email, avatar, motto, friendCode, savedScore, gamesPlayed, friends: [], pendingRequests: [], studioGames: [] }
+        activeSessionEmail: null,
+        servers: [
+          {
+            id: "srv-cloud-01",
+            name: "SkyDock Alpha",
+            gameId: "m3-exact-001",
+            gameTitle: "Cloud-City Cargo Logistics",
+            region: "US-East",
+            privacy: "public",
+            host: "[BOT] SkyCaptain",
+            peers: ["[BOT] NovaBot", "[BOT] DriftUnit"],
+          },
+          {
+            id: "srv-laundry-02",
+            name: "Nebula Wash 09",
+            gameId: "m3-exact-003",
+            gameTitle: "Galactic Laundromat",
+            region: "US-West",
+            privacy: "public",
+            host: "[BOT] OrbitKid",
+            peers: ["[BOT] PulseDrone"],
+          },
+          {
+            id: "srv-post-03",
+            name: "Rift Mail Hub",
+            gameId: "m3-exact-009",
+            gameTitle: "Interdimensional Post Office",
+            region: "EU-Orbit",
+            privacy: "public",
+            host: "[BOT] CometBot",
+            peers: ["[BOT] IonUnit"],
+          },
+        ],
+      };
+    }
+
     function loadLocalDb() {
       try {
         const raw = localStorage.getItem(LOCAL_DB_KEY);
         if (raw) {
           const parsed = JSON.parse(raw);
-          // Ensure no fake pre-populated friends exist in any stored account
-          if (parsed && parsed.accounts) {
-            for (const k of Object.keys(parsed.accounts)) {
-              if (!Array.isArray(parsed.accounts[k].friends)) parsed.accounts[k].friends = [];
-              if (!Array.isArray(parsed.accounts[k].pendingRequests)) parsed.accounts[k].pendingRequests = [];
-            }
-          }
-          return parsed;
+          return {
+            ...createDefaultLocalDb(),
+            ...parsed,
+            accounts: parsed.accounts || {},
+            servers: Array.isArray(parsed.servers) && parsed.servers.length ? parsed.servers : createDefaultLocalDb().servers,
+          };
         }
       } catch (e) {
-        console.warn("Local DB parse error:", e);
+        console.warn("Failed to read local DB", e);
       }
-      return {
-        accounts: {},
-        activeSessionEmail: null,
-        servers: [
-          {
-            id: "srv-cloud-1",
-            name: "Sky-Dock Cargo Sector",
-            gameId: "m3-exact-001",
-            gameTitle: "Cloud-City Cargo Logistics",
-            host: "[BOT] NovaBot",
-            region: "US-East",
-            privacy: "public",
-            players: 3,
-            maxPlayers: 8,
-            peers: ["[BOT] NovaBot", "[BOT] OrbitKid"],
-          },
-          {
-            id: "srv-laundromat-2",
-            name: "Nebula Wash Bay #2",
-            gameId: "m3-exact-003",
-            gameTitle: "Galactic Laundromat",
-            host: "[BOT] DriftUnit",
-            region: "EU-Orbit",
-            privacy: "public",
-            players: 2,
-            maxPlayers: 8,
-            peers: ["[BOT] DriftUnit"],
-          },
-          {
-            id: "srv-hotel-3",
-            name: "Midnight Spectral Wing",
-            gameId: "m3-exact-007",
-            gameTitle: "Haunted Hotel Hospitality",
-            host: "[BOT] PulseDrone",
-            region: "US-West",
-            privacy: "public",
-            players: 3,
-            maxPlayers: 8,
-            peers: ["[BOT] PulseDrone", "[BOT] CometBot"],
-          },
-        ],
-      };
+      return createDefaultLocalDb();
     }
 
     let localDb = loadLocalDb();
@@ -1193,43 +1067,41 @@ service cloud.firestore {
       try {
         localStorage.setItem(LOCAL_DB_KEY, JSON.stringify(localDb));
       } catch (e) {
-        console.error("Failed to save local DB:", e);
+        console.warn("Failed to write local DB", e);
       }
     }
 
-    let session = {
+    const session = {
       isGuest: true,
-      uid: "guest",
+      handle: "Guest_Pilot",
       email: "",
-      handle: "GuestPilot",
       avatar: "🛸",
-      motto: "Exploring M3rcury in Guest Orbit",
-      friendCode: "#GUEST",
+      motto: "Exploring M3rcury worlds...",
+      friendCode: "#M3-GUEST",
       savedScore: 0,
       gamesPlayed: 0,
-      bestByGame: {},
-      friends: [],          // Strictly empty until user adds real friends
-      pendingRequests: [],  // Strictly empty until incoming requests arrive
+      friends: [],
+      pendingRequests: [],
       studioGames: [],
-      activeView: "hub",
-      activeGameId: "m3-exact-001",
-      joinedServerId: null,
-      catalogFilter: "ALL",
+      activeGameId: BUILTIN_100_GAMES[0].id,
+      activeServerId: null,
       catalogSearch: "",
+      catalogFilter: "ALL",
       catalogLimit: 16,
+      runScore: 0,
+      bestScore: 0,
+      isPlaying: true,
     };
 
     function resetToGuestSession() {
       session.isGuest = true;
-      session.uid = "guest";
+      session.handle = "Guest_Pilot";
       session.email = "";
-      session.handle = "GuestPilot";
       session.avatar = "🛸";
-      session.motto = "Exploring M3rcury in Guest Orbit";
-      session.friendCode = "#GUEST";
+      session.motto = "Exploring M3rcury worlds...";
+      session.friendCode = "#M3-GUEST";
       session.savedScore = 0;
       session.gamesPlayed = 0;
-      session.bestByGame = {};
       session.friends = [];
       session.pendingRequests = [];
       session.studioGames = [];
@@ -1237,570 +1109,391 @@ service cloud.firestore {
 
     function applyAccountRecordToSession(acc) {
       session.isGuest = false;
-      session.uid = acc.uid;
-      session.email = acc.email || usernameToSyntheticEmail(acc.handle);
-      session.handle = acc.handle;
+      session.handle = acc.handle || "Pilot";
+      session.email = acc.email || "";
       session.avatar = acc.avatar || "🚀";
-      session.motto = acc.motto || "Commander in the M3rcury Fleet";
-      session.friendCode = acc.friendCode || `#M3-${String(acc.uid).slice(-4).toUpperCase()}`;
-      session.savedScore = acc.savedScore || 0;
-      session.gamesPlayed = acc.gamesPlayed || 0;
-      session.bestByGame = acc.bestByGame || {};
+      session.motto = acc.motto || "Charting M3rcury sectors";
+      session.friendCode = acc.friendCode || `#M3-${String(Math.abs(hashCode(session.handle)) % 9000 + 1000)}`;
+      session.savedScore = Number(acc.savedScore || 0);
+      session.gamesPlayed = Number(acc.gamesPlayed || 0);
+      session.bestScore = Math.max(session.bestScore, session.savedScore);
       session.friends = Array.isArray(acc.friends) ? acc.friends : [];
       session.pendingRequests = Array.isArray(acc.pendingRequests) ? acc.pendingRequests : [];
       session.studioGames = Array.isArray(acc.studioGames) ? acc.studioGames : [];
     }
 
-    function isPermissionDeniedError(err) {
-      return err?.code === "permission-denied" || String(err?.message || "").toLowerCase().includes("permission");
-    }
-
-    function handleFirestorePermissionError(err, actionLabel) {
-      console.error(`Firestore error during ${actionLabel}:`, err);
-      if (isPermissionDeniedError(err)) {
-        showAuthError("Firestore is in Locked Mode! Click Copy Firestore Rules below and publish them in Firebase Console.", true);
-        showToast("Firestore is in Locked Mode — copy & publish Rules in Firebase Console.", "error");
-      } else {
-        showToast(`Cloud sync error (${actionLabel}): ${err?.message || "check connection"}`, "error");
+    function hashCode(str) {
+      let h = 0;
+      for (let i = 0; i < str.length; i++) {
+        h = ((h << 5) - h) + str.charCodeAt(i);
+        h |= 0;
       }
-    }
-
-    async function loadCloudUserProfile(firebaseUser) {
-      if (!fbDb || !firebaseUser) return;
-      const derivedHandle =
-        firebaseUser.displayName ||
-        (firebaseUser.email && firebaseUser.email.endsWith("@m3rcury.local")
-          ? firebaseUser.email.split("@")[0]
-          : "Pilot");
-      try {
-        const userRef = doc(fbDb, "pilots", firebaseUser.uid);
-        const snap = await getDoc(userRef);
-        if (snap.exists()) {
-          applyAccountRecordToSession({
-            uid: firebaseUser.uid,
-            email: firebaseUser.email,
-            handle: derivedHandle,
-            ...snap.data(),
-          });
-        } else {
-          const freshProfile = {
-            uid: firebaseUser.uid,
-            email: firebaseUser.email || usernameToSyntheticEmail(derivedHandle),
-            handle: derivedHandle,
-            handleLower: derivedHandle.toLowerCase(),
-            avatar: "🚀",
-            motto: "Charting deep space in M3rcury",
-            friendCode: `#M3-${firebaseUser.uid.slice(0, 4).toUpperCase()}`,
-            savedScore: 0,
-            gamesPlayed: 0,
-            bestByGame: {},
-            friends: [],
-            pendingRequests: [],
-            studioGames: [],
-          };
-          await setDoc(userRef, freshProfile);
-          await setDoc(
-            doc(fbDb, "usernames", derivedHandle.toLowerCase()),
-            { uid: firebaseUser.uid, handle: derivedHandle, email: freshProfile.email },
-            { merge: true }
-          );
-          applyAccountRecordToSession(freshProfile);
-        }
-      } catch (err) {
-        applyAccountRecordToSession({
-          uid: firebaseUser.uid,
-          email: firebaseUser.email,
-          handle: derivedHandle,
-        });
-        if (isPermissionDeniedError(err)) {
-          showToast("Signed in! Publish Firestore Rules to enable cloud profile sync.", "info");
-        }
-      }
+      return h;
     }
 
     async function syncCurrentAccountToStorage() {
       if (session.isGuest) return;
+      const key = (session.email || usernameToSyntheticEmail(session.handle)).toLowerCase();
       const record = {
-        uid: session.uid,
-        email: session.email || usernameToSyntheticEmail(session.handle),
         handle: session.handle,
-        handleLower: session.handle.toLowerCase(),
+        email: key,
         avatar: session.avatar,
         motto: session.motto,
         friendCode: session.friendCode,
         savedScore: session.savedScore,
         gamesPlayed: session.gamesPlayed,
-        bestByGame: session.bestByGame,
         friends: session.friends,
         pendingRequests: session.pendingRequests,
         studioGames: session.studioGames,
+        updatedAt: Date.now(),
+      };
+      localDb.accounts[key] = record;
+      localDb.activeSessionEmail = key;
+      persistLocalDb();
+
+      if (isFirebaseLive && fbDb) {
+        try {
+          const docId = session.handle.toLowerCase().replace(/[^a-z0-9_-]/g, "");
+          await setDoc(doc(fbDb, "pilots", docId), record, { merge: true });
+        } catch (err) {
+          console.warn("Firestore profile sync skipped/failed:", err);
+        }
+      }
+    }
+
+    async function loadCloudUserProfile(fbUser) {
+      const emailLower = (fbUser.email || "").toLowerCase();
+      const handleFromUser =
+        fbUser.displayName ||
+        (emailLower.endsWith("@m3rcury.local") ? emailLower.replace("@m3rcury.local", "") : emailLower.split("@")[0]) ||
+        "Pilot";
+      const docId = handleFromUser.toLowerCase().replace(/[^a-z0-9_-]/g, "");
+
+      let cloudData = null;
+      if (isFirebaseLive && fbDb && docId) {
+        try {
+          const snap = await getDoc(doc(fbDb, "pilots", docId));
+          if (snap.exists()) cloudData = snap.data();
+        } catch (err) {
+          console.warn("Could not read cloud pilot profile:", err);
+        }
+      }
+
+      const localRec = localDb.accounts[emailLower];
+      const merged = {
+        handle: cloudData?.handle || localRec?.handle || handleFromUser,
+        email: emailLower,
+        avatar: cloudData?.avatar || localRec?.avatar || "🚀",
+        motto: cloudData?.motto || localRec?.motto || "Online in M3rcury",
+        friendCode: cloudData?.friendCode || localRec?.friendCode || `#M3-${String(Math.abs(hashCode(handleFromUser)) % 9000 + 1000)}`,
+        savedScore: Math.max(Number(cloudData?.savedScore || 0), Number(localRec?.savedScore || 0)),
+        gamesPlayed: Math.max(Number(cloudData?.gamesPlayed || 0), Number(localRec?.gamesPlayed || 0)),
+        friends: cloudData?.friends || localRec?.friends || [],
+        pendingRequests: cloudData?.pendingRequests || localRec?.pendingRequests || [],
+        studioGames: cloudData?.studioGames || localRec?.studioGames || [],
       };
 
-      if (session.handle) {
-        localDb.accounts[session.handle.toLowerCase()] = {
-          ...(localDb.accounts[session.handle.toLowerCase()] || {}),
-          ...record,
-        };
-        persistLocalDb();
-      }
-
-      if (isFirebaseLive && fbDb && fbAuth?.currentUser) {
-        try {
-          await setDoc(doc(fbDb, "pilots", fbAuth.currentUser.uid), record, { merge: true });
-        } catch (err) {
-          if (!isPermissionDeniedError(err)) {
-            handleFirestorePermissionError(err, "save profile");
-          }
-        }
-      }
-    }
-
-    async function loadCloudUserProfile(firebaseUser) {
-      if (!fbDb || !firebaseUser) return;
-      try {
-        const userRef = doc(fbDb, "users", firebaseUser.uid);
-        const snap = await getDoc(userRef);
-        if (snap.exists()) {
-          applyAccountRecordToSession({ uid: firebaseUser.uid, email: firebaseUser.email, ...snap.data() });
-        } else {
-          const freshProfile = {
-            uid: firebaseUser.uid,
-            email: firebaseUser.email,
-            handle: firebaseUser.displayName || firebaseUser.email.split("@")[0],
-            avatar: "🚀",
-            motto: "Charting deep space in M3rcury",
-            friendCode: `#M3-${firebaseUser.uid.slice(0, 4).toUpperCase()}`,
-            savedScore: 0,
-            gamesPlayed: 0,
-            bestByGame: {},
-            friends: [],
-            pendingRequests: [],
-            studioGames: [],
-          };
-          await setDoc(userRef, freshProfile);
-          applyAccountRecordToSession(freshProfile);
-        }
-      } catch (err) {
-        handleFirestorePermissionError(err, "load profile");
-      }
-    }
-
-    async function syncCurrentAccountToStorage() {
-      if (session.isGuest) return;
-      const record = {
-        uid: session.uid,
-        email: session.email,
-        handle: session.handle,
-        avatar: session.avatar,
-        motto: session.motto,
-        friendCode: session.friendCode,
-        savedScore: session.savedScore,
-        gamesPlayed: session.gamesPlayed,
-        bestByGame: session.bestByGame,
-        friends: session.friends,
-        pendingRequests: session.pendingRequests,
-        studioGames: session.studioGames,
-      };
-
-      if (isFirebaseLive && fbDb && fbAuth?.currentUser) {
-        try {
-          await setDoc(doc(fbDb, "users", fbAuth.currentUser.uid), record, { merge: true });
-        } catch (err) {
-          handleFirestorePermissionError(err, "save profile");
-        }
-      } else if (session.email && localDb.accounts[session.email]) {
-        localDb.accounts[session.email] = {
-          ...localDb.accounts[session.email],
-          ...record,
-        };
-        persistLocalDb();
-      }
-    }
-
-    if (!getSavedFirebaseConfig() && localDb.activeSessionEmail && localDb.accounts[localDb.activeSessionEmail]) {
-      applyAccountRecordToSession(localDb.accounts[localDb.activeSessionEmail]);
+      localDb.accounts[emailLower] = merged;
+      localDb.activeSessionEmail = emailLower;
+      persistLocalDb();
+      applyAccountRecordToSession(merged);
     }
 
     // =========================================================================
-    // 5. TOASTS, PASSWORD CHECKS & AUTHENTICATION MODALS
+    // AUTHENTICATION MODAL (USERNAME + PASSWORD SIGN UP & SIGN IN)
     // =========================================================================
-    let toastTimeout = null;
-    function showToast(msg, kind = "info") {
-      const card = document.getElementById("toastCard");
-      const icon = document.getElementById("toastIcon");
-      const text = document.getElementById("toastMsg");
-
-      card.className = "pointer-events-auto rounded-2xl px-4 py-3 border backdrop-blur-xl shadow-2xl flex items-center justify-between gap-3 text-xs sm:text-sm font-medium transition-all";
-      if (kind === "success") {
-        card.classList.add("bg-emerald-950/95", "border-emerald-400/50", "text-emerald-100");
-        icon.textContent = "🚀";
-      } else if (kind === "error") {
-        card.classList.add("bg-rose-950/95", "border-rose-400/50", "text-rose-100");
-        icon.textContent = "⚠️";
-      } else if (kind === "lock") {
-        card.classList.add("bg-amber-950/95", "border-amber-400/50", "text-amber-100");
-        icon.textContent = "🔒";
-      } else {
-        card.classList.add("bg-slate-900/95", "border-cyan-400/45", "text-cyan-100");
-        icon.textContent = "✨";
-      }
-
-      text.textContent = msg;
-      card.classList.remove("hidden");
-      clearTimeout(toastTimeout);
-      toastTimeout = setTimeout(() => card.classList.add("hidden"), 3600);
-    }
-
-    document.getElementById("toastCloseBtn").addEventListener("click", () => {
-      document.getElementById("toastCard").classList.add("hidden");
-    });
-
-    const authModal = document.getElementById("authModal");
-    const pwInput = document.getElementById("authPasswordInput");
-    const pwConfirmInput = document.getElementById("authPasswordConfirmInput");
-    const handleAuthInput = document.getElementById("authHandleInput");
     let isSignupMode = false;
 
-    function showAuthError(message, showRulesHelper = false) {
+    function openAuthModal(signup = false) {
+      isSignupMode = Boolean(signup);
+      document.getElementById("authModalHeading").textContent = isSignupMode ? "Create M3rcury Account" : "Sign In with Username";
+      document.getElementById("authActionSubmitBtn").textContent = isSignupMode ? "Create Account" : "Sign In";
+      document.getElementById("signupConfirmWrap").classList.toggle("hidden", !isSignupMode);
+      document.getElementById("passwordStrengthMeterWrap").classList.toggle("hidden", !isSignupMode);
+      document.getElementById("authErrorBox").classList.add("hidden");
+      document.getElementById("copyFirestoreRulesBtn").classList.add("hidden");
+
+      const loginBtn = document.getElementById("tabLoginModeBtn");
+      const signupBtn = document.getElementById("tabSignupModeBtn");
+      if (!isSignupMode) {
+        loginBtn.className = "py-2 rounded-lg text-xs font-bold bg-cyan-400/20 text-cyan-300 border border-cyan-400/40 transition";
+        signupBtn.className = "py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
+      } else {
+        signupBtn.className = "py-2 rounded-lg text-xs font-bold bg-purple-500/25 text-purple-200 border border-purple-400/40 transition";
+        loginBtn.className = "py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
+      }
+
+      document.getElementById("authModal").classList.remove("hidden");
+      document.getElementById("authHandleInput")?.focus();
+    }
+
+    function closeAuthModal() {
+      document.getElementById("authModal").classList.add("hidden");
+    }
+
+    function showAuthError(msg, showRulesHelper = false) {
       const box = document.getElementById("authErrorBox");
       const text = document.getElementById("authErrorText");
       const rulesBtn = document.getElementById("copyFirestoreRulesBtn");
-      text.textContent = message;
+      text.textContent = msg;
       rulesBtn.classList.toggle("hidden", !showRulesHelper);
       box.classList.remove("hidden");
     }
 
-    function hideAuthError() {
-      document.getElementById("authErrorBox").classList.add("hidden");
-      document.getElementById("copyFirestoreRulesBtn").classList.add("hidden");
-    }
-
-    document.getElementById("copyFirestoreRulesBtn").addEventListener("click", () => {
-      copyTextToClipboard(RECOMMENDED_FIRESTORE_RULES, "Copied Firestore Rules! Paste & Publish in Firebase Console.");
-    });
-    document.getElementById("modalCopyFirestoreRulesBtn").addEventListener("click", () => {
-      copyTextToClipboard(RECOMMENDED_FIRESTORE_RULES, "Copied Firestore Rules! Paste & Publish in Firebase Console.");
-    });
-
-    function updatePasswordStrengthUI() {
-      const val = pwInput.value || "";
-      const wrap = document.getElementById("passwordStrengthMeterWrap");
-      const lbl = document.getElementById("passwordStrengthLabel");
-      if (!isSignupMode) {
-        wrap.classList.add("hidden");
-        return;
-      }
-      wrap.classList.remove("hidden");
-      const hasNumOrSym = /[0-9!@#$%^&*]/.test(val);
-      const hasUpper = /[A-Z]/.test(val);
-      if (val.length >= 10 && hasNumOrSym && hasUpper) {
-        lbl.textContent = "Strong";
-        lbl.className = "text-emerald-300 font-bold";
-      } else if (val.length >= 6 && (hasNumOrSym || hasUpper)) {
-        lbl.textContent = "Good";
-        lbl.className = "text-cyan-300 font-bold";
-      } else {
-        lbl.textContent = "Basic (6+ chars)";
-        lbl.className = "text-amber-300 font-bold";
-      }
-    }
-
-    pwInput.addEventListener("input", updatePasswordStrengthUI);
-
-    function openAuthModal(signup = false) {
-      isSignupMode = signup;
-      hideAuthError();
-      document.getElementById("signupConfirmWrap").classList.toggle("hidden", !signup);
-      pwConfirmInput.required = signup;
-      pwConfirmInput.value = "";
-      updatePasswordStrengthUI();
-
-      document.getElementById("authModalHeading").textContent = signup ? "Create Pilot Account" : "Sign In with Username";
-      document.getElementById("authActionSubmitBtn").textContent = signup ? "Create Account & Launch" : "Sign In";
-
-      document.getElementById("tabLoginModeBtn").className = !signup
-        ? "py-2 rounded-lg text-xs font-bold bg-cyan-400/20 text-cyan-300 border border-cyan-400/40 transition"
-        : "py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
-      document.getElementById("tabSignupModeBtn").className = signup
-        ? "py-2 rounded-lg text-xs font-bold bg-purple-500/25 text-purple-200 border border-purple-400/40 transition"
-        : "py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
-
-      authModal.classList.remove("hidden");
-      setTimeout(() => handleAuthInput.focus(), 40);
-    }
-
-    document.getElementById("closeAuthModalBtn").addEventListener("click", () => authModal.classList.add("hidden"));
     document.getElementById("tabLoginModeBtn").addEventListener("click", () => openAuthModal(false));
     document.getElementById("tabSignupModeBtn").addEventListener("click", () => openAuthModal(true));
+    document.getElementById("closeAuthModalBtn").addEventListener("click", closeAuthModal);
     document.getElementById("bannerSignInBtn").addEventListener("click", () => openAuthModal(true));
     document.getElementById("friendsGateSignInBtn").addEventListener("click", () => openAuthModal(true));
     document.getElementById("profileUnlockAuthBtn").addEventListener("click", () => openAuthModal(true));
 
-    document.getElementById("guestContinueBtn").addEventListener("click", async () => {
-      if (isFirebaseLive && fbAuth?.currentUser) {
-        try { await signOut(fbAuth); } catch (e) {}
-      }
+    document.getElementById("guestContinueBtn").addEventListener("click", () => {
       resetToGuestSession();
-      localDb.activeSessionEmail = null;
-      persistLocalDb();
-      authModal.classList.add("hidden");
+      closeAuthModal();
       renderAllUI();
-      showToast("Entered Guest Orbit (Saves, Avatars & Friends locked)", "lock");
+      showToast("Continuing as Guest (Friends, Avatars & Saves locked)", "info");
+    });
+
+    document.getElementById("authPasswordInput").addEventListener("input", (e) => {
+      const val = e.target.value || "";
+      const lbl = document.getElementById("passwordStrengthLabel");
+      if (!lbl) return;
+      if (val.length >= 10 && /[A-Z]/.test(val) && /[0-9]/.test(val)) {
+        lbl.textContent = "Strong";
+        lbl.className = "text-emerald-300 font-bold";
+      } else if (val.length >= 6) {
+        lbl.textContent = "Good";
+        lbl.className = "text-cyan-300 font-bold";
+      } else {
+        lbl.textContent = "Too Short";
+        lbl.className = "text-rose-400 font-bold";
+      }
+    });
+
+    document.getElementById("copyFirestoreRulesBtn").addEventListener("click", () => {
+      copyTextToClipboard(RECOMMENDED_FIRESTORE_RULES, "Copied Firestore Rules! Paste in Firebase Console > Rules > Publish.");
+    });
+    document.getElementById("modalCopyFirestoreRulesBtn").addEventListener("click", () => {
+      copyTextToClipboard(RECOMMENDED_FIRESTORE_RULES, "Copied Firestore Rules! Paste in Firebase Console > Rules > Publish.");
     });
 
     document.getElementById("authSubmitForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      hideAuthError();
+      const rawHandle = document.getElementById("authHandleInput").value.trim();
+      const cleanHandle = rawHandle.replace(/[^A-Za-z0-9_-]/g, "");
+      const password = document.getElementById("authPasswordInput").value;
+      const confirmPass = document.getElementById("authPasswordConfirmInput").value;
 
-      const rawUsername = handleAuthInput.value.trim();
-      const handleLower = rawUsername.toLowerCase();
-      const password = pwInput.value;
-
-      if (!/^[A-Za-z0-9_-]{2,18}$/.test(rawUsername)) {
-        showAuthError("Username must be 2–18 characters using only letters, numbers, underscores, or hyphens.");
+      if (cleanHandle.length < 2) {
+        showAuthError("Username must be at least 2 letters or numbers.");
         return;
       }
-
       if (password.length < 6) {
         showAuthError("Password must be at least 6 characters.");
         return;
       }
-
-      if (isSignupMode && password !== pwConfirmInput.value) {
-        showAuthError("Passwords do not match. Please re-enter both passwords.");
+      if (isSignupMode && password !== confirmPass) {
+        showAuthError("Passwords do not match.");
         return;
       }
 
-      const syntheticEmail = usernameToSyntheticEmail(rawUsername);
+      const lowerHandle = cleanHandle.toLowerCase();
+      const syntheticEmail = usernameToSyntheticEmail(cleanHandle);
 
-      if (isFirebaseLive && fbAuth) {
-        authOperationInProgress = true;
-        try {
+      authOperationInProgress = true;
+      try {
+        if (isFirebaseLive && fbAuth) {
           if (isSignupMode) {
             if (fbDb) {
               try {
-                const uSnap = await getDoc(doc(fbDb, "usernames", handleLower));
-                if (uSnap.exists()) {
-                  showAuthError(`Username "${rawUsername}" is already taken. Try another username.`);
+                const nameSnap = await getDoc(doc(fbDb, "usernames", lowerHandle));
+                if (nameSnap.exists()) {
+                  showAuthError(`Username "${cleanHandle}" is already taken. Pick another.`);
                   return;
                 }
-              } catch (checkErr) {
-                if (isPermissionDeniedError(checkErr) && localDb.accounts[handleLower]) {
-                  showAuthError(`Username "${rawUsername}" is already taken.`);
+              } catch (permErr) {
+                if (String(permErr?.code || "").includes("permission-denied")) {
+                  showAuthError("Firestore is in Locked Mode! Click below to copy rules and publish them in Firebase.", true);
                   return;
                 }
               }
             }
 
             const cred = await createUserWithEmailAndPassword(fbAuth, syntheticEmail, password);
-            try { await updateProfile(cred.user, { displayName: rawUsername }); } catch (pErr) {}
+            await updateProfile(cred.user, { displayName: cleanHandle }).catch(() => {});
 
-            const uid = cred.user.uid;
             const newAcc = {
-              uid,
+              handle: cleanHandle,
               email: syntheticEmail,
-              handle: rawUsername,
-              handleLower,
-              password,
               avatar: "🚀",
-              motto: "Charting deep space in M3rcury",
-              friendCode: `#M3-${uid.slice(-4).toUpperCase()}`,
+              motto: "New M3rcury Pilot",
+              friendCode: `#M3-${String(Math.abs(hashCode(cleanHandle)) % 9000 + 1000)}`,
               savedScore: 0,
               gamesPlayed: 0,
-              bestByGame: {},
               friends: [],
               pendingRequests: [],
               studioGames: [],
             };
 
-            localDb.accounts[handleLower] = newAcc;
-            localDb.activeSessionEmail = handleLower;
+            if (fbDb) {
+              try {
+                await setDoc(doc(fbDb, "usernames", lowerHandle), { handle: cleanHandle, email: syntheticEmail, createdAt: Date.now() });
+                await setDoc(doc(fbDb, "pilots", lowerHandle), newAcc);
+              } catch (dbErr) {
+                if (String(dbErr?.code || "").includes("permission-denied")) {
+                  showAuthError("Account created in Auth, but Firestore is in Locked Mode! Copy & publish Firestore rules.", true);
+                  return;
+                }
+              }
+            }
+
+            localDb.accounts[syntheticEmail] = newAcc;
+            localDb.activeSessionEmail = syntheticEmail;
             persistLocalDb();
             applyAccountRecordToSession(newAcc);
-
-            if (fbDb) {
-              try {
-                await setDoc(doc(fbDb, "usernames", handleLower), {
-                  uid,
-                  handle: rawUsername,
-                  email: syntheticEmail,
-                });
-                await setDoc(doc(fbDb, "pilots", uid), newAcc);
-              } catch (fsErr) {
-                if (isPermissionDeniedError(fsErr)) {
-                  showToast("Account created! Publish Firestore Rules to enable cloud sync.", "info");
-                }
-              }
-            }
-
-            authModal.classList.add("hidden");
+            closeAuthModal();
             renderAllUI();
-            showToast(`Account created! Welcome, ${rawUsername}`, "success");
+            showToast(`Account created! Welcome, ${cleanHandle}!`, "success");
           } else {
-            let loginEmail = syntheticEmail;
-            if (fbDb) {
-              try {
-                const uSnap = await getDoc(doc(fbDb, "usernames", handleLower));
-                if (uSnap.exists() && uSnap.data()?.email) {
-                  loginEmail = uSnap.data().email;
-                }
-              } catch (lookupErr) {
-                if (localDb.accounts[handleLower]?.email) {
-                  loginEmail = localDb.accounts[handleLower].email;
-                }
-              }
-            }
-
-            const cred = await signInWithEmailAndPassword(fbAuth, loginEmail, password);
-            await loadCloudUserProfile(cred.user);
-            if (!session.handle || session.handle === "Pilot") {
-              session.handle = rawUsername;
-            }
-            localDb.activeSessionEmail = handleLower;
-            persistLocalDb();
-
-            authModal.classList.add("hidden");
+            await signInWithEmailAndPassword(fbAuth, syntheticEmail, password);
+            await loadCloudUserProfile(fbAuth.currentUser);
+            closeAuthModal();
             renderAllUI();
             showToast(`Signed in as ${session.handle}!`, "success");
           }
-        } catch (err) {
-          const code = err?.code || "";
-          if (code === "auth/email-already-in-use") {
-            showAuthError(`Username "${rawUsername}" already exists. Switch to Sign In.`);
-          } else if (code === "auth/invalid-credential" || code === "auth/wrong-password" || code === "auth/user-not-found") {
-            showAuthError("Invalid username or password. Check your spelling and try again.");
-          } else if (code === "auth/operation-not-allowed") {
-            showAuthError("Enable Email/Password sign-in in Firebase Console -> Authentication -> Sign-in method.");
+        } else {
+          // Local fallback mode
+          const existing = localDb.accounts[syntheticEmail];
+          if (isSignupMode) {
+            if (existing) {
+              showAuthError(`Username "${cleanHandle}" already exists.`);
+              return;
+            }
+            const newAcc = {
+              handle: cleanHandle,
+              email: syntheticEmail,
+              password,
+              avatar: "🚀",
+              motto: "New M3rcury Pilot",
+              friendCode: `#M3-${String(Math.abs(hashCode(cleanHandle)) % 9000 + 1000)}`,
+              savedScore: 0,
+              gamesPlayed: 0,
+              friends: [],
+              pendingRequests: [],
+              studioGames: [],
+            };
+            localDb.accounts[syntheticEmail] = newAcc;
+            localDb.activeSessionEmail = syntheticEmail;
+            persistLocalDb();
+            applyAccountRecordToSession(newAcc);
+            closeAuthModal();
+            renderAllUI();
+            showToast(`Account created for ${cleanHandle}!`, "success");
           } else {
-            showAuthError(err?.message || "Could not complete username login.");
+            if (!existing || existing.password !== password) {
+              showAuthError("Invalid username or password.");
+              return;
+            }
+            localDb.activeSessionEmail = syntheticEmail;
+            persistLocalDb();
+            applyAccountRecordToSession(existing);
+            closeAuthModal();
+            renderAllUI();
+            showToast(`Signed in as ${cleanHandle}!`, "success");
           }
-        } finally {
-          authOperationInProgress = false;
         }
-        return;
-      }
-
-      if (isSignupMode) {
-        if (localDb.accounts[handleLower]) {
-          showAuthError(`Username "${rawUsername}" is already taken. Switch to Sign In.`);
-          return;
+      } catch (err) {
+        const code = err?.code || "";
+        if (code === "auth/email-already-in-use") {
+          showAuthError(`Username "${cleanHandle}" is already registered. Try Sign In instead.`);
+        } else if (code === "auth/invalid-credential" || code === "auth/user-not-found" || code === "auth/wrong-password") {
+          showAuthError("Incorrect username or password.");
+        } else {
+          showAuthError(err?.message || "Authentication error.");
         }
-        const uid = "loc-" + Math.random().toString(36).slice(2, 10);
-        const newAcc = {
-          uid,
-          email: syntheticEmail,
-          handle: rawUsername,
-          handleLower,
-          password,
-          avatar: "🚀",
-          motto: "Charting unknown sectors in M3rcury",
-          friendCode: `#M3-${uid.slice(-4).toUpperCase()}`,
-          savedScore: 0,
-          gamesPlayed: 0,
-          bestByGame: {},
-          friends: [],
-          pendingRequests: [],
-          studioGames: [],
-        };
-        localDb.accounts[handleLower] = newAcc;
-        localDb.activeSessionEmail = handleLower;
-        persistLocalDb();
-        applyAccountRecordToSession(newAcc);
-        authModal.classList.add("hidden");
-        renderAllUI();
-        showToast(`Account created for ${rawUsername}! Progress saving & friends unlocked.`, "success");
-      } else {
-        const existing = localDb.accounts[handleLower];
-        if (!existing || existing.password !== password) {
-          showAuthError("Invalid username or password.");
-          return;
-        }
-        localDb.activeSessionEmail = handleLower;
-        persistLocalDb();
-        applyAccountRecordToSession(existing);
-        authModal.classList.add("hidden");
-        renderAllUI();
-        showToast(`Signed in as ${existing.handle}!`, "success");
+      } finally {
+        authOperationInProgress = false;
       }
     });
 
-    // Firebase Config Modal
-    const firebaseModal = document.getElementById("firebaseModal");
-    document.getElementById("openFirebaseSettingsBtn").addEventListener("click", () => {
-      const existing = getSavedFirebaseConfig();
-      document.getElementById("firebaseConfigTextarea").value = existing ? JSON.stringify(existing, null, 2) : "";
-      firebaseModal.classList.remove("hidden");
+    // =========================================================================
+    // FIREBASE CONFIG MODAL WIRING
+    // =========================================================================
+    document.getElementById("openFirebaseModalBtn").addEventListener("click", () => {
+      document.getElementById("firebaseConfigTextarea").value = JSON.stringify(getSavedFirebaseConfig(), null, 2);
+      document.getElementById("firebaseModal").classList.remove("hidden");
     });
-    document.getElementById("closeFirebaseModalBtn").addEventListener("click", () => firebaseModal.classList.add("hidden"));
-    document.getElementById("cancelFirebaseModalBtn").addEventListener("click", () => firebaseModal.classList.add("hidden"));
 
-    document.getElementById("saveFirebaseConfigBtn").addEventListener("click", () => {
-      const raw = document.getElementById("firebaseConfigTextarea").value.trim();
+    document.getElementById("closeFirebaseModalBtn").addEventListener("click", () => {
+      document.getElementById("firebaseModal").classList.add("hidden");
+    });
+
+    document.getElementById("saveFirebaseConfigBtn")?.addEventListener("click", () => {
       try {
-        const parsed = JSON.parse(raw);
-        if (!parsed.apiKey || !parsed.projectId) throw new Error("Missing apiKey or projectId");
+        const parsed = JSON.parse(document.getElementById("firebaseConfigTextarea").value);
+        if (!parsed.apiKey || !parsed.projectId) {
+          showToast("Config must include apiKey and projectId", "error");
+          return;
+        }
         localStorage.setItem(FB_CONFIG_KEY, JSON.stringify(parsed));
-        firebaseModal.classList.add("hidden");
+        document.getElementById("firebaseModal").classList.add("hidden");
         initFirebaseIfConfigured();
-        showToast(`Connected to Firebase Live: ${parsed.projectId}`, "success");
-      } catch (e) {
-        showToast("Please paste a valid JSON Firebase config object", "error");
+        renderAllUI();
+        showToast("Saved Firebase config!", "success");
+      } catch (err) {
+        showToast("Invalid JSON in Firebase config", "error");
       }
     });
 
     document.getElementById("resetFirebaseConfigBtn").addEventListener("click", () => {
       localStorage.removeItem(FB_CONFIG_KEY);
-      firebaseModal.classList.add("hidden");
-      initFirebaseIfConfigured();
-      showToast("Switched back to Local Preview Mode", "info");
+      document.getElementById("firebaseConfigTextarea").value = JSON.stringify(DEFAULT_FIREBASE_CONFIG, null, 2);
+      showToast("Restored default m3rcury-games config", "info");
     });
 
     // =========================================================================
-    // 6. NAVIGATION & 100-GAME CATALOG HELPERS
+    // MULTIPLAYER SERVER BROWSER & JOIN FLOW (WITH SIMULATED BOT PILOTS)
     // =========================================================================
-    function switchWorkspaceView(viewName) {
-      session.activeView = viewName;
-      document.querySelectorAll(".workspace-view").forEach((v) => {
-        v.classList.toggle("hidden", v.id !== `view-${viewName}`);
-      });
-      document.querySelectorAll(".nav-tab-btn").forEach((btn) => {
-        const active = btn.dataset.nav === viewName;
-        btn.className = active
-          ? "nav-tab-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap bg-cyan-400/20 text-cyan-300 border border-cyan-400/40 transition"
-          : "nav-tab-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap text-slate-400 hover:text-white border border-transparent transition";
-      });
-
-      if (viewName === "studio") {
-        updateCodeLineNumbers();
+    function subscribeLiveFirestoreServers() {
+      if (!isFirebaseLive || !fbDb) return;
+      if (typeof serversUnsub === "function") serversUnsub();
+      try {
+        serversUnsub = onSnapshot(collection(fbDb, "servers"), (snap) => {
+          const liveRooms = [];
+          snap.forEach((d) => liveRooms.push({ id: d.id, ...d.data() }));
+          if (liveRooms.length) {
+            const ids = new Set(liveRooms.map((r) => r.id));
+            const keptLocal = localDb.servers.filter((s) => !ids.has(s.id));
+            localDb.servers = [...liveRooms, ...keptLocal];
+            renderServersList();
+            renderFriendsSection();
+          }
+        }, () => {});
+      } catch (e) {
+        // Ignore if locked
       }
     }
 
-    document.querySelectorAll(".nav-tab-btn").forEach((btn) => {
-      btn.addEventListener("click", () => switchWorkspaceView(btn.dataset.nav));
-    });
-    document.getElementById("brandHomeBtn").addEventListener("click", () => switchWorkspaceView("hub"));
-    document.getElementById("goToStudioBtn").addEventListener("click", () => switchWorkspaceView("studio"));
-
     function getCombinedGamesList() {
-      const customEntries = session.studioGames.map((sg, idx) => ({
+      const customMapped = (session.studioGames || []).map((sg, i) => ({
         id: sg.id,
-        number: 101 + idx,
+        number: 101 + i,
         title: sg.title,
         dim: sg.dim || "3D",
-        mode: "Multiplayer",
-        multiplayer: true,
-        engine: "custom_code",
+        mode: "Stud!o Creation",
+        multiplayer: false,
+        engine: "custom_studio",
         genre: `${sg.dim || "3D"} • Stud!o`,
-        studio: `Stud!o • ${sg.author}`,
+        studio: `By ${sg.author || session.handle}`,
         rating: "5.0",
-        palette: PALETTES[1],
+        palette: PALETTES[i % PALETTES.length],
         speedMult: 1.0,
         density: 4,
-        description: `Custom M3rcury Stud!o creation by ${sg.author}.`,
+        description: `Custom game created in M3rcury Stud!o by ${sg.author || session.handle}.`,
         isCustomStudio: true,
-        studioBundle: sg,
+        customCode: { html: sg.html, css: sg.css, js: sg.js },
       }));
-      return [...customEntries, ...BUILTIN_100_GAMES];
+      return [...BUILTIN_100_GAMES, ...customMapped];
     }
 
     function getCurrentGame() {
@@ -1808,1432 +1501,490 @@ service cloud.firestore {
       return all.find((g) => g.id === session.activeGameId) || all[0];
     }
 
-    // =========================================================================
-    // 7. DUAL 2D + 3D PERSPECTIVE/WIREFRAME ENGINE WITH BOT PLAYERS & NAMETAGS
-    // =========================================================================
-    const canvas2D = document.getElementById("canvas2DStage");
-    const ctx2D = canvas2D.getContext("2d");
-    const container3D = document.getElementById("stage3DContainer");
-    const nametagLayer = document.getElementById("nametagOverlayLayer");
+    function renderServersList() {
+      const container = document.getElementById("serverListContainer");
+      if (!container) return;
+      const curGame = getCurrentGame();
+      document.getElementById("hostTargetGameLabel").textContent = curGame.title;
 
-    let activeRaf = null;
-    let isPlaying = false;
-    let isPaused = false;
-    let liveScore = 0;
-    let keysDown = {};
-    let pointerNormX = 0;
-    let pointerActive = false;
-
-    let threeRenderer = null;
-    let threeScene = null;
-    let threeCamera = null;
-    let threeState = null;
-    let state2D = null;
-
-    function getRoomBotPlayers() {
-      const srv = localDb.servers.find((s) => s.id === session.joinedServerId);
-      if (srv && Array.isArray(srv.peers)) {
-        const bots = srv.peers.filter((p) => p.startsWith("[BOT]"));
-        if (bots.length) return bots;
-      }
-      const game = getCurrentGame();
-      if (game.multiplayer) {
-        return [BOT_ROSTER_NAMES[0], BOT_ROSTER_NAMES[1]];
-      }
-      return [];
-    }
-
-    function clearNametags() {
-      nametagLayer.innerHTML = "";
-    }
-
-    function renderProjectedNametags(tags) {
-      nametagLayer.innerHTML = tags
-        .map((t) => {
-          const badgeClass = t.isSelf
-            ? "bg-cyan-950/90 border-cyan-400 text-cyan-200 shadow-cyan-500/30"
-            : t.isBot
-            ? "bg-purple-950/90 border-purple-400 text-purple-200 shadow-purple-500/30"
-            : "bg-emerald-950/90 border-emerald-400 text-emerald-200";
-          const prefix = t.isSelf ? session.avatar : t.isBot ? "🤖" : "🛸";
+      container.innerHTML = localDb.servers
+        .map((srv) => {
+          const activeNow = session.activeServerId === srv.id;
+          const peerCount = (srv.peers || []).length + 1;
           return `
-            <div style="left:${Math.round(t.x)}px; top:${Math.round(t.y)}px; transform:translate(-50%, -120%);"
-                 class="absolute px-2 py-0.5 rounded-full border text-[10px] sm:text-[11px] font-mono font-bold whitespace-nowrap shadow-lg ${badgeClass}">
-              ${prefix} ${escapeHtml(t.name)}
+            <div class="rounded-2xl bg-slate-950/90 border ${
+              activeNow ? "border-cyan-400" : "border-slate-800"
+            } p-3 flex items-center justify-between gap-2.5">
+              <div class="min-w-0">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>
+                  <span class="font-bold text-xs sm:text-sm text-white truncate">${escapeHtml(srv.name)}</span>
+                  <span class="text-[10px] font-mono text-slate-400">[${escapeHtml(srv.region || "US-E")}]</span>
+                </div>
+                <div class="text-[11px] text-slate-400 truncate mt-0.5">
+                  ${escapeHtml(srv.gameTitle)} • <span class="text-amber-300">${peerCount} pilots</span>
+                </div>
+              </div>
+              <button type="button" data-join-srv="${srv.id}" class="join-srv-btn px-3 py-1.5 rounded-xl text-xs font-bold ${
+                activeNow
+                  ? "bg-emerald-400/20 text-emerald-300 border border-emerald-400/40"
+                  : "bg-cyan-400 text-slate-950 hover:bg-cyan-300"
+              } transition shrink-0">
+                ${activeNow ? "Joined" : "Join"}
+              </button>
             </div>
           `;
         })
         .join("");
-    }
 
-    function teardownCurrentEngine() {
-      isPlaying = false;
-      isPaused = false;
-      if (activeRaf) {
-        cancelAnimationFrame(activeRaf);
-        activeRaf = null;
-      }
-      clearNametags();
-      if (threeRenderer) {
-        threeRenderer.dispose();
-        threeRenderer = null;
-      }
-      container3D.innerHTML = "";
-      threeScene = null;
-      threeCamera = null;
-      threeState = null;
-      state2D = null;
-    }
-
-    function setupGameStage(game) {
-      teardownCurrentEngine();
-      liveScore = 0;
-      document.getElementById("hudScoreVal").textContent = "0";
-      const savedBest = session.isGuest ? 0 : (session.bestByGame[game.id] || 0);
-      document.getElementById("hudBestVal").textContent = session.isGuest ? "Guest (Locked)" : String(savedBest);
-
-      const bots = getRoomBotPlayers();
-      document.getElementById("hudPeersVal").textContent = `${1 + bots.length} (${bots.length} Bots)`;
-
-      if (game.dim === "3D" && typeof THREE !== "undefined") {
-        canvas2D.classList.add("hidden");
-        container3D.classList.remove("hidden");
-        initThreeEngine(game, bots);
-      } else {
-        container3D.classList.add("hidden");
-        canvas2D.classList.remove("hidden");
-        initCanvas2DEngine(game, bots);
-      }
-    }
-
-    function initThreeEngine(game, bots) {
-      const rect = document.getElementById("gameViewportContainer").getBoundingClientRect();
-      const w = Math.max(300, rect.width);
-      const h = Math.max(180, rect.height);
-
-      threeScene = new THREE.Scene();
-      threeScene.background = new THREE.Color(game.palette.bgHex);
-      threeScene.fog = new THREE.FogExp2(game.palette.bgHex, 0.022);
-
-      threeCamera = new THREE.PerspectiveCamera(62, w / h, 0.1, 160);
-      threeCamera.position.set(0, 4.5, 11);
-      threeCamera.lookAt(0, 1, -8);
-
-      threeRenderer = new THREE.WebGLRenderer({ antialias: true });
-      threeRenderer.setSize(w, h);
-      threeRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-      container3D.appendChild(threeRenderer.domElement);
-
-      threeScene.add(new THREE.AmbientLight(0xffffff, 0.55));
-      const dirLight = new THREE.DirectionalLight(game.palette.primary, 1.3);
-      dirLight.position.set(8, 16, 10);
-      threeScene.add(dirLight);
-
-      const gridHelper = new THREE.GridHelper(90, 36, game.palette.primary, game.palette.secondary);
-      gridHelper.position.y = -1.2;
-      threeScene.add(gridHelper);
-
-      const playerGroup = new THREE.Group();
-      const hullMat = new THREE.MeshStandardMaterial({
-        color: game.palette.primary,
-        emissive: game.palette.primary,
-        emissiveIntensity: 0.35,
-        roughness: 0.25,
-        metalness: 0.7,
+      container.querySelectorAll(".join-srv-btn").forEach((btn) => {
+        btn.addEventListener("click", () => joinServerById(btn.dataset.joinSrv));
       });
-      const hullMesh = new THREE.Mesh(
-        game.engine === "obby3d" ? new THREE.BoxGeometry(1.1, 1.4, 1.1) : new THREE.ConeGeometry(0.85, 2.2, 6),
-        hullMat
-      );
-      if (game.engine !== "obby3d") hullMesh.rotation.x = -Math.PI / 2;
-      playerGroup.add(hullMesh);
-      playerGroup.position.set(0, 0, 2);
-      threeScene.add(playerGroup);
-
-      // Simulated Bot Players with 3D wireframe/emissive craft & floating nametags
-      const botActors = bots.map((botName, idx) => {
-        const bGroup = new THREE.Group();
-        const bMat = new THREE.MeshStandardMaterial({
-          color: 0xa855f7,
-          emissive: 0xa855f7,
-          emissiveIntensity: 0.35,
-          wireframe: idx % 2 === 1,
-        });
-        const bMesh = new THREE.Mesh(new THREE.OctahedronGeometry(0.85), bMat);
-        bGroup.add(bMesh);
-        bGroup.position.set((idx === 0 ? -3.4 : 3.4), 0.3, -1.5 - idx * 2.5);
-        threeScene.add(bGroup);
-        return { name: botName, mesh: bGroup, phase: idx * 2.1, isBot: true };
-      });
-
-      threeState = {
-        game,
-        playerGroup,
-        botActors,
-        gridHelper,
-        obstacles: [],
-        crystals: [],
-        spawnTick: 0,
-        vy: 0,
-        grounded: true,
-      };
-
-      threeRenderer.render(threeScene, threeCamera);
-      projectThreeNametags(w, h);
-    }
-
-    function projectThreeNametags(w, h) {
-      if (!threeState || !threeCamera) return;
-      const tags = [];
-
-      const projectPoint = (vec3) => {
-        const v = vec3.clone().project(threeCamera);
-        if (v.z > 1) return null;
-        return {
-          x: (v.x * 0.5 + 0.5) * w,
-          y: (-v.y * 0.5 + 0.5) * h,
-        };
-      };
-
-      const selfPos = threeState.playerGroup.position.clone().add(new THREE.Vector3(0, 1.35, 0));
-      const sp = projectPoint(selfPos);
-      if (sp) {
-        tags.push({ name: session.handle, x: sp.x, y: sp.y, isSelf: true, isBot: false });
-      }
-
-      for (const bot of threeState.botActors) {
-        const bp = projectPoint(bot.mesh.position.clone().add(new THREE.Vector3(0, 1.35, 0)));
-        if (bp) {
-          tags.push({ name: bot.name, x: bp.x, y: bp.y, isSelf: false, isBot: true });
-        }
-      }
-
-      renderProjectedNametags(tags);
-    }
-
-    function updateThreeLoop() {
-      const rect = document.getElementById("gameViewportContainer").getBoundingClientRect();
-      const w = Math.max(300, rect.width);
-      const h = Math.max(180, rect.height);
-      if (threeRenderer.domElement.width !== Math.floor(w * Math.min(window.devicePixelRatio || 1, 2))) {
-        threeRenderer.setSize(w, h);
-        threeCamera.aspect = w / h;
-        threeCamera.updateProjectionMatrix();
-      }
-
-      const st = threeState;
-      const spd = 0.24 * st.game.speedMult;
-
-      if (keysDown["ArrowLeft"] || keysDown["KeyA"]) st.playerGroup.position.x -= 0.18;
-      if (keysDown["ArrowRight"] || keysDown["KeyD"]) st.playerGroup.position.x += 0.18;
-      if (pointerActive) {
-        st.playerGroup.position.x += (pointerNormX * 6.5 - st.playerGroup.position.x) * 0.14;
-      }
-      st.playerGroup.position.x = Math.max(-6.5, Math.min(6.5, st.playerGroup.position.x));
-
-      if ((keysDown["Space"] || keysDown["ArrowUp"] || keysDown["KeyW"]) && st.grounded) {
-        st.vy = 0.26;
-        st.grounded = false;
-      }
-      st.playerGroup.position.y += st.vy;
-      if (st.playerGroup.position.y > 0) {
-        st.vy -= 0.014;
-      } else {
-        st.playerGroup.position.y = 0;
-        st.vy = 0;
-        st.grounded = true;
-      }
-
-      st.playerGroup.rotation.z = -st.playerGroup.position.x * 0.08;
-      st.gridHelper.position.z = (st.gridHelper.position.z + spd) % 2.5;
-
-      const now = performance.now() * 0.002;
-      for (const bot of st.botActors) {
-        bot.mesh.position.x = Math.sin(now + bot.phase) * 4.4;
-        bot.mesh.position.y = 0.4 + Math.abs(Math.cos(now * 1.4 + bot.phase)) * 0.7;
-        bot.mesh.rotation.y += 0.03;
-      }
-
-      st.spawnTick += 1;
-      const interval = Math.max(16, Math.round(34 - st.game.density * 2));
-      if (st.spawnTick >= interval) {
-        st.spawnTick = 0;
-        const isOrb = Math.random() < 0.45;
-        const laneX = (Math.random() * 12) - 6;
-        const orbColor =
-          st.game.engine === "cargo_logistics_3d"
-            ? 0xf59e0b
-            : st.game.engine === "galactic_laundromat_3d"
-            ? 0x38bdf8
-            : st.game.engine === "haunted_hotel_3d"
-            ? 0xc084fc
-            : st.game.engine === "volcanic_glass_3d"
-            ? 0xf97316
-            : 0x22c55e;
-
-        if (isOrb) {
-          const orb = new THREE.Mesh(
-            new THREE.OctahedronGeometry(0.65),
-            new THREE.MeshStandardMaterial({ color: orbColor, emissive: orbColor, emissiveIntensity: 0.65 })
-          );
-          orb.position.set(laneX, 0.2, -55);
-          threeScene.add(orb);
-          st.crystals.push(orb);
-        } else {
-          const box = new THREE.Mesh(
-            new THREE.BoxGeometry(1.6, st.game.engine === "obby3d" ? 0.9 : 1.6, 1.6),
-            new THREE.MeshStandardMaterial({ color: 0xf43f5e, emissive: 0xf43f5e, emissiveIntensity: 0.4 })
-          );
-          box.position.set(laneX, 0, -55);
-          threeScene.add(box);
-          st.obstacles.push(box);
-        }
-      }
-
-      for (let i = st.crystals.length - 1; i >= 0; i--) {
-        const c = st.crystals[i];
-        c.position.z += spd * 1.6;
-        c.rotation.y += 0.06;
-        if (c.position.distanceTo(st.playerGroup.position) < 1.55) {
-          liveScore += 25;
-          threeScene.remove(c);
-          st.crystals.splice(i, 1);
-          continue;
-        }
-        if (c.position.z > 14) {
-          threeScene.remove(c);
-          st.crystals.splice(i, 1);
-        }
-      }
-
-      for (let i = st.obstacles.length - 1; i >= 0; i--) {
-        const ob = st.obstacles[i];
-        ob.position.z += spd * 1.65;
-        if (
-          Math.abs(ob.position.z - st.playerGroup.position.z) < 1.15 &&
-          Math.abs(ob.position.x - st.playerGroup.position.x) < 1.25 &&
-          st.playerGroup.position.y < 1.05
-        ) {
-          endGameSession();
-          return;
-        }
-        if (ob.position.z > 14) {
-          liveScore += 10;
-          threeScene.remove(ob);
-          st.obstacles.splice(i, 1);
-        }
-      }
-
-      threeRenderer.render(threeScene, threeCamera);
-      projectThreeNametags(w, h);
-    }
-
-    function sync2DSize() {
-      const rect = document.getElementById("gameViewportContainer").getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const w = Math.max(300, Math.floor(rect.width));
-      const h = Math.max(180, Math.floor(rect.height));
-      if (canvas2D.width !== Math.floor(w * dpr) || canvas2D.height !== Math.floor(h * dpr)) {
-        canvas2D.width = Math.floor(w * dpr);
-        canvas2D.height = Math.floor(h * dpr);
-      }
-      ctx2D.setTransform(dpr, 0, 0, dpr, 0, 0);
-      return { w, h };
-    }
-
-    function initCanvas2DEngine(game, bots) {
-      const { w, h } = sync2DSize();
-      state2D = {
-        game,
-        px: w * 0.5,
-        py: game.engine === "gravity2d" ? h - 34 : h - 38,
-        vy: 0,
-        gravityDir: 1,
-        bullets: [],
-        enemies: [],
-        pickups: [],
-        tick: 0,
-        bots: bots.map((name, i) => ({
-          name,
-          x: w * (0.25 + i * 0.45),
-          y: h - 42,
-          phase: i * 1.9,
-          isBot: true,
-        })),
-      };
-      draw2DIdleFrame(w, h);
-    }
-
-    function draw2DIdleFrame(w, h) {
-      ctx2D.fillStyle = state2D.game.palette.bgHex;
-      ctx2D.fillRect(0, 0, w, h);
-      const tags = [
-        { name: session.handle, x: state2D.px, y: state2D.py - 12, isSelf: true, isBot: false },
-        ...state2D.bots.map((b) => ({ name: b.name, x: b.x, y: b.y - 12, isSelf: false, isBot: true })),
-      ];
-      renderProjectedNametags(tags);
-    }
-
-    function updateCanvas2DLoop() {
-      const { w, h } = sync2DSize();
-      const st = state2D;
-      const g = st.game;
-
-      ctx2D.fillStyle = g.palette.bgHex;
-      ctx2D.fillRect(0, 0, w, h);
-
-      ctx2D.strokeStyle = "rgba(56, 189, 248, 0.08)";
-      ctx2D.lineWidth = 1;
-      for (let x = 0; x < w; x += 42) {
-        ctx2D.beginPath();
-        ctx2D.moveTo(x, 0);
-        ctx2D.lineTo(x, h);
-        ctx2D.stroke();
-      }
-
-      // Bespoke mechanic HUD cue inside 2D viewport for signature titles
-      const mechLabel =
-        g.engine === "mushroom_terrarium_2d"
-          ? "🍄 SPORE & HUMIDITY HARVEST (A/D or Mouse)"
-          : g.engine === "trench_research_2d"
-          ? "🌊 TRENCH SONAR & PRESSURE CORE (A/D or Mouse)"
-          : `${g.dim} • ${g.mode.toUpperCase()}`;
-      ctx2D.fillStyle = "rgba(148, 163, 184, 0.85)";
-      ctx2D.font = "bold 11px 'JetBrains Mono', monospace";
-      ctx2D.fillText(mechLabel, 14, 22);
-
-      const speed = 5.4 * g.speedMult;
-      if (keysDown["ArrowLeft"] || keysDown["KeyA"]) st.px -= speed;
-      if (keysDown["ArrowRight"] || keysDown["KeyD"]) st.px += speed;
-      if (pointerActive) {
-        const targetX = (pointerNormX * 0.5 + 0.5) * w;
-        st.px += (targetX - st.px) * 0.18;
-      }
-      st.px = Math.max(20, Math.min(w - 20, st.px));
-
-      if (g.engine === "gravity2d") {
-        if (keysDown["Space"] || keysDown["ArrowUp"] || keysDown["KeyW"]) {
-          st.gravityDir = -1;
-        } else if (keysDown["ArrowDown"] || keysDown["KeyS"]) {
-          st.gravityDir = 1;
-        }
-        st.py += st.gravityDir * 5.2;
-        st.py = Math.max(28, Math.min(h - 28, st.py));
-      } else {
-        st.py = h - 34;
-      }
-
-      st.tick += 1;
-
-      if (g.engine === "shooter2d" && st.tick % 14 === 0) {
-        st.bullets.push({ x: st.px, y: st.py - 16 });
-      }
-
-      for (let i = st.bullets.length - 1; i >= 0; i--) {
-        const b = st.bullets[i];
-        b.y -= 9;
-        ctx2D.fillStyle = "#38bdf8";
-        ctx2D.fillRect(b.x - 2, b.y - 10, 4, 12);
-        if (b.y < -15) st.bullets.splice(i, 1);
-      }
-
-      const spawnRate = Math.max(15, Math.round(32 - g.density * 2));
-      if (st.tick % spawnRate === 0) {
-        const isPickup = Math.random() < 0.4;
-        const item = {
-          x: 24 + Math.random() * Math.max(40, w - 48),
-          y: -16,
-          r: isPickup ? 10 : 14,
-          vy: (3.2 + Math.random() * 1.5) * g.speedMult,
-        };
-        if (isPickup) st.pickups.push(item);
-        else st.enemies.push(item);
-      }
-
-      for (let i = st.pickups.length - 1; i >= 0; i--) {
-        const p = st.pickups[i];
-        p.y += p.vy;
-        ctx2D.fillStyle = "#22c55e";
-        ctx2D.beginPath();
-        ctx2D.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx2D.fill();
-
-        if (Math.hypot(p.x - st.px, p.y - st.py) < p.r + 14) {
-          liveScore += 25;
-          st.pickups.splice(i, 1);
-          continue;
-        }
-        if (p.y > h + 20) st.pickups.splice(i, 1);
-      }
-
-      for (let i = st.enemies.length - 1; i >= 0; i--) {
-        const en = st.enemies[i];
-        en.y += en.vy;
-        ctx2D.fillStyle = "#f43f5e";
-        ctx2D.beginPath();
-        ctx2D.arc(en.x, en.y, en.r, 0, Math.PI * 2);
-        ctx2D.fill();
-
-        let destroyed = false;
-        for (let bi = st.bullets.length - 1; bi >= 0; bi--) {
-          const b = st.bullets[bi];
-          if (Math.hypot(b.x - en.x, b.y - en.y) < en.r + 6) {
-            st.bullets.splice(bi, 1);
-            st.enemies.splice(i, 1);
-            liveScore += 20;
-            destroyed = true;
-            break;
-          }
-        }
-        if (destroyed) continue;
-
-        if (Math.hypot(en.x - st.px, en.y - st.py) < en.r + 13) {
-          endGameSession();
-          return;
-        }
-        if (en.y > h + 24) {
-          liveScore += 5;
-          st.enemies.splice(i, 1);
-        }
-      }
-
-      const tags = [{ name: session.handle, x: st.px, y: st.py - 14, isSelf: true, isBot: false }];
-      for (const bot of st.bots) {
-        bot.x = w * 0.5 + Math.sin(st.tick * 0.025 + bot.phase) * (w * 0.34);
-        ctx2D.fillStyle = "#a855f7";
-        ctx2D.beginPath();
-        ctx2D.arc(bot.x, bot.y, 11, 0, Math.PI * 2);
-        ctx2D.fill();
-        tags.push({ name: bot.name, x: bot.x, y: bot.y - 12, isSelf: false, isBot: true });
-      }
-
-      ctx2D.fillStyle = g.palette.hex;
-      ctx2D.beginPath();
-      ctx2D.moveTo(st.px, st.py - 15);
-      ctx2D.lineTo(st.px - 14, st.py + 12);
-      ctx2D.lineTo(st.px + 14, st.py + 12);
-      ctx2D.closePath();
-      ctx2D.fill();
-
-      renderProjectedNametags(tags);
-    }
-
-    function runGameFrame() {
-      if (!isPlaying) return;
-      if (!isPaused) {
-        const game = getCurrentGame();
-        if (game.dim === "3D" && threeRenderer) {
-          updateThreeLoop();
-        } else if (state2D) {
-          updateCanvas2DLoop();
-        }
-        document.getElementById("hudScoreVal").textContent = String(liveScore);
-      }
-      if (isPlaying) {
-        activeRaf = requestAnimationFrame(runGameFrame);
-      }
-    }
-
-    function launchCurrentGame() {
-      const game = getCurrentGame();
-      setupGameStage(game);
-      isPlaying = true;
-      isPaused = false;
-      document.getElementById("stagePauseBtn").textContent = "Pause";
-      document.getElementById("stageOverlay").classList.add("hidden");
-      activeRaf = requestAnimationFrame(runGameFrame);
-    }
-
-    async function endGameSession() {
-      isPlaying = false;
-      if (activeRaf) {
-        cancelAnimationFrame(activeRaf);
-        activeRaf = null;
-      }
-
-      const game = getCurrentGame();
-      const earned = Math.max(10, Math.round(liveScore / 2));
-
-      if (!session.isGuest) {
-        session.savedScore += earned;
-        session.gamesPlayed += 1;
-        const prev = session.bestByGame[game.id] || 0;
-        if (liveScore > prev) session.bestByGame[game.id] = liveScore;
-        await syncCurrentAccountToStorage();
-        document.getElementById("hudBestVal").textContent = String(session.bestByGame[game.id]);
-        document.getElementById("overlayHeadline").textContent = `Mission Complete — ${liveScore} PTS`;
-        document.getElementById("overlaySubtext").textContent = `+${earned} XP saved to Commander ${session.handle}'s account!`;
-      } else {
-        document.getElementById("overlayHeadline").textContent = `Mission Complete — ${liveScore} PTS`;
-        document.getElementById("overlaySubtext").textContent = `Guest Orbit: Progress not saved. Sign in or create an account to save progress!`;
-      }
-
-      renderProfileView();
-      document.getElementById("overlayStartBtn").textContent = "🚀 Relaunch Mission";
-      document.getElementById("stageOverlay").classList.remove("hidden");
-    }
-
-    window.addEventListener("keydown", (e) => {
-      if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Space"].includes(e.code) && isPlaying && session.activeView === "hub") {
-        e.preventDefault();
-      }
-      keysDown[e.code] = true;
-    });
-    window.addEventListener("keyup", (e) => {
-      keysDown[e.code] = false;
-    });
-
-    const viewportEl = document.getElementById("gameViewportContainer");
-    viewportEl.addEventListener("pointermove", (e) => {
-      const r = viewportEl.getBoundingClientRect();
-      pointerNormX = ((e.clientX - r.left) / r.width) * 2 - 1;
-      pointerActive = true;
-    });
-    viewportEl.addEventListener("pointerleave", () => {
-      pointerActive = false;
-    });
-
-    document.getElementById("mobileLeftBtn").addEventListener("touchstart", (e) => { e.preventDefault(); keysDown["ArrowLeft"] = true; });
-    document.getElementById("mobileLeftBtn").addEventListener("touchend", () => { keysDown["ArrowLeft"] = false; });
-    document.getElementById("mobileRightBtn").addEventListener("touchstart", (e) => { e.preventDefault(); keysDown["ArrowRight"] = true; });
-    document.getElementById("mobileRightBtn").addEventListener("touchend", () => { keysDown["ArrowRight"] = false; });
-    document.getElementById("mobileActionBtn").addEventListener("touchstart", (e) => { e.preventDefault(); keysDown["Space"] = true; });
-    document.getElementById("mobileActionBtn").addEventListener("touchend", () => { keysDown["Space"] = false; });
-
-    document.getElementById("stageLaunchBtn").addEventListener("click", launchCurrentGame);
-    document.getElementById("overlayStartBtn").addEventListener("click", launchCurrentGame);
-    document.getElementById("stagePauseBtn").addEventListener("click", () => {
-      if (!isPlaying) return;
-      isPaused = !isPaused;
-      document.getElementById("stagePauseBtn").textContent = isPaused ? "Resume" : "Pause";
-    });
-
-    function selectWorldGame(gameId) {
-      session.activeGameId = gameId;
-      const game = getCurrentGame();
-      document.getElementById("stageTitle").textContent = game.title;
-      document.getElementById("stageDescription").textContent = game.description;
-      document.getElementById("stageDimBadge").textContent = game.dim === "3D" ? "3D VIEW • NAMETAGS ON" : "2D CANVAS • NAMETAGS ON";
-      document.getElementById("stageGenreBadge").textContent = `${game.dim} • ${game.mode}`;
-      document.getElementById("stageMpBadge").textContent = game.multiplayer ? "Multiplayer + Bots" : "Singleplayer";
-      document.getElementById("hostTargetGameLabel").textContent = game.title;
-
-      document.getElementById("overlayKicker").textContent = `#${game.number} • ${game.dim} • ${game.mode.toUpperCase()}`;
-      document.getElementById("overlayHeadline").textContent = game.title;
-      document.getElementById("overlaySubtext").textContent = game.description;
-      document.getElementById("overlayStartBtn").textContent = "🚀 Engage Thrusters";
-      document.getElementById("stageOverlay").classList.remove("hidden");
-
-      setupGameStage(game);
-      renderCatalogGrid();
-    }
-
-    // =========================================================================
-    // 8. MULTIPLAYER SERVERS (With Bots) & REAL FRIEND SYSTEM + REMOVAL
-    // =========================================================================
-    function subscribeLiveFirestoreServers() {
-      if (!isFirebaseLive || !fbDb) return;
-      if (serversUnsub) serversUnsub();
-      serversUnsub = onSnapshot(
-        collection(fbDb, "servers"),
-        (snapshot) => {
-          const cloudRooms = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
-          if (cloudRooms.length > 0) {
-            localDb.servers = cloudRooms;
-            renderServersList();
-            renderFriendsSection();
-          }
-        },
-        (err) => handleFirestorePermissionError(err, "listen to servers")
-      );
     }
 
     async function joinServerById(serverId) {
       const srv = localDb.servers.find((s) => s.id === serverId);
-      if (!srv) {
-        showToast("That server room is no longer active.", "error");
-        return;
-      }
-
-      session.joinedServerId = srv.id;
-      if (!Array.isArray(srv.peers)) srv.peers = [BOT_ROSTER_NAMES[0]];
-      if (!srv.peers.includes(session.handle)) {
-        srv.peers.push(session.handle);
-        srv.players = Math.min(srv.maxPlayers || 8, srv.peers.length);
-      }
-
-      if (isFirebaseLive && fbDb && !srv.id.startsWith("srv-")) {
-        try {
-          await updateDoc(doc(fbDb, "servers", srv.id), {
-            peers: srv.peers,
-            players: srv.players,
-          });
-        } catch (err) {
-          handleFirestorePermissionError(err, "join server");
-        }
-      } else {
+      if (!srv) return;
+      session.activeServerId = srv.id;
+      if (!session.isGuest && !(srv.peers || []).includes(session.handle)) {
+        srv.peers = [...(srv.peers || []), session.handle];
         persistLocalDb();
       }
-
-      document.getElementById("hudRoomVal").textContent = srv.name;
       selectWorldGame(srv.gameId);
       switchWorkspaceView("hub");
       renderServersList();
-      renderFriendsSection();
-      showToast(`Joined "${srv.name}" (${srv.gameTitle})!`, "success");
+      showToast(`Joined "${srv.name}" (${srv.gameTitle}) with [BOT] pilots!`, "success");
     }
 
     document.getElementById("hostServerBtn").addEventListener("click", async () => {
-      const game = getCurrentGame();
-      const rawName = document.getElementById("serverNameInput").value.trim();
+      if (session.isGuest) {
+        showToast("Create an account to host multiplayer servers!", "lock");
+        openAuthModal(true);
+        return;
+      }
+
+      const curGame = getCurrentGame();
+      const nameInput = document.getElementById("serverNameInput");
+      const roomName = (nameInput.value || "").trim() || `${session.handle}'s Sector`;
       const region = document.getElementById("serverRegionSelect").value;
       const privacy = document.getElementById("serverPrivacySelect").value;
-      const roomName = rawName || `${session.handle}'s ${game.title}`;
-      const roomBots = [BOT_ROSTER_NAMES[0], BOT_ROSTER_NAMES[2]];
 
       const newSrv = {
         id: `srv-${Date.now().toString(36)}`,
         name: roomName,
-        gameId: game.id,
-        gameTitle: game.title,
-        host: session.handle,
+        gameId: curGame.id,
+        gameTitle: curGame.title,
         region,
         privacy,
-        players: 1 + roomBots.length,
-        maxPlayers: 8,
-        peers: [session.handle, ...roomBots],
+        host: session.handle,
+        peers: ["[BOT] NovaBot", "[BOT] OrbitKid", "[BOT] DriftUnit"],
       };
+
+      localDb.servers.unshift(newSrv);
+      session.activeServerId = newSrv.id;
+      nameInput.value = "";
+      persistLocalDb();
 
       if (isFirebaseLive && fbDb) {
         try {
-          const docRef = await addDoc(collection(fbDb, "servers"), newSrv);
-          newSrv.id = docRef.id;
-        } catch (err) {
-          handleFirestorePermissionError(err, "host server");
+          await addDoc(collection(fbDb, "servers"), newSrv);
+        } catch (e) {
+          // Keep local room active even if Firestore rules block writes
         }
       }
 
-      localDb.servers.unshift(newSrv);
-      persistLocalDb();
-      session.joinedServerId = newSrv.id;
-      document.getElementById("serverNameInput").value = "";
-      document.getElementById("hudRoomVal").textContent = newSrv.name;
-      selectWorldGame(game.id);
       renderServersList();
-      showToast(`Hosted "${roomName}" with simulated bot players!`, "success");
-    });
-
-    function renderServersList() {
-      const container = document.getElementById("serverListContainer");
-      const activeSrv = localDb.servers.find((s) => s.id === session.joinedServerId);
-      document.getElementById("hudRoomVal").textContent = activeSrv ? activeSrv.name : "Solo Orbit";
-
-      container.innerHTML = localDb.servers
-        .map((srv) => {
-          const joined = srv.id === session.joinedServerId;
-          const friendInside = !session.isGuest && session.friends.some((f) => (srv.peers || []).includes(f.handle) || f.handle === srv.host);
-          const botCount = (srv.peers || []).filter((p) => p.startsWith("[BOT]")).length;
-          return `
-            <div class="rounded-2xl bg-slate-950/90 border ${joined ? "border-emerald-400/60" : friendInside ? "border-purple-400/50" : "border-slate-800"} p-3 flex items-center justify-between gap-2.5">
-              <div class="min-w-0">
-                <div class="flex items-center gap-1.5">
-                  <span class="font-bold text-xs sm:text-sm text-white truncate">${escapeHtml(srv.name)}</span>
-                  <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 border border-slate-700">${escapeHtml(srv.region)}</span>
-                </div>
-                <div class="text-[11px] text-slate-400 truncate mt-0.5">
-                  ${escapeHtml(srv.gameTitle)} • <span class="text-purple-300">${botCount} Bots</span> • <span class="font-mono text-emerald-300">${srv.players}/${srv.maxPlayers}</span>
-                </div>
-                ${friendInside ? `<div class="text-[10px] font-mono text-purple-300 mt-0.5">🛸 Friend inside this room</div>` : ""}
-              </div>
-              <button type="button" data-srv-id="${srv.id}" class="join-server-btn px-3 py-1.5 rounded-xl text-xs font-bold shrink-0 transition ${
-                joined
-                  ? "bg-emerald-500/20 text-emerald-300 border border-emerald-400/40"
-                  : "bg-cyan-400 text-slate-950 hover:bg-cyan-300"
-              }">
-                ${joined ? "In Room ✓" : "Join"}
-              </button>
-            </div>
-          `;
-        })
-        .join("");
-
-      container.querySelectorAll(".join-server-btn").forEach((btn) => {
-        btn.addEventListener("click", () => joinServerById(btn.dataset.srvId));
-      });
-    }
-
-    // Add & Remove Real Friends (Strictly Account-Gated, Zero Fake Friends)
-    document.getElementById("sendFriendReqForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      if (session.isGuest) {
-        showToast("Create an account to add friends!", "lock");
-        openAuthModal(true);
-        return;
-      }
-
-      const input = document.getElementById("friendSearchHandleInput");
-      const targetHandle = input.value.trim();
-      if (!targetHandle) return;
-
-      if (targetHandle.toLowerCase() === session.handle.toLowerCase()) {
-        showToast("You cannot add yourself as a friend.", "error");
-        return;
-      }
-      if (session.friends.some((f) => f.handle.toLowerCase() === targetHandle.toLowerCase())) {
-        showToast(`${targetHandle} is already in your friends list.`, "info");
-        return;
-      }
-
-      const matchingRoom = localDb.servers.find((s) => s.host.toLowerCase() === targetHandle.toLowerCase());
-      session.friends.push({
-        handle: targetHandle,
-        avatar: AVATAR_EMBLEMS[targetHandle.length % AVATAR_EMBLEMS.length],
-        status: matchingRoom ? "In Server" : "Online",
-        roomId: matchingRoom ? matchingRoom.id : null,
-      });
-
-      input.value = "";
-      await syncCurrentAccountToStorage();
       renderFriendsSection();
-      renderServersList();
-      showToast(`Added ${targetHandle} to your friends list!`, "success");
-    });
-
-    function renderFriendsSection() {
-      const gateCard = document.getElementById("friendsGuestGateCard");
-      const unlockedGrid = document.getElementById("friendsUnlockedGrid");
-
-      if (session.isGuest) {
-        gateCard.classList.remove("hidden");
-        unlockedGrid.classList.add("hidden");
-        return;
-      }
-
-      gateCard.classList.add("hidden");
-      unlockedGrid.classList.remove("hidden");
-      document.getElementById("myFriendCodeLabel").textContent = session.friendCode;
-      document.getElementById("incomingReqBadge").textContent = String(session.pendingRequests.length);
-      document.getElementById("friendTotalBadge").textContent = `${session.friends.length} Friends`;
-
-      const reqBox = document.getElementById("incomingReqContainer");
-      if (!session.pendingRequests.length) {
-        reqBox.innerHTML = `<p class="text-xs text-slate-400">No incoming friend requests.</p>`;
-      } else {
-        reqBox.innerHTML = session.pendingRequests
-          .map(
-            (r, idx) => `
-            <div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-3 flex items-center justify-between gap-2">
-              <div class="flex items-center gap-2.5 min-w-0">
-                <span class="text-xl">${r.avatar || "🛸"}</span>
-                <div class="min-w-0">
-                  <div class="text-xs sm:text-sm font-bold text-white truncate">${escapeHtml(r.handle)}</div>
-                  <div class="text-[11px] text-slate-400 truncate">${escapeHtml(r.note || "Squad invite")}</div>
-                </div>
-              </div>
-              <div class="flex items-center gap-1.5 shrink-0">
-                <button type="button" data-acc-req="${idx}" class="acc-friend-btn px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-400 text-slate-950 hover:bg-emerald-300">Accept</button>
-                <button type="button" data-dec-req="${idx}" class="dec-friend-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700">Decline</button>
-              </div>
-            </div>
-          `
-          )
-          .join("");
-
-        reqBox.querySelectorAll(".acc-friend-btn").forEach((btn) => {
-          btn.addEventListener("click", async () => {
-            const idx = Number(btn.dataset.accReq);
-            const req = session.pendingRequests[idx];
-            if (!req) return;
-            session.pendingRequests.splice(idx, 1);
-            session.friends.push({ handle: req.handle, avatar: req.avatar || "🚀", status: "Online", roomId: null });
-            await syncCurrentAccountToStorage();
-            renderFriendsSection();
-            showToast(`Added ${req.handle} as a friend!`, "success");
-          });
-        });
-
-        reqBox.querySelectorAll(".dec-friend-btn").forEach((btn) => {
-          btn.addEventListener("click", async () => {
-            const idx = Number(btn.dataset.decReq);
-            session.pendingRequests.splice(idx, 1);
-            await syncCurrentAccountToStorage();
-            renderFriendsSection();
-            showToast("Declined friend request", "info");
-          });
-        });
-      }
-
-      const rosterBox = document.getElementById("friendsRosterContainer");
-      if (!session.friends.length) {
-        rosterBox.innerHTML = `<div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-5 text-xs text-slate-400 text-center">Your friends list is currently empty. Add a player handle on the left whenever you're ready.</div>`;
-        return;
-      }
-
-      rosterBox.innerHTML = session.friends
-        .map((fr, fIdx) => {
-          const activeRoom =
-            (fr.roomId && localDb.servers.find((s) => s.id === fr.roomId)) ||
-            localDb.servers.find((s) => s.host.toLowerCase() === fr.handle.toLowerCase() || (s.peers || []).includes(fr.handle));
-
-          return `
-            <div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-3.5 flex flex-wrap items-center justify-between gap-3">
-              <div class="flex items-center gap-3 min-w-0">
-                <div class="w-10 h-10 rounded-2xl bg-slate-900 border border-slate-700 flex items-center justify-center text-xl">${fr.avatar || "🛸"}</div>
-                <div class="min-w-0">
-                  <div class="flex items-center gap-2">
-                    <span class="font-bold text-sm text-white truncate">${escapeHtml(fr.handle)}</span>
-                    <span class="text-[10px] font-mono px-2 py-0.5 rounded-full ${
-                      activeRoom
-                        ? "bg-emerald-500/20 text-emerald-300 border border-emerald-400/35"
-                        : "bg-cyan-500/15 text-cyan-300 border border-cyan-400/30"
-                    }">
-                      ${activeRoom ? "In Multiplayer Server" : "Online"}
-                    </span>
-                  </div>
-                  <div class="text-xs text-slate-400 truncate mt-0.5">
-                    ${
-                      activeRoom
-                        ? `World: <span class="text-white">${escapeHtml(activeRoom.gameTitle)}</span> • Room: <span class="font-mono text-purple-300">${escapeHtml(activeRoom.name)}</span>`
-                        : "Orbiting M3rcury Hub"
-                    }
-                  </div>
-                </div>
-              </div>
-
-              <div class="flex items-center gap-2">
-                ${
-                  activeRoom
-                    ? `<button type="button" data-join-friend-room="${activeRoom.id}" class="join-friend-srv-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-400 to-purple-500 text-slate-950 hover:brightness-110 transition">Join Friend</button>`
-                    : ""
-                }
-                <button type="button" data-remove-friend="${fIdx}" class="remove-friend-btn px-3 py-2 rounded-xl text-xs font-semibold bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/35 transition">
-                  Remove Friend
-                </button>
-              </div>
-            </div>
-          `;
-        })
-        .join("");
-
-      rosterBox.querySelectorAll(".join-friend-srv-btn").forEach((btn) => {
-        btn.addEventListener("click", () => joinServerById(btn.dataset.joinFriendRoom));
-      });
-
-      rosterBox.querySelectorAll(".remove-friend-btn").forEach((btn) => {
-        btn.addEventListener("click", async () => {
-          const idx = Number(btn.dataset.removeFriend);
-          const removed = session.friends[idx];
-          if (!removed) return;
-          session.friends.splice(idx, 1);
-          await syncCurrentAccountToStorage();
-          renderFriendsSection();
-          renderServersList();
-          showToast(`Removed ${removed.handle} from your friends list`, "info");
-        });
-      });
-    }
-
-    // =========================================================================
-    // 9. CATALOG RENDERING (ALL 100 USER GAMES + STUD!O CREATIONS)
-    // =========================================================================
-    function renderCatalogGrid() {
-      const allGames = getCombinedGamesList();
-      const q = session.catalogSearch.trim().toLowerCase();
-      const f = session.catalogFilter;
-
-      const filtered = allGames.filter((g) => {
-        const matchFilter =
-          f === "ALL" ||
-          (f === "3D" && g.dim === "3D") ||
-          (f === "2D" && g.dim === "2D") ||
-          (f === "MP" && g.multiplayer) ||
-          (f === "SP" && !g.multiplayer && !g.isCustomStudio) ||
-          (f === "STUDIO" && g.isCustomStudio);
-        const matchQuery =
-          !q ||
-          g.title.toLowerCase().includes(q) ||
-          g.description.toLowerCase().includes(q) ||
-          g.mode.toLowerCase().includes(q) ||
-          g.dim.toLowerCase().includes(q) ||
-          String(g.number).includes(q);
-        return matchFilter && matchQuery;
-      });
-
-      const shown = filtered.slice(0, session.catalogLimit);
-      document.getElementById("catalogTotalPill").textContent = `${allGames.length} Games (${BUILTIN_100_GAMES.length} Core)`;
-      document.getElementById("catalogCountSummary").textContent = `Showing ${shown.length} of ${filtered.length} matching games`;
-
-      const hasMore = shown.length < filtered.length;
-      document.getElementById("loadMoreGamesBtn").classList.toggle("hidden", !hasMore);
-      document.getElementById("showAllGamesBtn").classList.toggle("hidden", !hasMore);
-
-      const grid = document.getElementById("catalogCardsGrid");
-      grid.innerHTML = shown
-        .map((g) => {
-          const active = g.id === session.activeGameId;
-          return `
-            <article class="cosmic-card rounded-2xl p-4 flex flex-col justify-between gap-3 ${active ? "ring-2 ring-cyan-400" : ""}">
-              <div>
-                <div class="flex items-center justify-between gap-2 text-[10px] font-mono">
-                  <span class="px-2 py-0.5 rounded-full font-bold ${
-                    g.dim === "3D"
-                      ? "bg-purple-500/20 text-purple-300 border border-purple-400/35"
-                      : "bg-cyan-500/20 text-cyan-300 border border-cyan-400/35"
-                  }">
-                    #${g.number} • ${g.dim} | ${escapeHtml(g.mode)}
-                  </span>
-                  <span class="text-slate-400">★ ${g.rating}</span>
-                </div>
-                <h3 class="font-display font-bold text-sm sm:text-base text-white mt-2.5">${escapeHtml(g.title)}</h3>
-                <p class="text-xs text-slate-400 mt-1 line-clamp-3">${escapeHtml(g.description)}</p>
-              </div>
-              <div class="pt-2.5 border-t border-slate-800/80 flex items-center justify-between gap-2">
-                <span class="text-[11px] font-mono text-slate-400 truncate">
-                  ${g.multiplayer ? '<span class="text-emerald-300">● MP + Bots</span>' : "Solo"}
-                </span>
-                <button type="button" data-select-world="${g.id}" class="select-world-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-400/15 hover:bg-cyan-400 text-cyan-300 hover:text-slate-950 border border-cyan-400/40 transition shrink-0">
-                  Play
-                </button>
-              </div>
-            </article>
-          `;
-        })
-        .join("");
-
-      grid.querySelectorAll(".select-world-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          selectWorldGame(btn.dataset.selectWorld);
-          window.scrollTo({ top: 0, behavior: "smooth" });
-          showToast(`Loaded "${getCurrentGame().title}"`, "info");
-        });
-      });
-    }
-
-    document.getElementById("catalogSearchInput").addEventListener("input", (e) => {
-      session.catalogSearch = e.target.value;
-      session.catalogLimit = 16;
-      renderCatalogGrid();
-    });
-
-    document.querySelectorAll(".cat-pill").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        session.catalogFilter = btn.dataset.filter;
-        session.catalogLimit = 16;
-        document.querySelectorAll(".cat-pill").forEach((p) => {
-          const on = p.dataset.filter === session.catalogFilter;
-          p.className = on
-            ? "cat-pill px-2.5 py-1 rounded-lg text-xs font-bold bg-cyan-400/20 text-cyan-300 border border-cyan-400/40"
-            : "cat-pill px-2.5 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white";
-        });
-        renderCatalogGrid();
-      });
-    });
-
-    document.getElementById("loadMoreGamesBtn").addEventListener("click", () => {
-      session.catalogLimit += 24;
-      renderCatalogGrid();
-    });
-    document.getElementById("showAllGamesBtn").addEventListener("click", () => {
-      session.catalogLimit = 999;
-      renderCatalogGrid();
+      updateStageBadges();
+      showToast(`Launched server "${roomName}"!`, "success");
     });
 
     // =========================================================================
-    // 10. M3RCURY STUD!O — MULTI-FILE (HTML / CSS / JS) EDITOR + LIVE PREVIEW
+    // 3D (THREE.JS) & 2D CANVAS ENGINE WITH FLOATING NAMETAGS & BOTS
     // =========================================================================
-    const STUDIO_TEMPLATES = {
-      world3d: {
-        title: "Starlight Hovercraft 3D",
-        dim: "3D",
-        html: `<div class="hud">
-  <span class="tag">3D NAMETAG WORLD</span>
-  <span class="score" id="pts">SCORE: 0</span>
-</div>
-<canvas id="worldCanvas"></canvas>
-<div class="nametag" id="selfTag">🚀 Player</div>
-<div class="nametag bot" id="botTag">[BOT] NovaBot</div>`,
-        css: `body { margin: 0; background: #040712; color: #f8fafc; font-family: monospace; overflow: hidden; }
-canvas { display: block; width: 100vw; height: 100vh; }
-.hud { position: fixed; top: 10px; left: 10px; right: 10px; display: flex; justify-content: space-between; pointer-events: none; font-size: 12px; }
-.tag { background: rgba(168,85,247,0.25); border: 1px solid #c084fc; padding: 3px 8px; border-radius: 999px; color: #e9d5ff; }
-.score { color: #00f0ff; font-weight: bold; }
-.nametag { position: fixed; transform: translate(-50%, -120%); padding: 2px 8px; border-radius: 999px; font-size: 11px; background: rgba(8,47,73,0.9); border: 1px solid #22d3ee; color: #cffafe; pointer-events: none; }
-.nametag.bot { background: rgba(59,7,100,0.9); border-color: #c084fc; color: #f3e8ff; }`,
-        js: `const canvas = document.getElementById("worldCanvas");
-const ctx = canvas.getContext("2d");
-const selfTag = document.getElementById("selfTag");
-const botTag = document.getElementById("botTag");
-const ptsEl = document.getElementById("pts");
+    let threeRenderer = null;
+    let threeScene = null;
+    let threeCamera = null;
+    let playerMesh3D = null;
+    let botMeshes3D = [];
+    let targetMeshes3D = [];
+    let animFrameId = null;
 
-let px = 0, botX = -1.5, score = 0, t = 0;
-const keys = {};
-window.addEventListener("keydown", (e) => (keys[e.code] = true));
-window.addEventListener("keyup", (e) => (keys[e.code] = false));
-
-function project(x, y, z, w, h) {
-  const fov = 260 / Math.max(1.2, z + 5);
-  return { sx: w * 0.5 + x * fov, sy: h * 0.58 - y * fov };
-}
-
-function frame() {
-  const w = (canvas.width = window.innerWidth);
-  const h = (canvas.height = window.innerHeight);
-  t += 0.03;
-  if (keys["ArrowLeft"] || keys["KeyA"]) px -= 0.08;
-  if (keys["ArrowRight"] || keys["KeyD"]) px += 0.08;
-  px = Math.max(-2.6, Math.min(2.6, px));
-  botX = Math.sin(t) * 1.9;
-  score += 1;
-  ptsEl.textContent = "SCORE: " + score;
-
-  ctx.fillStyle = "#040712";
-  ctx.fillRect(0, 0, w, h);
-
-  // Perspective grid lines
-  ctx.strokeStyle = "rgba(0, 240, 255, 0.22)";
-  for (let gx = -4; gx <= 4; gx += 1) {
-    const a = project(gx, -0.6, 0, w, h);
-    const b = project(gx, -0.6, 14, w, h);
-    ctx.beginPath(); ctx.moveTo(a.sx, a.sy); ctx.lineTo(b.sx, b.sy); ctx.stroke();
-  }
-
-  const pScreen = project(px, 0, 1.5, w, h);
-  ctx.fillStyle = "#00f0ff";
-  ctx.beginPath(); ctx.arc(pScreen.sx, pScreen.sy, 12, 0, Math.PI * 2); ctx.fill();
-  selfTag.style.left = pScreen.sx + "px";
-  selfTag.style.top = (pScreen.sy - 14) + "px";
-
-  const bScreen = project(botX, 0.2, 2.2, w, h);
-  ctx.fillStyle = "#a855f7";
-  ctx.beginPath(); ctx.arc(bScreen.sx, bScreen.sy, 11, 0, Math.PI * 2); ctx.fill();
-  botTag.style.left = bScreen.sx + "px";
-  botTag.style.top = (bScreen.sy - 14) + "px";
-
-  requestAnimationFrame(frame);
-}
-frame();`,
-      },
-      arcade2d: {
-        title: "Orbital Star Blaster 2D",
-        dim: "2D",
-        html: `<div class="bar"><span>2D ARCADE</span><span id="hud">PTS: 0</span></div>
-<canvas id="c2d"></canvas>`,
-        css: `body { margin: 0; background: #050918; color: #f8fafc; font-family: monospace; overflow: hidden; }
-canvas { display: block; width: 100vw; height: 100vh; }
-.bar { position: fixed; top: 8px; left: 10px; right: 10px; display: flex; justify-content: space-between; font-size: 12px; color: #38bdf8; pointer-events: none; }`,
-        js: `const c = document.getElementById("c2d");
-const ctx = c.getContext("2d");
-const hud = document.getElementById("hud");
-let x = 180, pts = 0, gems = [];
-const keys = {};
-window.addEventListener("keydown", (e) => (keys[e.code] = true));
-window.addEventListener("keyup", (e) => (keys[e.code] = false));
-
-function loop() {
-  const w = (c.width = window.innerWidth);
-  const h = (c.height = window.innerHeight);
-  if (keys["ArrowLeft"] || keys["KeyA"]) x -= 6;
-  if (keys["ArrowRight"] || keys["KeyD"]) x += 6;
-  x = Math.max(18, Math.min(w - 18, x));
-  if (Math.random() < 0.06) gems.push({ x: 20 + Math.random() * (w - 40), y: -10 });
-
-  ctx.fillStyle = "#050918";
-  ctx.fillRect(0, 0, w, h);
-
-  for (let i = gems.length - 1; i >= 0; i--) {
-    gems[i].y += 4;
-    ctx.fillStyle = "#22c55e";
-    ctx.beginPath(); ctx.arc(gems[i].x, gems[i].y, 8, 0, Math.PI * 2); ctx.fill();
-    if (Math.hypot(gems[i].x - x, gems[i].y - (h - 28)) < 22) {
-      pts += 20; hud.textContent = "PTS: " + pts; gems.splice(i, 1);
-    } else if (gems[i].y > h + 15) gems.splice(i, 1);
-  }
-
-  ctx.fillStyle = "#00f0ff";
-  ctx.fillRect(x - 14, h - 34, 28, 12);
-  requestAnimationFrame(loop);
-}
-loop();`,
-      },
-    };
-
-    let studioFiles = {
-      html: STUDIO_TEMPLATES.world3d.html,
-      css: STUDIO_TEMPLATES.world3d.css,
-      js: STUDIO_TEMPLATES.world3d.js,
-    };
-    let activeStudioFileTab = "js";
-
-    const studioTextarea = document.getElementById("studioCodeTextarea");
-    const studioLineNums = document.getElementById("studioLineNumbers");
-
-    function updateCodeLineNumbers() {
-      const lines = studioTextarea.value.split("\n").length;
-      studioLineNums.innerHTML = Array.from({ length: lines }, (_, i) => i + 1).join("<br>");
-    }
-
-    studioTextarea.value = studioFiles[activeStudioFileTab];
-    updateCodeLineNumbers();
-
-    studioTextarea.addEventListener("input", () => {
-      studioFiles[activeStudioFileTab] = studioTextarea.value;
-      updateCodeLineNumbers();
-    });
-
-    studioTextarea.addEventListener("scroll", () => {
-      studioLineNums.scrollTop = studioTextarea.scrollTop;
-    });
-
-    studioTextarea.addEventListener("keydown", (e) => {
-      if (e.key === "Tab") {
+    const keysDown = new Set();
+    window.addEventListener("keydown", (e) => {
+      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space"].includes(e.code) && document.activeElement?.tagName !== "TEXTAREA" && document.activeElement?.tagName !== "INPUT") {
         e.preventDefault();
-        const start = studioTextarea.selectionStart;
-        const end = studioTextarea.selectionEnd;
-        studioTextarea.value = studioTextarea.value.substring(0, start) + "  " + studioTextarea.value.substring(end);
-        studioTextarea.selectionStart = studioTextarea.selectionEnd = start + 2;
-        studioFiles[activeStudioFileTab] = studioTextarea.value;
-        updateCodeLineNumbers();
       }
+      keysDown.add(e.code);
     });
+    window.addEventListener("keyup", (e) => keysDown.delete(e.code));
 
-    document.querySelectorAll(".studio-file-tab").forEach((tab) => {
-      tab.addEventListener("click", () => {
-        studioFiles[activeStudioFileTab] = studioTextarea.value;
-        activeStudioFileTab = tab.dataset.filetab;
-        studioTextarea.value = studioFiles[activeStudioFileTab];
-        updateCodeLineNumbers();
+    const simState = {
+      px: 0,
+      py: 0,
+      pz: 0,
+      bots: [],
+      targets: [],
+      tick: 0,
+    };
 
-        document.querySelectorAll(".studio-file-tab").forEach((t) => {
-          const on = t.dataset.filetab === activeStudioFileTab;
-          t.className = on
-            ? "studio-file-tab px-3 py-1 rounded-lg text-xs font-mono font-bold bg-cyan-400/20 text-cyan-300 border border-cyan-400/40"
-            : "studio-file-tab px-3 py-1 rounded-lg text-xs font-mono font-bold text-slate-400 hover:text-white";
-        });
-      });
-    });
-
-    document.querySelectorAll(".studio-tpl-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const tpl = STUDIO_TEMPLATES[btn.dataset.tpl];
-        if (!tpl) return;
-        document.getElementById("studioProjectTitleInput").value = tpl.title;
-        document.getElementById("studioProjectDimSelect").value = tpl.dim;
-        studioFiles = { html: tpl.html, css: tpl.css, js: tpl.js };
-        studioTextarea.value = studioFiles[activeStudioFileTab];
-        updateCodeLineNumbers();
-        logStudioConsole(`Loaded template: ${tpl.title} (${tpl.dim})`, "info");
-      });
-    });
-
-    function logStudioConsole(msg, kind = "info") {
-      const box = document.getElementById("studioConsoleOutput");
-      const row = document.createElement("div");
-      row.className = kind === "error" ? "text-rose-400" : kind === "success" ? "text-emerald-300" : "text-cyan-200";
-      row.textContent = `[${new Date().toLocaleTimeString([], { hour12: false })}] ${msg}`;
-      box.appendChild(row);
-      box.scrollTop = box.scrollHeight;
+    function updateStageBadges() {
+      const g = getCurrentGame();
+      document.getElementById("activeGameTitle").textContent = g.title;
+      document.getElementById("activeGameDesc").textContent = g.description;
+      document.getElementById("stageDimBadge").textContent = g.dim;
+      document.getElementById("stageModeBadge").textContent = g.mode;
+      const srv = localDb.servers.find((s) => s.id === session.activeServerId);
+      document.getElementById("stageServerBadge").textContent = srv ? `Sector: ${srv.name}` : "Sector: Solo Orbit";
+      document.getElementById("hudScoreValue").textContent = String(session.runScore);
+      document.getElementById("hudBestValue").textContent = String(session.bestScore);
+      document.getElementById("hudBotsLabel").textContent = g.multiplayer
+        ? `${BOT_ROSTER_NAMES.slice(0, 3).join(" • ")}`
+        : `${BOT_ROSTER_NAMES[0]} • Solo World`;
+      document.getElementById("toggleStagePlayBtn").textContent = session.isPlaying ? "⏸ Pause" : "▶ Start Mission";
     }
 
-    document.getElementById("studioClearConsoleBtn").addEventListener("click", () => {
-      document.getElementById("studioConsoleOutput").innerHTML = "";
-    });
+    function setupSimulationEntities(game) {
+      simState.px = 0;
+      simState.py = 0;
+      simState.pz = 0;
+      simState.tick = 0;
 
-    function buildCombinedStudioHtml(bundle) {
-      return `<!DOCTYPE html><html><head><style>${bundle.css || ""}</style></head><body>${bundle.html || ""}<script>
-        window.onerror = function(msg) { console.error(msg); };
-        try { ${bundle.js || ""} } catch (e) { console.error(e.message); }
-      <\/script></body></html>`;
+      const botCount = game.multiplayer ? 3 : 1;
+      simState.bots = Array.from({ length: botCount }, (_, i) => ({
+        name: BOT_ROSTER_NAMES[i % BOT_ROSTER_NAMES.length],
+        x: (i - 1) * 3.2,
+        y: (i % 2 === 0 ? 1 : -1) * 1.1,
+        z: -2 - i * 2.2,
+        phase: i * 1.7,
+      }));
+
+      simState.targets = Array.from({ length: game.density || 4 }, (_, i) => ({
+        x: ((i % 3) - 1) * 3.5,
+        y: ((i % 2) * 2 - 1) * 1.2,
+        z: -3 - i * 2.8,
+        active: true,
+      }));
     }
 
-    document.getElementById("studioRunCodeBtn").addEventListener("click", () => {
-      studioFiles[activeStudioFileTab] = studioTextarea.value;
-      const iframe = document.getElementById("studioPreviewIframe");
-      iframe.srcdoc = buildCombinedStudioHtml(studioFiles);
-      document.getElementById("studioSandboxBadge").textContent = "LIVE PREVIEW RUNNING";
-      logStudioConsole("Rendered HTML + CSS + JS bundle in sandboxed preview.", "success");
-    });
+    function initThreeStage(game) {
+      const host = document.getElementById("threeStageHost");
+      host.innerHTML = "";
+      if (typeof THREE === "undefined") return;
 
-    document.getElementById("studioStopCodeBtn").addEventListener("click", () => {
-      document.getElementById("studioPreviewIframe").srcdoc = "";
-      document.getElementById("studioSandboxBadge").textContent = "PREVIEW STOPPED";
-      logStudioConsole("Preview stopped.", "info");
-    });
+      const width = host.clientWidth || 720;
+      const height = host.clientHeight || 400;
 
-    document.getElementById("studioPublishGameBtn").addEventListener("click", async () => {
-      if (session.isGuest) {
-        showToast("Sign in or create an account to publish Stud!o games!", "lock");
-        openAuthModal(true);
+      threeScene = new THREE.Scene();
+      threeScene.background = new THREE.Color(game.palette.bgHex || "#040816");
+      threeScene.fog = new THREE.FogExp2(game.palette.bgHex || "#040816", 0.045);
+
+      threeCamera = new THREE.PerspectiveCamera(60, width / height, 0.1, 100);
+      threeCamera.position.set(0, 3.2, 7.5);
+      threeCamera.lookAt(0, 0, -2);
+
+      threeRenderer = new THREE.WebGLRenderer({ antialias: true });
+      threeRenderer.setSize(width, height);
+      host.appendChild(threeRenderer.domElement);
+
+      const amb = new THREE.AmbientLight(0xffffff, 0.85);
+      threeScene.add(amb);
+      const dir = new THREE.DirectionalLight(game.palette.primary, 1.2);
+      dir.position.set(5, 10, 6);
+      threeScene.add(dir);
+
+      const grid = new THREE.GridHelper(28, 28, game.palette.primary, game.palette.secondary);
+      grid.position.y = -2;
+      threeScene.add(grid);
+
+      const pGeo = new THREE.OctahedronGeometry(0.65, 1);
+      const pMat = new THREE.MeshStandardMaterial({ color: game.palette.primary, emissive: game.palette.primary, emissiveIntensity: 0.35 });
+      playerMesh3D = new THREE.Mesh(pGeo, pMat);
+      threeScene.add(playerMesh3D);
+
+      botMeshes3D = simState.bots.map(() => {
+        const m = new THREE.Mesh(
+          new THREE.BoxGeometry(0.9, 0.9, 0.9),
+          new THREE.MeshStandardMaterial({ color: game.palette.secondary, emissive: game.palette.secondary, emissiveIntensity: 0.25 })
+        );
+        threeScene.add(m);
+        return m;
+      });
+
+      targetMeshes3D = simState.targets.map(() => {
+        const m = new THREE.Mesh(
+          new THREE.TorusGeometry(0.45, 0.14, 10, 20),
+          new THREE.MeshStandardMaterial({ color: 0xfbbf24, emissive: 0xf59e0b, emissiveIntensity: 0.4 })
+        );
+        threeScene.add(m);
+        return m;
+      });
+    }
+
+    function project3DToScreen(x, y, z, width, height) {
+      if (!threeCamera) return { x: width * 0.5, y: height * 0.5, visible: false };
+      const v = new THREE.Vector3(x, y + 0.9, z).project(threeCamera);
+      return {
+        x: (v.x * 0.5 + 0.5) * width,
+        y: (-v.y * 0.5 + 0.5) * height,
+        visible: v.z < 1,
+      };
+    }
+
+    function renderFloatingNametags(items, width, height) {
+      const layer = document.getElementById("floatingNametagsLayer");
+      if (!layer) return;
+      layer.innerHTML = items
+        .filter((it) => it.visible !== false && it.x >= 0 && it.x <= width && it.y >= 0 && it.y <= height)
+        .map(
+          (it) => `
+          <div style="left:${Math.round(it.x)}px;top:${Math.round(it.y)}px;transform:translate(-50%,-100%);" class="absolute px-2 py-0.5 rounded-full text-[10px] font-mono font-bold whitespace-nowrap ${
+            it.isBot
+              ? "bg-purple-950/90 text-purple-200 border border-purple-400/50"
+              : "bg-cyan-950/90 text-cyan-200 border border-cyan-400/60"
+          }">
+            ${escapeHtml(it.label)}
+          </div>
+        `
+        )
+        .join("");
+    }
+
+    function startWorldEngine(game) {
+      if (animFrameId) cancelAnimationFrame(animFrameId);
+      setupSimulationEntities(game);
+
+      const threeHost = document.getElementById("threeStageHost");
+      const canvas2d = document.getElementById("canvas2dStage");
+      const customFrame = document.getElementById("customGameStageIframe");
+
+      if (game.isCustomStudio && game.customCode) {
+        threeHost.classList.add("hidden");
+        canvas2d.classList.add("hidden");
+        customFrame.classList.remove("hidden");
+        document.getElementById("floatingNametagsLayer").innerHTML = "";
+        customFrame.srcdoc = buildCombinedStudioHtml(game.customCode);
         return;
       }
 
-      studioFiles[activeStudioFileTab] = studioTextarea.value;
-      const title = document.getElementById("studioProjectTitleInput").value.trim() || `Stud!o World #${session.studioGames.length + 1}`;
-      const dim = document.getElementById("studioProjectDimSelect").value;
+      customFrame.classList.add("hidden");
+      customFrame.srcdoc = "";
 
-      const publishedObj = {
-        id: `m3-studio-${Date.now().toString(36)}`,
-        title,
-        dim,
-        author: session.handle,
-        html: studioFiles.html,
-        css: studioFiles.css,
-        js: studioFiles.js,
-        createdAt: Date.now(),
+      if (game.dim === "3D") {
+        threeHost.classList.remove("hidden");
+        canvas2d.classList.add("hidden");
+        initThreeStage(game);
+      } else {
+        threeHost.classList.add("hidden");
+        canvas2d.classList.remove("hidden");
+      }
+
+      const step = () => {
+        if (session.isPlaying) {
+          simState.tick += 0.025 * (game.speedMult || 1);
+          const spd = 0.14 * (game.speedMult || 1);
+          if (keysDown.has("KeyA") || keysDown.has("ArrowLeft")) simState.px -= spd;
+          if (keysDown.has("KeyD") || keysDown.has("ArrowRight")) simState.px += spd;
+          if (keysDown.has("KeyW") || keysDown.has("ArrowUp")) simState.py += spd;
+          if (keysDown.has("KeyS") || keysDown.has("ArrowDown")) simState.py -= spd;
+          if (keysDown.has("Space")) simState.pz -= spd * 1.4;
+
+          simState.px = Math.max(-7.5, Math.min(7.5, simState.px));
+          simState.py = Math.max(-1.4, Math.min(3.5, simState.py));
+
+          simState.bots.forEach((b, idx) => {
+            b.x = Math.sin(simState.tick + b.phase) * 4.5;
+            b.y = Math.cos(simState.tick * 1.3 + b.phase) * 1.1;
+            b.z = -2.5 - idx * 2.4 + Math.sin(simState.tick * 0.7 + idx) * 1.5;
+          });
+
+          simState.targets.forEach((t, idx) => {
+            if (!t.active) {
+              if (Math.random() < 0.015) t.active = true;
+              return;
+            }
+            const dist = Math.hypot(simState.px - t.x, simState.py - t.y, simState.pz - t.z);
+            if (dist < 1.35) {
+              t.active = false;
+              session.runScore += 25;
+              if (session.runScore > session.bestScore) session.bestScore = session.runScore;
+              document.getElementById("hudScoreValue").textContent = String(session.runScore);
+              document.getElementById("hudBestValue").textContent = String(session.bestScore);
+            }
+          });
+        }
+
+        if (game.dim === "3D" && threeRenderer && threeScene && threeCamera) {
+          const w = threeHost.clientWidth || 720;
+          const h = threeHost.clientHeight || 400;
+          threeRenderer.setSize(w, h);
+          threeCamera.aspect = w / h;
+          threeCamera.updateProjectionMatrix();
+
+          if (playerMesh3D) {
+            playerMesh3D.position.set(simState.px, simState.py, simState.pz);
+            playerMesh3D.rotation.y += 0.03;
+          }
+
+          simState.bots.forEach((b, i) => {
+            if (botMeshes3D[i]) {
+              botMeshes3D[i].position.set(b.x, b.y, b.z);
+              botMeshes3D[i].rotation.x += 0.025;
+              botMeshes3D[i].rotation.y += 0.025;
+            }
+          });
+
+          simState.targets.forEach((t, i) => {
+            if (targetMeshes3D[i]) {
+              targetMeshes3D[i].visible = t.active;
+              targetMeshes3D[i].position.set(t.x, t.y, t.z);
+              targetMeshes3D[i].rotation.z += 0.04;
+            }
+          });
+
+          threeRenderer.render(threeScene, threeCamera);
+
+          const pProj = project3DToScreen(simState.px, simState.py, simState.pz, w, h);
+          const tags = [
+            { label: `${session.avatar} ${session.handle}`, x: pProj.x, y: pProj.y, visible: pProj.visible, isBot: false },
+            ...simState.bots.map((b) => {
+              const bp = project3DToScreen(b.x, b.y, b.z, w, h);
+              return { label: b.name, x: bp.x, y: bp.y, visible: bp.visible, isBot: true };
+            }),
+          ];
+          renderFloatingNametags(tags, w, h);
+        } else if (game.dim === "2D") {
+          const w = (canvas2d.width = canvas2d.clientWidth || 720);
+          const h = (canvas2d.height = canvas2d.clientHeight || 400);
+          const ctx = canvas2d.getContext("2d");
+          ctx.fillStyle = game.palette.bgHex || "#040816";
+          ctx.fillRect(0, 0, w, h);
+
+          ctx.strokeStyle = "rgba(56, 189, 248, 0.14)";
+          for (let x = 0; x < w; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
+          for (let y = 0; y < h; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); }
+
+          const px2d = w * 0.5 + simState.px * 42;
+          const py2d = h * 0.5 - simState.py * 42;
+
+          simState.targets.forEach((t, i) => {
+            if (!t.active) return;
+            const tx = w * 0.5 + t.x * 42;
+            const ty = h * 0.5 - t.y * 42;
+            ctx.fillStyle = "#fbbf24";
+            ctx.beginPath(); ctx.arc(tx, ty, 9, 0, Math.PI * 2); ctx.fill();
+            if (Math.hypot(px2d - tx, py2d - ty) < 24) {
+              t.active = false;
+              session.runScore += 25;
+              if (session.runScore > session.bestScore) session.bestScore = session.runScore;
+              document.getElementById("hudScoreValue").textContent = String(session.runScore);
+              document.getElementById("hudBestValue").textContent = String(session.bestScore);
+            }
+          });
+
+          const botTags = simState.bots.map((b) => {
+            const bx = w * 0.5 + b.x * 42;
+            const by = h * 0.5 - b.y * 42;
+            ctx.fillStyle = game.palette.hex || "#c084fc";
+            ctx.beginPath(); ctx.arc(bx, by, 12, 0, Math.PI * 2); ctx.fill();
+            return { label: b.name, x: bx, y: by - 14, visible: true, isBot: true };
+          });
+
+          ctx.fillStyle = "#00f0ff";
+          ctx.beginPath(); ctx.arc(px2d, py2d, 14, 0, Math.PI * 2); ctx.fill();
+
+          renderFloatingNametags(
+            [{ label: `${session.avatar} ${session.handle}`, x: px2d, y: py2d - 16, visible: true, isBot: false }, ...botTags],
+            w,
+            h
+          );
+        }
+
+        animFrameId = requestAnimationFrame(step);
       };
 
-      session.studioGames.unshift(publishedObj);
-      await syncCurrentAccountToStorage();
-      renderCatalogGrid();
-      renderProfileView();
-      selectWorldGame(publishedObj.id);
-      switchWorkspaceView("hub");
-      showToast(`Published "${title}" to your M3rcury library!`, "success");
-    });
-
-    // =========================================================================
-    // 11. COMMANDER PROFILE VIEW & HEADER RENDERING (Strict Guest Gating)
-    // =========================================================================
-    function renderProfileView() {
-      const isGuest = session.isGuest;
-      document.getElementById("profileAccountPill").textContent = isGuest ? "GUEST (UNSAVED)" : "VERIFIED COMMANDER";
-      document.getElementById("profileAccountPill").className = isGuest
-        ? "text-xs font-mono font-bold px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/35"
-        : "text-xs font-mono font-bold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/35";
-
-      document.getElementById("profileGuestLockBox").classList.toggle("hidden", !isGuest);
-      document.getElementById("avatarLockHint").classList.toggle("hidden", !isGuest);
-      document.getElementById("signOutAccountBtn").classList.toggle("hidden", isGuest);
-
-      const handleInput = document.getElementById("profileHandleInput");
-      const mottoInput = document.getElementById("profileMottoInput");
-      handleInput.value = session.handle;
-      mottoInput.value = session.motto;
-      handleInput.disabled = isGuest;
-      mottoInput.disabled = isGuest;
-
-      document.getElementById("statSavedScore").textContent = isGuest ? "—" : String(session.savedScore);
-      document.getElementById("statGamesPlayed").textContent = isGuest ? "—" : String(session.gamesPlayed);
-      document.getElementById("statStudioCreated").textContent = isGuest ? "—" : String(session.studioGames.length);
-
-      // Avatar Grid (Disabled & locked for Guests)
-      const avGrid = document.getElementById("avatarSelectorGrid");
-      avGrid.innerHTML = AVATAR_EMBLEMS.map((em) => {
-        const selected = session.avatar === em;
-        return `
-          <button type="button" data-pick-avatar="${em}" ${isGuest ? "disabled" : ""} class="avatar-pick-btn py-2.5 rounded-xl text-xl border transition ${
-            isGuest
-              ? "opacity-45 cursor-not-allowed bg-slate-950 border-slate-800"
-              : selected
-              ? "bg-cyan-400/25 border-cyan-400 scale-105"
-              : "bg-slate-950 border-slate-800 hover:border-slate-600"
-          }">
-            ${em}
-          </button>
-        `;
-      }).join("");
-
-      if (!isGuest) {
-        avGrid.querySelectorAll(".avatar-pick-btn").forEach((btn) => {
-          btn.addEventListener("click", async () => {
-            session.avatar = btn.dataset.pickAvatar;
-            await syncCurrentAccountToStorage();
-            renderAllUI();
-            showToast(`Updated cosmic avatar to ${session.avatar}`, "success");
-          });
-        });
-      }
-
-      // User's published games list
-      const pubBox = document.getElementById("myPublishedGamesList");
-      if (isGuest) {
-        pubBox.innerHTML = `<p class="text-xs text-slate-400">Sign in to publish and manage your M3rcury Stud!o creations.</p>`;
-      } else if (!session.studioGames.length) {
-        pubBox.innerHTML = `<p class="text-xs text-slate-400">No published Stud!o games yet. Open M3rcury Stud!o to code and publish your first game!</p>`;
-      } else {
-        pubBox.innerHTML = session.studioGames
-          .map(
-            (sg) => `
-            <div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-3 flex items-center justify-between gap-2">
-              <div>
-                <div class="font-bold text-xs sm:text-sm text-white">${escapeHtml(sg.title)}</div>
-                <div class="text-[11px] font-mono text-purple-300">${sg.dim} Stud!o Script</div>
-              </div>
-              <button type="button" data-launch-pub="${sg.id}" class="launch-pub-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-cyan-400 text-slate-950 hover:bg-cyan-300">
-                Play
-              </button>
-            </div>
-          `
-          )
-          .join("");
-
-        pubBox.querySelectorAll(".launch-pub-btn").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            selectWorldGame(btn.dataset.launchPub);
-            switchWorkspaceView("hub");
-          });
-        });
-      }
+      animFrameId = requestAnimationFrame(step);
     }
 
-    document.getElementById("profileUpdateForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
+    function selectWorldGame(gameId) {
+      session.activeGameId = gameId;
+      session.runScore = 0;
+      session.isPlaying = true;
+      updateStageBadges();
+      startWorldEngine(getCurrentGame());
+      renderCatalogGrid();
+    }
+
+    document.getElementById("toggleStagePlayBtn").addEventListener("click", () => {
+      session.isPlaying = !session.isPlaying;
+      updateStageBadges();
+    });
+
+    document.getElementById("saveMissionScoreBtn").addEventListener("click", async () => {
       if (session.isGuest) {
-        showToast("Create an account to save profile & avatar changes!", "lock");
+        showToast("Create an account to save scores & progress!", "lock");
         openAuthModal(true);
         return;
       }
-
-      const nextHandle = document.getElementById("profileHandleInput").value.trim();
-      const nextMotto = document.getElementById("profileMottoInput").value.trim();
-      if (nextHandle) session.handle = nextHandle;
-      session.motto = nextMotto;
+      session.savedScore = Math.max(session.savedScore, session.runScore, session.bestScore);
+      session.gamesPlayed += 1;
       await syncCurrentAccountToStorage();
-      renderAllUI();
-      showToast("Saved Commander profile & progress!", "success");
+      renderProfileView();
+      showToast(`Saved score ${session.savedScore} to your Commander profile!`, "success");
     });
 
-    document.getElementById("signOutAccountBtn").addEventListener("click", async () => {
-      if (isFirebaseLive && fbAuth) {
-        await signOut(fbAuth);
-      }
-      localDb.activeSessionEmail = null;
-      persistLocalDb();
-      resetToGuestSession();
-      renderAllUI();
-      showToast("Signed out — now in Guest Orbit", "info");
-    });
-
-    function renderHeaderSlot() {
-      const slot = document.getElementById("headerAccountSlot");
-      document.getElementById("guestWarningBanner").classList.toggle("hidden", !session.isGuest);
-
-      if (session.isGuest) {
-        slot.innerHTML = `
-          <button id="headerSignInBtn" type="button" class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-cyan-400 to-purple-500 text-slate-950 text-xs font-extrabold hover:brightness-110 transition shadow-md shadow-cyan-500/20">
-            <span>🛸</span>
-            <span>Sign In / Register</span>
-          </button>
-        `;
-        document.getElementById("headerSignInBtn").addEventListener("click", () => openAuthModal(false));
-      } else {
-        slot.innerHTML = `
-          <button id="headerCommanderBtn" type="button" class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900/95 hover:bg-slate-800 border border-cyan-400/40 text-xs font-bold text-white transition">
-            <span class="text-base">${session.avatar}</span>
-            <span class="max-w-[100px] truncate">${escapeHtml(session.handle)}</span>
-            <span class="hidden sm:inline font-mono text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">SAVED</span>
-          </button>
-        `;
-        document.getElementById("headerCommanderBtn").addEventListener("click", () => switchWorkspaceView("profile"));
-      }
+    // =========================================================================
+    // NAVIGATION TABS & SPACE STARFIELD BACKGROUND
+    // =========================================================================
+    function switchWorkspaceView(viewKey) {
+      const map = {
+        hub: "view-hub",
+        studio: "view-studio",
+        friends: "view-friends",
+        profile: "view-profile",
+      };
+      const targetId = map[viewKey] || "view-hub";
+      document.querySelectorAll(".workspace-view").forEach((sec) => {
+        sec.classList.toggle("hidden", sec.id !== targetId);
+      });
+      document.querySelectorAll(".nav-tab-btn").forEach((btn) => {
+        const active = btn.dataset.nav === viewKey;
+        btn.className = active
+          ? "nav-tab-btn px-2.5 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-400/20 text-cyan-300 border border-cyan-400/40 transition"
+          : "nav-tab-btn px-2.5 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition";
+      });
     }
 
-    function escapeHtml(s) {
-      return String(s)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+    document.querySelectorAll(".nav-tab-btn").forEach((btn) => {
+      btn.addEventListener("click", () => switchWorkspaceView(btn.dataset.nav));
+    });
+
+    document.getElementById("goToStudioBtn")?.addEventListener("click", () => switchWorkspaceView("studio"));
+
+    function initCosmicStarfield() {
+      const c = document.getElementById("spaceBgCanvas");
+      if (!c) return;
+      const ctx = c.getContext("2d");
+      const stars = Array.from({ length: 90 }, () => ({
+        x: Math.random(),
+        y: Math.random(),
+        r: Math.random() * 1.6 + 0.4,
+        sp: Math.random() * 0.0004 + 0.0001,
+      }));
+      const drawStars = () => {
+        const w = (c.width = window.innerWidth);
+        const h = (c.height = window.innerHeight);
+        ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = "rgba(226, 248, 255, 0.72)";
+        for (const s of stars) {
+          s.y = (s.y + s.sp) % 1;
+          ctx.beginPath();
+          ctx.arc(s.x * w, s.y * h, s.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        requestAnimationFrame(drawStars);
+      };
+      drawStars();
     }
 
     function renderAllUI() {
@@ -3242,10 +1993,12 @@ loop();`,
       renderCatalogGrid();
       renderFriendsSection();
       renderProfileView();
+      updateStageBadges();
     }
 
     // Boot Application
     window.addEventListener("load", () => {
+      initCosmicStarfield();
       initFirebaseIfConfigured();
       selectWorldGame(session.activeGameId);
       renderAllUI();

@@ -174,18 +174,12 @@
       </div>
 
       <form id="authSubmitForm" class="space-y-3.5">
-        <div id="signupUsernameWrap" class="hidden">
-          <label for="authHandleInput" class="block text-[11px] font-semibold uppercase tracking-wider text-slate-300 mb-1">
-            Commander Handle (Public Nametag)
-          </label>
-          <input id="authHandleInput" type="text" maxlength="18" placeholder="e.g. NovaPilot" class="w-full rounded-xl bg-slate-950/90 border border-slate-800 focus:border-cyan-400 px-3.5 py-2.5 text-sm text-white outline-none" />
-        </div>
-
         <div>
-          <label for="authEmailInput" class="block text-[11px] font-semibold uppercase tracking-wider text-slate-300 mb-1">
-            Email Address
+          <label for="authHandleInput" class="block text-[11px] font-semibold uppercase tracking-wider text-slate-300 mb-1">
+            Username (Pilot Callsign — Used to Sign In)
           </label>
-          <input id="authEmailInput" type="email" required placeholder="commander@m3rcury.space" class="w-full rounded-xl bg-slate-950/90 border border-slate-800 focus:border-cyan-400 px-3.5 py-2.5 text-sm text-white outline-none" />
+          <input id="authHandleInput" type="text" required minlength="2" maxlength="18" pattern="[A-Za-z0-9_-]{2,18}" placeholder="e.g. NovaPilot" class="w-full rounded-xl bg-slate-950/90 border border-slate-800 focus:border-cyan-400 px-3.5 py-2.5 text-sm text-white outline-none" />
+          <p class="text-[10px] text-slate-400 mt-1">Letters, numbers, underscores, or hyphens (2–18 chars). No email needed to sign in.</p>
         </div>
 
         <div>
@@ -206,7 +200,12 @@
           <input id="authPasswordConfirmInput" type="password" minlength="6" placeholder="••••••••" class="w-full rounded-xl bg-slate-950/90 border border-slate-800 focus:border-cyan-400 px-3.5 py-2.5 text-sm text-white outline-none" />
         </div>
 
-        <p id="authErrorText" class="hidden text-xs text-rose-400 font-medium bg-rose-950/50 border border-rose-500/30 rounded-xl px-3 py-2"></p>
+        <div id="authErrorBox" class="hidden text-xs text-rose-300 font-medium bg-rose-950/60 border border-rose-500/40 rounded-xl px-3 py-2.5 space-y-2">
+          <p id="authErrorText"></p>
+          <button type="button" id="copyFirestoreRulesBtn" class="hidden px-2.5 py-1 rounded-lg bg-amber-400/20 hover:bg-amber-400/30 text-amber-200 border border-amber-400/40 font-mono text-[11px] font-bold">
+            📋 Copy Firestore Rules (Fix Locked Mode)
+          </button>
+        </div>
 
         <div class="pt-1 flex flex-col sm:flex-row items-center justify-between gap-2.5">
           <button type="button" id="guestContinueBtn" class="w-full sm:w-auto px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-700 hover:border-slate-500 transition">
@@ -233,13 +232,13 @@
         <button id="closeFirebaseModalBtn" type="button" class="text-slate-400 hover:text-white p-1.5 rounded-xl hover:bg-slate-800">✕</button>
       </div>
 
-      <div class="space-y-3">
-        <label for="firebaseConfigTextarea" class="block text-xs font-semibold text-slate-300">
-          Firebase Web Config Object (<span class="font-mono text-cyan-300">apiKey, authDomain, projectId...</span>)
-        </label>
-        <textarea id="firebaseConfigTextarea" rows="7" placeholder='{"apiKey":"AIza...","authDomain":"m3rcury-games.firebaseapp.com","projectId":"m3rcury-games","storageBucket":"m3rcury-games.firebasestorage.app","messagingSenderId":"...","appId":"1:..."}' class="w-full rounded-2xl bg-slate-950 border border-slate-800 focus:border-cyan-400 p-3 font-mono text-xs text-cyan-200 outline-none"></textarea>
-        <div class="rounded-xl bg-amber-950/40 border border-amber-400/30 p-2.5 text-[11px] text-amber-200 leading-relaxed">
-          <strong>Getting Firestore out of Locked Mode:</strong> In Firebase Console &rarr; <em>Firestore Database &rarr; Rules</em>, set rules to allow authenticated users (or public read + signed-in write) and click <strong>Publish</strong> so public profiles, friends, and servers don't get blocked by permission errors.
+        <div class="rounded-xl bg-amber-950/40 border border-amber-400/30 p-2.5 text-[11px] text-amber-200 leading-relaxed space-y-2">
+          <div>
+            <strong>Getting Firestore out of Locked Mode:</strong> In Firebase Console &rarr; <em>Firestore Database &rarr; Rules</em>, paste the rules below and click <strong>Publish</strong> so username logins, pilot profiles, friends, and servers sync in the cloud.
+          </div>
+          <button type="button" id="modalCopyFirestoreRulesBtn" class="px-2.5 py-1 rounded-lg bg-amber-400/20 hover:bg-amber-400/30 text-amber-200 border border-amber-400/40 font-mono text-[11px] font-bold">
+            📋 Copy Recommended Firestore Rules
+          </button>
         </div>
         <div class="flex items-center justify-between gap-2 text-[11px] text-slate-400">
           <span>Status: <strong id="fbModalStatusLabel" class="text-amber-300">Local Preview Mode</strong></span>
@@ -466,6 +465,9 @@
       <!-- 100 Exact Playable Games Catalog -->
       <section class="cosmic-glass rounded-3xl p-4 sm:p-6 space-y-5">
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-slate-800 pb-4">
+      <!-- 100 Exact Playable Games Catalog -->
+      <section class="cosmic-glass rounded-3xl p-4 sm:p-6 space-y-5">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-slate-800 pb-4">
           <div>
             <div class="flex flex-wrap items-center gap-2">
               <h2 class="font-display text-lg sm:text-xl font-extrabold text-white">M3rcury Universe Catalog</h2>
@@ -474,7 +476,7 @@
               </span>
             </div>
             <p class="text-xs sm:text-sm text-slate-400 mt-1">
-              All 100 worlds from your list are playable in 2D Canvas or 3D perspective/wireframe with floating nametags and simulated bot players.
+              All 100 worlds from your list run tailored interactive gameplay in 2D Canvas or 3D perspective/wireframe with floating nametags and simulated `[BOT]` pilots.
             </p>
           </div>
 
@@ -658,15 +660,15 @@
         <!-- Add Friend + Incoming Requests (5 cols) -->
         <div class="lg:col-span-5 space-y-6">
           <div class="cosmic-glass rounded-3xl p-5 space-y-3.5">
-            <h3 class="font-display text-base font-bold text-white">Add Commander by Handle</h3>
+            <h3 class="font-display text-base font-bold text-white">Add Pilot by Exact Username</h3>
             <form id="sendFriendReqForm" class="flex gap-2">
-              <input id="friendSearchHandleInput" type="text" required maxlength="20" placeholder="Enter handle (e.g. StarDrifter)" class="flex-1 rounded-xl bg-slate-950/90 border border-slate-800 focus:border-cyan-400 px-3.5 py-2 text-sm text-white outline-none" />
+              <input id="friendSearchHandleInput" type="text" required maxlength="20" placeholder="Enter username (e.g. NovaPilot)" class="flex-1 rounded-xl bg-slate-950/90 border border-slate-800 focus:border-cyan-400 px-3.5 py-2 text-sm text-white outline-none" />
               <button type="submit" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-cyan-400 text-slate-950 hover:bg-cyan-300 transition shrink-0">
                 Add Friend
               </button>
             </form>
             <p class="text-[11px] text-slate-400">
-              Your Friend Code: <span id="myFriendCodeLabel" class="font-mono text-cyan-300 font-bold">#M3-0000</span>
+              Your Pilot Code: <span id="myFriendCodeLabel" class="font-mono text-cyan-300 font-bold">#M3-0000</span>
             </p>
           </div>
 
@@ -843,14 +845,51 @@
     };
 
     const FB_CONFIG_KEY = "m3rcury_firebase_custom_config_v1";
-    const LOCAL_DB_KEY = "m3rcury_cosmic_local_db_v2";
+    const LOCAL_DB_KEY = "m3rcury_cosmic_local_db_v3";
     const AVATAR_EMBLEMS = ["🛸", "🚀", "🪐", "👾", "⚡", "🦊", "🤖", "🌌", "☄️", "🐉", "💎", "🛰️"];
+    const RECOMMENDED_FIRESTORE_RULES = `rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /usernames/{usernameLower} {
+      allow read, write: if true;
+    }
+    match /pilots/{pilotId} {
+      allow read, write: if true;
+    }
+    match /servers/{serverId} {
+      allow read, write: if true;
+    }
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}`;
+
+    function usernameToSyntheticEmail(username) {
+      const clean = String(username || "").trim().toLowerCase().replace(/[^a-z0-9_-]/g, "");
+      return `${clean}@m3rcury.local`;
+    }
+
+    function copyTextToClipboard(text, successMsg) {
+      try {
+        const helper = document.createElement("textarea");
+        helper.value = text;
+        document.body.appendChild(helper);
+        helper.select();
+        document.execCommand("copy");
+        document.body.removeChild(helper);
+        showToast(successMsg || "Copied to clipboard!", "success");
+      } catch (e) {
+        showToast("Could not copy automatically — copy manually from modal.", "error");
+      }
+    }
 
     let fbApp = null;
     let fbAuth = null;
     let fbDb = null;
     let isFirebaseLive = false;
     let serversUnsub = null;
+    let authOperationInProgress = false;
 
     function getSavedFirebaseConfig() {
       try {
@@ -894,6 +933,7 @@
         document.getElementById("footerSyncStatus").textContent = `100 Exact Worlds • Firebase Live (${cfg.projectId})`;
 
         onAuthStateChanged(fbAuth, async (user) => {
+          if (authOperationInProgress) return;
           if (user) {
             await loadCloudUserProfile(user);
           } else {
@@ -1041,40 +1081,44 @@
     function build100ExactGames() {
       return EXACT_100_GAMES_RAW.map(([num, title, dim, mode, description], idx) => {
         const isMp = mode.toLowerCase().includes("multi");
-        const pal = PALETTES[idx % PALETTES.length];
-        const speedMult = Number((0.88 + ((idx % 6) * 0.12)).toFixed(2));
-        const density = 3 + (idx % 5);
-        const engine =
-          dim === "3D"
-            ? idx % 3 === 0
-              ? "flight3d"
-              : idx % 3 === 1
-              ? "obby3d"
-              : "arena3d"
-            : idx % 3 === 0
-            ? "shooter2d"
-            : idx % 3 === 1
-            ? "runner2d"
-            : "gravity2d";
+      const pal = PALETTES[idx % PALETTES.length];
+      const speedMult = Number((0.88 + ((idx % 6) * 0.12)).toFixed(2));
+      const density = 3 + (idx % 5);
 
-        return {
-          id: `m3-exact-${String(num).padStart(3, "0")}`,
-          number: num,
-          title,
-          dim,
-          mode,
-          multiplayer: isMp,
-          engine,
-          genre: `${dim} • ${mode}`,
-          studio: isMp ? "M3rcury Squad Lab" : "M3rcury Solo Forge",
-          rating: (4.4 + ((idx % 6) * 0.1)).toFixed(1),
-          palette: pal,
-          speedMult,
-          density,
-          description,
-          isCustomStudio: false,
-        };
-      });
+      let mechanicType = "generic_2d";
+      if (num === 1) mechanicType = "cargo_logistics_3d";
+      else if (num === 2) mechanicType = "mushroom_terrarium_2d";
+      else if (num === 3) mechanicType = "galactic_laundromat_3d";
+      else if (num === 4) mechanicType = "clockwork_toymaker_3d";
+      else if (num === 5) mechanicType = "trench_research_2d";
+      else if (num === 6) mechanicType = "amber_museum_3d";
+      else if (num === 7) mechanicType = "haunted_hotel_3d";
+      else if (num === 8) mechanicType = "bonsai_sanctuary_3d";
+      else if (num === 9) mechanicType = "dimensional_post_3d";
+      else if (num === 10) mechanicType = "volcanic_glass_3d";
+      else if (dim === "3D") {
+        mechanicType = idx % 3 === 0 ? "flight3d" : idx % 3 === 1 ? "obby3d" : "arena3d";
+      } else {
+        mechanicType = idx % 3 === 0 ? "shooter2d" : idx % 3 === 1 ? "runner2d" : "gravity2d";
+      }
+
+      return {
+        id: `m3-exact-${String(num).padStart(3, "0")}`,
+        number: num,
+        title,
+        dim,
+        mode,
+        multiplayer: isMp,
+        engine: mechanicType,
+        genre: `${dim} • ${mode}`,
+        studio: isMp ? "M3rcury Squad Lab" : "M3rcury Solo Forge",
+        rating: (4.4 + ((idx % 6) * 0.1)).toFixed(1),
+        palette: pal,
+        speedMult,
+        density,
+        description,
+        isCustomStudio: false,
+      };
     }
 
     const BUILTIN_100_GAMES = build100ExactGames();
@@ -1194,11 +1238,11 @@
     function applyAccountRecordToSession(acc) {
       session.isGuest = false;
       session.uid = acc.uid;
-      session.email = acc.email;
+      session.email = acc.email || usernameToSyntheticEmail(acc.handle);
       session.handle = acc.handle;
       session.avatar = acc.avatar || "🚀";
       session.motto = acc.motto || "Commander in the M3rcury Fleet";
-      session.friendCode = acc.friendCode || `#M3-${acc.uid.slice(-4).toUpperCase()}`;
+      session.friendCode = acc.friendCode || `#M3-${String(acc.uid).slice(-4).toUpperCase()}`;
       session.savedScore = acc.savedScore || 0;
       session.gamesPlayed = acc.gamesPlayed || 0;
       session.bestByGame = acc.bestByGame || {};
@@ -1207,13 +1251,107 @@
       session.studioGames = Array.isArray(acc.studioGames) ? acc.studioGames : [];
     }
 
+    function isPermissionDeniedError(err) {
+      return err?.code === "permission-denied" || String(err?.message || "").toLowerCase().includes("permission");
+    }
+
     function handleFirestorePermissionError(err, actionLabel) {
       console.error(`Firestore error during ${actionLabel}:`, err);
-      const locked = err?.code === "permission-denied" || String(err?.message || "").toLowerCase().includes("permission");
-      if (locked) {
-        showToast("Firestore is in Locked Mode! Update Rules in Firebase Console to allow public/auth access.", "error");
+      if (isPermissionDeniedError(err)) {
+        showAuthError("Firestore is in Locked Mode! Click Copy Firestore Rules below and publish them in Firebase Console.", true);
+        showToast("Firestore is in Locked Mode — copy & publish Rules in Firebase Console.", "error");
       } else {
         showToast(`Cloud sync error (${actionLabel}): ${err?.message || "check connection"}`, "error");
+      }
+    }
+
+    async function loadCloudUserProfile(firebaseUser) {
+      if (!fbDb || !firebaseUser) return;
+      const derivedHandle =
+        firebaseUser.displayName ||
+        (firebaseUser.email && firebaseUser.email.endsWith("@m3rcury.local")
+          ? firebaseUser.email.split("@")[0]
+          : "Pilot");
+      try {
+        const userRef = doc(fbDb, "pilots", firebaseUser.uid);
+        const snap = await getDoc(userRef);
+        if (snap.exists()) {
+          applyAccountRecordToSession({
+            uid: firebaseUser.uid,
+            email: firebaseUser.email,
+            handle: derivedHandle,
+            ...snap.data(),
+          });
+        } else {
+          const freshProfile = {
+            uid: firebaseUser.uid,
+            email: firebaseUser.email || usernameToSyntheticEmail(derivedHandle),
+            handle: derivedHandle,
+            handleLower: derivedHandle.toLowerCase(),
+            avatar: "🚀",
+            motto: "Charting deep space in M3rcury",
+            friendCode: `#M3-${firebaseUser.uid.slice(0, 4).toUpperCase()}`,
+            savedScore: 0,
+            gamesPlayed: 0,
+            bestByGame: {},
+            friends: [],
+            pendingRequests: [],
+            studioGames: [],
+          };
+          await setDoc(userRef, freshProfile);
+          await setDoc(
+            doc(fbDb, "usernames", derivedHandle.toLowerCase()),
+            { uid: firebaseUser.uid, handle: derivedHandle, email: freshProfile.email },
+            { merge: true }
+          );
+          applyAccountRecordToSession(freshProfile);
+        }
+      } catch (err) {
+        applyAccountRecordToSession({
+          uid: firebaseUser.uid,
+          email: firebaseUser.email,
+          handle: derivedHandle,
+        });
+        if (isPermissionDeniedError(err)) {
+          showToast("Signed in! Publish Firestore Rules to enable cloud profile sync.", "info");
+        }
+      }
+    }
+
+    async function syncCurrentAccountToStorage() {
+      if (session.isGuest) return;
+      const record = {
+        uid: session.uid,
+        email: session.email || usernameToSyntheticEmail(session.handle),
+        handle: session.handle,
+        handleLower: session.handle.toLowerCase(),
+        avatar: session.avatar,
+        motto: session.motto,
+        friendCode: session.friendCode,
+        savedScore: session.savedScore,
+        gamesPlayed: session.gamesPlayed,
+        bestByGame: session.bestByGame,
+        friends: session.friends,
+        pendingRequests: session.pendingRequests,
+        studioGames: session.studioGames,
+      };
+
+      if (session.handle) {
+        localDb.accounts[session.handle.toLowerCase()] = {
+          ...(localDb.accounts[session.handle.toLowerCase()] || {}),
+          ...record,
+        };
+        persistLocalDb();
+      }
+
+      if (isFirebaseLive && fbDb && fbAuth?.currentUser) {
+        try {
+          await setDoc(doc(fbDb, "pilots", fbAuth.currentUser.uid), record, { merge: true });
+        } catch (err) {
+          if (!isPermissionDeniedError(err)) {
+            handleFirestorePermissionError(err, "save profile");
+          }
+        }
       }
     }
 
@@ -1320,7 +1458,29 @@
     const authModal = document.getElementById("authModal");
     const pwInput = document.getElementById("authPasswordInput");
     const pwConfirmInput = document.getElementById("authPasswordConfirmInput");
+    const handleAuthInput = document.getElementById("authHandleInput");
     let isSignupMode = false;
+
+    function showAuthError(message, showRulesHelper = false) {
+      const box = document.getElementById("authErrorBox");
+      const text = document.getElementById("authErrorText");
+      const rulesBtn = document.getElementById("copyFirestoreRulesBtn");
+      text.textContent = message;
+      rulesBtn.classList.toggle("hidden", !showRulesHelper);
+      box.classList.remove("hidden");
+    }
+
+    function hideAuthError() {
+      document.getElementById("authErrorBox").classList.add("hidden");
+      document.getElementById("copyFirestoreRulesBtn").classList.add("hidden");
+    }
+
+    document.getElementById("copyFirestoreRulesBtn").addEventListener("click", () => {
+      copyTextToClipboard(RECOMMENDED_FIRESTORE_RULES, "Copied Firestore Rules! Paste & Publish in Firebase Console.");
+    });
+    document.getElementById("modalCopyFirestoreRulesBtn").addEventListener("click", () => {
+      copyTextToClipboard(RECOMMENDED_FIRESTORE_RULES, "Copied Firestore Rules! Paste & Publish in Firebase Console.");
+    });
 
     function updatePasswordStrengthUI() {
       const val = pwInput.value || "";
@@ -1349,14 +1509,13 @@
 
     function openAuthModal(signup = false) {
       isSignupMode = signup;
-      document.getElementById("authErrorText").classList.add("hidden");
-      document.getElementById("signupUsernameWrap").classList.toggle("hidden", !signup);
+      hideAuthError();
       document.getElementById("signupConfirmWrap").classList.toggle("hidden", !signup);
       pwConfirmInput.required = signup;
       pwConfirmInput.value = "";
       updatePasswordStrengthUI();
 
-      document.getElementById("authModalHeading").textContent = signup ? "Create M3rcury Account" : "Sign In to M3rcury";
+      document.getElementById("authModalHeading").textContent = signup ? "Create Pilot Account" : "Sign In with Username";
       document.getElementById("authActionSubmitBtn").textContent = signup ? "Create Account & Launch" : "Sign In";
 
       document.getElementById("tabLoginModeBtn").className = !signup
@@ -1367,6 +1526,7 @@
         : "py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
 
       authModal.classList.remove("hidden");
+      setTimeout(() => handleAuthInput.focus(), 40);
     }
 
     document.getElementById("closeAuthModalBtn").addEventListener("click", () => authModal.classList.add("hidden"));
@@ -1376,7 +1536,10 @@
     document.getElementById("friendsGateSignInBtn").addEventListener("click", () => openAuthModal(true));
     document.getElementById("profileUnlockAuthBtn").addEventListener("click", () => openAuthModal(true));
 
-    document.getElementById("guestContinueBtn").addEventListener("click", () => {
+    document.getElementById("guestContinueBtn").addEventListener("click", async () => {
+      if (isFirebaseLive && fbAuth?.currentUser) {
+        try { await signOut(fbAuth); } catch (e) {}
+      }
       resetToGuestSession();
       localDb.activeSessionEmail = null;
       persistLocalDb();
@@ -1387,62 +1550,148 @@
 
     document.getElementById("authSubmitForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const errBox = document.getElementById("authErrorText");
-      errBox.classList.add("hidden");
+      hideAuthError();
 
-      const email = document.getElementById("authEmailInput").value.trim().toLowerCase();
+      const rawUsername = handleAuthInput.value.trim();
+      const handleLower = rawUsername.toLowerCase();
       const password = pwInput.value;
-      const handleRaw = document.getElementById("authHandleInput").value.trim();
+
+      if (!/^[A-Za-z0-9_-]{2,18}$/.test(rawUsername)) {
+        showAuthError("Username must be 2–18 characters using only letters, numbers, underscores, or hyphens.");
+        return;
+      }
 
       if (password.length < 6) {
-        errBox.textContent = "Password must be at least 6 characters.";
-        errBox.classList.remove("hidden");
+        showAuthError("Password must be at least 6 characters.");
         return;
       }
 
       if (isSignupMode && password !== pwConfirmInput.value) {
-        errBox.textContent = "Passwords do not match. Please re-enter both passwords.";
-        errBox.classList.remove("hidden");
+        showAuthError("Passwords do not match. Please re-enter both passwords.");
         return;
       }
 
+      const syntheticEmail = usernameToSyntheticEmail(rawUsername);
+
       if (isFirebaseLive && fbAuth) {
+        authOperationInProgress = true;
         try {
           if (isSignupMode) {
-            const handle = handleRaw || email.split("@")[0];
-            const cred = await createUserWithEmailAndPassword(fbAuth, email, password);
-            await updateProfile(cred.user, { displayName: handle });
-            await loadCloudUserProfile(cred.user);
-            session.handle = handle;
-            await syncCurrentAccountToStorage();
-            showToast(`Account created! Welcome, Commander ${handle}`, "success");
+            if (fbDb) {
+              try {
+                const uSnap = await getDoc(doc(fbDb, "usernames", handleLower));
+                if (uSnap.exists()) {
+                  showAuthError(`Username "${rawUsername}" is already taken. Try another username.`);
+                  return;
+                }
+              } catch (checkErr) {
+                if (isPermissionDeniedError(checkErr) && localDb.accounts[handleLower]) {
+                  showAuthError(`Username "${rawUsername}" is already taken.`);
+                  return;
+                }
+              }
+            }
+
+            const cred = await createUserWithEmailAndPassword(fbAuth, syntheticEmail, password);
+            try { await updateProfile(cred.user, { displayName: rawUsername }); } catch (pErr) {}
+
+            const uid = cred.user.uid;
+            const newAcc = {
+              uid,
+              email: syntheticEmail,
+              handle: rawUsername,
+              handleLower,
+              password,
+              avatar: "🚀",
+              motto: "Charting deep space in M3rcury",
+              friendCode: `#M3-${uid.slice(-4).toUpperCase()}`,
+              savedScore: 0,
+              gamesPlayed: 0,
+              bestByGame: {},
+              friends: [],
+              pendingRequests: [],
+              studioGames: [],
+            };
+
+            localDb.accounts[handleLower] = newAcc;
+            localDb.activeSessionEmail = handleLower;
+            persistLocalDb();
+            applyAccountRecordToSession(newAcc);
+
+            if (fbDb) {
+              try {
+                await setDoc(doc(fbDb, "usernames", handleLower), {
+                  uid,
+                  handle: rawUsername,
+                  email: syntheticEmail,
+                });
+                await setDoc(doc(fbDb, "pilots", uid), newAcc);
+              } catch (fsErr) {
+                if (isPermissionDeniedError(fsErr)) {
+                  showToast("Account created! Publish Firestore Rules to enable cloud sync.", "info");
+                }
+              }
+            }
+
+            authModal.classList.add("hidden");
+            renderAllUI();
+            showToast(`Account created! Welcome, ${rawUsername}`, "success");
           } else {
-            const cred = await signInWithEmailAndPassword(fbAuth, email, password);
+            let loginEmail = syntheticEmail;
+            if (fbDb) {
+              try {
+                const uSnap = await getDoc(doc(fbDb, "usernames", handleLower));
+                if (uSnap.exists() && uSnap.data()?.email) {
+                  loginEmail = uSnap.data().email;
+                }
+              } catch (lookupErr) {
+                if (localDb.accounts[handleLower]?.email) {
+                  loginEmail = localDb.accounts[handleLower].email;
+                }
+              }
+            }
+
+            const cred = await signInWithEmailAndPassword(fbAuth, loginEmail, password);
             await loadCloudUserProfile(cred.user);
-            showToast(`Welcome back, ${session.handle}!`, "success");
+            if (!session.handle || session.handle === "Pilot") {
+              session.handle = rawUsername;
+            }
+            localDb.activeSessionEmail = handleLower;
+            persistLocalDb();
+
+            authModal.classList.add("hidden");
+            renderAllUI();
+            showToast(`Signed in as ${session.handle}!`, "success");
           }
-          authModal.classList.add("hidden");
-          renderAllUI();
         } catch (err) {
-          errBox.textContent = err.message || "Firebase Authentication failed.";
-          errBox.classList.remove("hidden");
+          const code = err?.code || "";
+          if (code === "auth/email-already-in-use") {
+            showAuthError(`Username "${rawUsername}" already exists. Switch to Sign In.`);
+          } else if (code === "auth/invalid-credential" || code === "auth/wrong-password" || code === "auth/user-not-found") {
+            showAuthError("Invalid username or password. Check your spelling and try again.");
+          } else if (code === "auth/operation-not-allowed") {
+            showAuthError("Enable Email/Password sign-in in Firebase Console -> Authentication -> Sign-in method.");
+          } else {
+            showAuthError(err?.message || "Could not complete username login.");
+          }
+        } finally {
+          authOperationInProgress = false;
         }
         return;
       }
 
       if (isSignupMode) {
-        if (localDb.accounts[email]) {
-          errBox.textContent = "An account with that email already exists. Switch to Sign In.";
-          errBox.classList.remove("hidden");
+        if (localDb.accounts[handleLower]) {
+          showAuthError(`Username "${rawUsername}" is already taken. Switch to Sign In.`);
           return;
         }
-        const handle = handleRaw || email.split("@")[0];
         const uid = "loc-" + Math.random().toString(36).slice(2, 10);
         const newAcc = {
           uid,
-          email,
+          email: syntheticEmail,
+          handle: rawUsername,
+          handleLower,
           password,
-          handle,
           avatar: "🚀",
           motto: "Charting unknown sectors in M3rcury",
           friendCode: `#M3-${uid.slice(-4).toUpperCase()}`,
@@ -1453,21 +1702,20 @@
           pendingRequests: [],
           studioGames: [],
         };
-        localDb.accounts[email] = newAcc;
-        localDb.activeSessionEmail = email;
+        localDb.accounts[handleLower] = newAcc;
+        localDb.activeSessionEmail = handleLower;
         persistLocalDb();
         applyAccountRecordToSession(newAcc);
         authModal.classList.add("hidden");
         renderAllUI();
-        showToast(`Account created for ${handle}! Progress saving & friends unlocked.`, "success");
+        showToast(`Account created for ${rawUsername}! Progress saving & friends unlocked.`, "success");
       } else {
-        const existing = localDb.accounts[email];
+        const existing = localDb.accounts[handleLower];
         if (!existing || existing.password !== password) {
-          errBox.textContent = "Invalid email or password.";
-          errBox.classList.remove("hidden");
+          showAuthError("Invalid username or password.");
           return;
         }
-        localDb.activeSessionEmail = email;
+        localDb.activeSessionEmail = handleLower;
         persistLocalDb();
         applyAccountRecordToSession(existing);
         authModal.classList.add("hidden");
@@ -1807,15 +2055,26 @@
       }
 
       st.spawnTick += 1;
-      const interval = Math.max(18, Math.round(36 - st.game.density * 2));
+      const interval = Math.max(16, Math.round(34 - st.game.density * 2));
       if (st.spawnTick >= interval) {
         st.spawnTick = 0;
-        const isOrb = Math.random() < 0.42;
+        const isOrb = Math.random() < 0.45;
         const laneX = (Math.random() * 12) - 6;
+        const orbColor =
+          st.game.engine === "cargo_logistics_3d"
+            ? 0xf59e0b
+            : st.game.engine === "galactic_laundromat_3d"
+            ? 0x38bdf8
+            : st.game.engine === "haunted_hotel_3d"
+            ? 0xc084fc
+            : st.game.engine === "volcanic_glass_3d"
+            ? 0xf97316
+            : 0x22c55e;
+
         if (isOrb) {
           const orb = new THREE.Mesh(
             new THREE.OctahedronGeometry(0.65),
-            new THREE.MeshStandardMaterial({ color: 0x22c55e, emissive: 0x22c55e, emissiveIntensity: 0.6 })
+            new THREE.MeshStandardMaterial({ color: orbColor, emissive: orbColor, emissiveIntensity: 0.65 })
           );
           orb.position.set(laneX, 0.2, -55);
           threeScene.add(orb);
@@ -1931,6 +2190,17 @@
         ctx2D.lineTo(x, h);
         ctx2D.stroke();
       }
+
+      // Bespoke mechanic HUD cue inside 2D viewport for signature titles
+      const mechLabel =
+        g.engine === "mushroom_terrarium_2d"
+          ? "🍄 SPORE & HUMIDITY HARVEST (A/D or Mouse)"
+          : g.engine === "trench_research_2d"
+          ? "🌊 TRENCH SONAR & PRESSURE CORE (A/D or Mouse)"
+          : `${g.dim} • ${g.mode.toUpperCase()}`;
+      ctx2D.fillStyle = "rgba(148, 163, 184, 0.85)";
+      ctx2D.font = "bold 11px 'JetBrains Mono', monospace";
+      ctx2D.fillText(mechLabel, 14, 22);
 
       const speed = 5.4 * g.speedMult;
       if (keysDown["ArrowLeft"] || keysDown["KeyA"]) st.px -= speed;

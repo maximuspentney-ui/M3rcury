@@ -193,6 +193,17 @@
             Password (Min. 6 Characters)
           </label>
           <input id="authPasswordInput" type="password" required minlength="6" placeholder="••••••••" class="w-full rounded-xl bg-slate-950/90 border border-slate-800 focus:border-cyan-400 px-3.5 py-2.5 text-sm text-white outline-none" />
+          <div id="passwordStrengthMeterWrap" class="hidden mt-1.5 flex items-center justify-between gap-2 text-[11px] font-mono">
+            <span class="text-slate-400">Strength:</span>
+            <span id="passwordStrengthLabel" class="text-amber-300 font-bold">Standard</span>
+          </div>
+        </div>
+
+        <div id="signupConfirmWrap" class="hidden">
+          <label for="authPasswordConfirmInput" class="block text-[11px] font-semibold uppercase tracking-wider text-slate-300 mb-1">
+            Confirm Password
+          </label>
+          <input id="authPasswordConfirmInput" type="password" minlength="6" placeholder="••••••••" class="w-full rounded-xl bg-slate-950/90 border border-slate-800 focus:border-cyan-400 px-3.5 py-2.5 text-sm text-white outline-none" />
         </div>
 
         <p id="authErrorText" class="hidden text-xs text-rose-400 font-medium bg-rose-950/50 border border-rose-500/30 rounded-xl px-3 py-2"></p>
@@ -227,8 +238,11 @@
           Firebase Web Config Object (<span class="font-mono text-cyan-300">apiKey, authDomain, projectId...</span>)
         </label>
         <textarea id="firebaseConfigTextarea" rows="7" placeholder='{"apiKey":"AIza...","authDomain":"m3rcury-games.firebaseapp.com","projectId":"m3rcury-games","storageBucket":"m3rcury-games.firebasestorage.app","messagingSenderId":"...","appId":"1:..."}' class="w-full rounded-2xl bg-slate-950 border border-slate-800 focus:border-cyan-400 p-3 font-mono text-xs text-cyan-200 outline-none"></textarea>
+        <div class="rounded-xl bg-amber-950/40 border border-amber-400/30 p-2.5 text-[11px] text-amber-200 leading-relaxed">
+          <strong>Getting Firestore out of Locked Mode:</strong> In Firebase Console &rarr; <em>Firestore Database &rarr; Rules</em>, set rules to allow authenticated users (or public read + signed-in write) and click <strong>Publish</strong> so public profiles, friends, and servers don't get blocked by permission errors.
+        </div>
         <div class="flex items-center justify-between gap-2 text-[11px] text-slate-400">
-          <span>Status: <strong id="fbModalStatusLabel" class="text-amber-300">Local Sandbox Engine</strong></span>
+          <span>Status: <strong id="fbModalStatusLabel" class="text-amber-300">Local Preview Mode</strong></span>
           <button type="button" id="resetFirebaseConfigBtn" class="text-rose-300 hover:underline">Clear Custom Config</button>
         </div>
       </div>
@@ -263,7 +277,7 @@
                 STUD!O
               </span>
             </div>
-            <p class="text-[11px] text-slate-400 hidden sm:block">108+ 2D &amp; 3D Worlds • Live Servers • Zero Chat</p>
+            <p class="text-[11px] text-slate-400 hidden sm:block">100+ 2D &amp; 3D Worlds • Bot-Populated Servers • Zero Chat</p>
           </div>
         </button>
       </div>
@@ -288,7 +302,7 @@
       <div class="flex items-center gap-2">
         <button id="openFirebaseSettingsBtn" type="button" title="Configure Firebase Connection" class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-950/90 border border-slate-800 hover:border-purple-400/50 text-[11px] font-mono text-slate-300 transition">
           <span id="fbIndicatorDot" class="w-2 h-2 rounded-full bg-amber-400"></span>
-          <span id="fbIndicatorText">Firebase: Local Sync</span>
+          <span id="fbIndicatorText">Local Preview Mode</span>
         </button>
         <div id="headerAccountSlot"></div>
       </div>
@@ -449,26 +463,30 @@
       <!-- 108+ Distinct Playable Games Catalog -->
       <section class="cosmic-glass rounded-3xl p-4 sm:p-6 space-y-5">
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-slate-800 pb-4">
+      <!-- 100 Exact Playable Games Catalog -->
+      <section class="cosmic-glass rounded-3xl p-4 sm:p-6 space-y-5">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-slate-800 pb-4">
           <div>
             <div class="flex flex-wrap items-center gap-2">
               <h2 class="font-display text-lg sm:text-xl font-extrabold text-white">M3rcury Universe Catalog</h2>
               <span id="catalogTotalPill" class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-400/35">
-                108 Distinct Games
+                100 Exact Games
               </span>
             </div>
             <p class="text-xs sm:text-sm text-slate-400 mt-1">
-              Every single title launches a distinct playable 2D or 3D WebGL experience with custom physics, colors, speed, and floating nametags.
+              All 100 worlds from your list are playable in 2D Canvas or 3D perspective/wireframe with floating nametags and simulated bot players.
             </p>
           </div>
 
-          <!-- Search + Dimension & Genre Filters -->
+          <!-- Search + Dimension & Mode Filters -->
           <div class="flex flex-wrap items-center gap-2">
-            <input id="catalogSearchInput" type="search" placeholder="Search 108+ games, genres..." class="w-full sm:w-52 rounded-xl bg-slate-950/90 border border-slate-800 focus:border-cyan-400 px-3.5 py-2 text-xs sm:text-sm text-white outline-none" />
+            <input id="catalogSearchInput" type="search" placeholder="Search 100 games, 2D/3D, MP..." class="w-full sm:w-52 rounded-xl bg-slate-950/90 border border-slate-800 focus:border-cyan-400 px-3.5 py-2 text-xs sm:text-sm text-white outline-none" />
             <div class="flex flex-wrap items-center gap-1 bg-slate-950/90 p-1 rounded-xl border border-slate-800">
               <button type="button" data-filter="ALL" class="cat-pill px-2.5 py-1 rounded-lg text-xs font-bold bg-cyan-400/20 text-cyan-300 border border-cyan-400/40">All</button>
-              <button type="button" data-filter="3D" class="cat-pill px-2.5 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white">3D WebGL</button>
-              <button type="button" data-filter="2D" class="cat-pill px-2.5 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white">2D Arcade</button>
+              <button type="button" data-filter="3D" class="cat-pill px-2.5 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white">3D</button>
+              <button type="button" data-filter="2D" class="cat-pill px-2.5 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white">2D</button>
               <button type="button" data-filter="MP" class="cat-pill px-2.5 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white">Multiplayer</button>
+              <button type="button" data-filter="SP" class="cat-pill px-2.5 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white">Singleplayer</button>
               <button type="button" data-filter="STUDIO" class="cat-pill px-2.5 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white">Stud!o</button>
             </div>
           </div>
@@ -479,10 +497,10 @@
 
         <!-- Catalog Pagination Controls -->
         <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-800/80">
-          <span id="catalogCountSummary" class="text-xs font-mono text-slate-400">Showing 16 of 108 games</span>
+          <span id="catalogCountSummary" class="text-xs font-mono text-slate-400">Showing 16 of 100 games</span>
           <div class="flex items-center gap-2">
             <button id="showAllGamesBtn" type="button" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-purple-300 border border-purple-500/35 transition">
-              Show All 108+
+              Show All 100+
             </button>
             <button id="loadMoreGamesBtn" type="button" class="px-4 py-2 rounded-xl text-xs font-bold bg-cyan-400/15 hover:bg-cyan-400/25 text-cyan-300 border border-cyan-400/40 transition">
               Load +24 More
@@ -493,7 +511,7 @@
     </section>
 
     <!-- ===================================================================== -->
-    <!-- VIEW 2: M3RCURY STUD!O (Real Multi-Tab Code Editor + Live Sandbox)    -->
+    <!-- VIEW 2: M3RCURY STUD!O (Multi-File HTML/CSS/JS Code Editor + Preview) -->
     <!-- ===================================================================== -->
     <section id="view-studio" class="workspace-view hidden space-y-6 animate-panel">
       <div class="cosmic-glass rounded-3xl p-4 sm:p-6 space-y-5">
@@ -501,18 +519,18 @@
           <div>
             <div class="flex items-center gap-2">
               <span class="text-[11px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-400/40">
-                REAL CODE ENGINE
+                HTML • CSS • JS STUDIO
               </span>
               <h2 class="font-display text-xl sm:text-2xl font-extrabold text-white">M3rcury Stud!o IDE</h2>
             </div>
             <p class="text-xs sm:text-sm text-slate-400 mt-1">
-              Write real JavaScript game logic using the built-in <code class="text-cyan-300 font-mono">ctx</code> (2D Canvas) or <code class="text-purple-300 font-mono">THREE</code> (3D WebGL) APIs, test live in the split-screen runner, and publish straight to M3rcury.
+              Edit real <code class="text-cyan-300 font-mono">index.html</code>, <code class="text-purple-300 font-mono">style.css</code>, and <code class="text-emerald-300 font-mono">game.js</code> files with sandboxed live execution and publish to your M3rcury library.
             </p>
           </div>
 
           <div class="flex flex-wrap items-center gap-2">
             <button id="studioRunCodeBtn" type="button" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-emerald-400 text-slate-950 hover:bg-emerald-300 transition shadow-lg shadow-emerald-500/20">
-              ▶ Run Code
+              ▶ Run Preview
             </button>
             <button id="studioStopCodeBtn" type="button" class="px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900 text-slate-200 border border-slate-700 hover:border-slate-500 transition">
               ■ Stop
@@ -527,73 +545,69 @@
         <div class="grid grid-cols-1 md:grid-cols-12 gap-3 bg-slate-950/80 border border-slate-800 rounded-2xl p-3.5 items-center">
           <div class="md:col-span-4">
             <label for="studioProjectTitleInput" class="block text-[10px] font-mono uppercase text-slate-400 mb-1">Game Title</label>
-            <input id="studioProjectTitleInput" type="text" maxlength="30" value="Pulsar Dodge Custom" class="w-full rounded-xl bg-slate-900 border border-slate-700 focus:border-cyan-400 px-3 py-1.5 text-xs sm:text-sm text-white outline-none" />
+            <input id="studioProjectTitleInput" type="text" maxlength="32" value="Starlight Hovercraft 3D" class="w-full rounded-xl bg-slate-900 border border-slate-700 focus:border-cyan-400 px-3 py-1.5 text-xs sm:text-sm text-white outline-none" />
           </div>
           <div class="md:col-span-3">
-            <label for="studioProjectDimSelect" class="block text-[10px] font-mono uppercase text-slate-400 mb-1">Engine Target</label>
+            <label for="studioProjectDimSelect" class="block text-[10px] font-mono uppercase text-slate-400 mb-1">Format Tag</label>
             <select id="studioProjectDimSelect" class="w-full rounded-xl bg-slate-900 border border-slate-700 px-3 py-1.5 text-xs sm:text-sm text-white outline-none">
-              <option value="2D">2D Canvas Script</option>
-              <option value="3D">3D Three.js Script</option>
+              <option value="3D">3D Nametag World</option>
+              <option value="2D">2D Arcade World</option>
             </select>
           </div>
           <div class="md:col-span-5">
-            <label class="block text-[10px] font-mono uppercase text-slate-400 mb-1">Load Starter Code Template</label>
+            <label class="block text-[10px] font-mono uppercase text-slate-400 mb-1">Load Code Template</label>
             <div class="flex flex-wrap gap-1.5">
-              <button type="button" data-tpl="shooter2d" class="studio-tpl-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-cyan-500/15 text-cyan-300 border border-cyan-400/35 hover:bg-cyan-500/25">
-                2D Laser Blaster
+              <button type="button" data-tpl="world3d" class="studio-tpl-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-purple-500/15 text-purple-300 border border-purple-400/35 hover:bg-purple-500/25">
+                3D Nametag World
               </button>
-              <button type="button" data-tpl="orbit3d" class="studio-tpl-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-purple-500/15 text-purple-300 border border-purple-400/35 hover:bg-purple-500/25">
-                3D Cube Reactor
-              </button>
-              <button type="button" data-tpl="pong2d" class="studio-tpl-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-amber-500/15 text-amber-300 border border-amber-400/35 hover:bg-amber-500/25">
-                2D Gravity Bounce
+              <button type="button" data-tpl="arcade2d" class="studio-tpl-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-cyan-500/15 text-cyan-300 border border-cyan-400/35 hover:bg-cyan-500/25">
+                2D Arcade Blaster
               </button>
             </div>
           </div>
         </div>
 
-        <!-- Split Screen: Multi-Tab Code Editor (Left) + Live Sandbox & Console (Right) -->
+        <!-- Split Screen: Multi-File HTML/CSS/JS Editor (Left) + Sandboxed Preview & Console (Right) -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
-          <!-- Left: Multi-Tab Code Editor (7 cols) -->
+          <!-- Left: Multi-File Editor (7 cols) -->
           <div class="lg:col-span-7 flex flex-col space-y-2">
-            <!-- File Tabs -->
             <div class="flex items-center justify-between bg-slate-950/90 border border-slate-800 rounded-xl px-2 py-1.5">
               <div class="flex items-center gap-1">
-                <button type="button" data-filetab="main" class="studio-file-tab px-3 py-1 rounded-lg text-xs font-mono font-bold bg-cyan-400/20 text-cyan-300 border border-cyan-400/40">
+                <button type="button" data-filetab="html" class="studio-file-tab px-3 py-1 rounded-lg text-xs font-mono font-bold text-slate-400 hover:text-white">
+                  index.html
+                </button>
+                <button type="button" data-filetab="css" class="studio-file-tab px-3 py-1 rounded-lg text-xs font-mono font-bold text-slate-400 hover:text-white">
+                  style.css
+                </button>
+                <button type="button" data-filetab="js" class="studio-file-tab px-3 py-1 rounded-lg text-xs font-mono font-bold bg-cyan-400/20 text-cyan-300 border border-cyan-400/40">
                   game.js
                 </button>
-                <button type="button" data-filetab="config" class="studio-file-tab px-3 py-1 rounded-lg text-xs font-mono font-bold text-slate-400 hover:text-white">
-                  world.json
-                </button>
               </div>
-              <span class="text-[11px] font-mono text-slate-500 hidden sm:inline">Tab inserts 2 spaces</span>
+              <span class="text-[11px] font-mono text-slate-500 hidden sm:inline">Tab = 2 spaces</span>
             </div>
 
-            <!-- Line-Numbered Code Editor -->
             <div class="code-editor-wrap flex-1 min-h-[380px]">
               <div id="studioLineNumbers" class="code-gutter">1</div>
               <textarea id="studioCodeTextarea" spellcheck="false" class="code-textarea w-full h-full min-h-[380px]"></textarea>
             </div>
           </div>
 
-          <!-- Right: Live Execution Viewport + Console Log (5 cols) -->
+          <!-- Right: Sandboxed Live Preview Iframe + Console Log (5 cols) -->
           <div class="lg:col-span-5 flex flex-col space-y-3">
             <div class="rounded-2xl bg-[#02040a] border border-purple-500/30 overflow-hidden aspect-video relative">
-              <canvas id="studioSandbox2D" class="w-full h-full block"></canvas>
-              <div id="studioSandbox3D" class="hidden absolute inset-0 w-full h-full"></div>
-              <div id="studioSandboxBadge" class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-lg bg-slate-950/85 border border-slate-800 text-[10px] font-mono text-emerald-300">
-                SANDBOX READY • Click Run Code
+              <iframe id="studioPreviewIframe" sandbox="allow-scripts" title="M3rcury Stud!o Live Preview" class="w-full h-full block bg-[#040712]"></iframe>
+              <div id="studioSandboxBadge" class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-lg bg-slate-950/85 border border-slate-800 text-[10px] font-mono text-emerald-300 pointer-events-none">
+                SANDBOX READY • Click Run Preview
               </div>
             </div>
 
-            <!-- Studio Output / Error Console -->
             <div class="flex-1 rounded-2xl bg-[#040711] border border-slate-800 p-3 flex flex-col min-h-[165px]">
               <div class="flex items-center justify-between border-b border-slate-800/90 pb-1.5 mb-2">
                 <span class="text-[11px] font-mono font-bold uppercase text-slate-400">Stud!o Output Console</span>
                 <button id="studioClearConsoleBtn" type="button" class="text-[11px] font-mono text-slate-400 hover:text-white">Clear</button>
               </div>
               <div id="studioConsoleOutput" class="flex-1 font-mono text-xs space-y-1 overflow-y-auto max-h-36 text-slate-300">
-                <div class="text-cyan-300">[M3rcury Stud!o] Ready. Edit game.js and press Run Code.</div>
+                <div class="text-cyan-300">[M3rcury Stud!o] Ready. Edit index.html, style.css, or game.js and run preview.</div>
               </div>
             </div>
           </div>
@@ -815,70 +829,19 @@
     } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
     // =========================================================================
-    // 1. ANIMATED DEEP SPACE STARFIELD & NEBULA BACKGROUND
+    // 2. FIREBASE INITIALIZATION (Pre-wired to m3rcury-games + Config Override)
     // =========================================================================
-    (function initSpaceBackground() {
-      const bgCanvas = document.getElementById("spaceBgCanvas");
-      const bctx = bgCanvas.getContext("2d");
-      let stars = [];
-      let w = 0;
-      let h = 0;
+    const DEFAULT_FIREBASE_CONFIG = {
+      apiKey: "AIzaSyDKg5fdIgllNTwDd-_S0zZ5ttxsZUha_-U",
+      authDomain: "m3rcury-games.firebaseapp.com",
+      databaseURL: "https://m3rcury-games-default-rtdb.firebaseio.com",
+      projectId: "m3rcury-games",
+      storageBucket: "m3rcury-games.firebasestorage.app",
+      messagingSenderId: "110240309589",
+      appId: "1:110240309589:web:c8fafb229a6bbe2475cfdc",
+      measurementId: "G-9Z13HZ5PYZ"
+    };
 
-      function resizeBg() {
-        w = bgCanvas.width = window.innerWidth;
-        h = bgCanvas.height = window.innerHeight;
-        const count = Math.min(180, Math.floor((w * h) / 9000));
-        stars = Array.from({ length: count }, () => ({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          r: Math.random() * 1.6 + 0.3,
-          speed: Math.random() * 0.25 + 0.05,
-          phase: Math.random() * Math.PI * 2,
-          tint: Math.random() < 0.25 ? "#38bdf8" : Math.random() < 0.2 ? "#c084fc" : "#f8fafc",
-        }));
-      }
-
-      window.addEventListener("resize", resizeBg);
-      resizeBg();
-
-      function drawBg(t) {
-        bctx.clearRect(0, 0, w, h);
-
-        // Deep space nebula radial glows
-        const g1 = bctx.createRadialGradient(w * 0.18, h * 0.15, 10, w * 0.18, h * 0.15, w * 0.55);
-        g1.addColorStop(0, "rgba(0, 240, 255, 0.09)");
-        g1.addColorStop(1, "rgba(3, 5, 12, 0)");
-        bctx.fillStyle = g1;
-        bctx.fillRect(0, 0, w, h);
-
-        const g2 = bctx.createRadialGradient(w * 0.82, h * 0.78, 10, w * 0.82, h * 0.78, w * 0.55);
-        g2.addColorStop(0, "rgba(168, 85, 247, 0.11)");
-        g2.addColorStop(1, "rgba(3, 5, 12, 0)");
-        bctx.fillStyle = g2;
-        bctx.fillRect(0, 0, w, h);
-
-        for (const s of stars) {
-          s.y += s.speed;
-          if (s.y > h) {
-            s.y = 0;
-            s.x = Math.random() * w;
-          }
-          const alpha = 0.35 + 0.65 * Math.abs(Math.sin(t * 0.0015 + s.phase));
-          bctx.globalAlpha = alpha;
-          bctx.fillStyle = s.tint;
-          bctx.beginPath();
-          bctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-          bctx.fill();
-        }
-        bctx.globalAlpha = 1;
-        requestAnimationFrame(drawBg);
-      }
-      requestAnimationFrame(drawBg);
-    })();
-
-    // =========================================================================
-    // 2. FIREBASE INITIALIZATION (Supports Custom Pasted Config or Local Mode)
-    // =========================================================================
     const FB_CONFIG_KEY = "m3rcury_firebase_custom_config_v1";
     const LOCAL_DB_KEY = "m3rcury_cosmic_local_db_v2";
     const AVATAR_EMBLEMS = ["🛸", "🚀", "🪐", "👾", "⚡", "🦊", "🤖", "🌌", "☄️", "🐉", "💎", "🛰️"];
@@ -892,13 +855,14 @@
     function getSavedFirebaseConfig() {
       try {
         const raw = localStorage.getItem(FB_CONFIG_KEY);
-        if (!raw) return null;
-        const parsed = JSON.parse(raw);
-        if (parsed && parsed.apiKey && parsed.projectId) return parsed;
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && parsed.apiKey && parsed.projectId) return parsed;
+        }
       } catch (e) {
-        console.warn("Invalid stored Firebase config", e);
+        console.warn("Invalid stored Firebase config override, falling back to m3rcury-games default", e);
       }
-      return null;
+      return DEFAULT_FIREBASE_CONFIG;
     }
 
     function initFirebaseIfConfigured() {
@@ -907,12 +871,13 @@
       const label = document.getElementById("fbIndicatorText");
       const modalLabel = document.getElementById("fbModalStatusLabel");
 
-      if (!cfg) {
+      if (!cfg || !cfg.apiKey || !cfg.projectId) {
         isFirebaseLive = false;
         dot.className = "w-2 h-2 rounded-full bg-amber-400";
-        label.textContent = "Firebase: Local Sync";
-        modalLabel.textContent = "Local Sandbox Engine (Paste config to go live)";
+        label.textContent = "Local Preview Mode";
+        modalLabel.textContent = "Local Preview Mode (Paste Firebase config to go live)";
         modalLabel.className = "text-amber-300";
+        document.getElementById("footerSyncStatus").textContent = "100 Exact Worlds • Local Preview Mode • Zero Chat";
         return false;
       }
 
@@ -923,10 +888,10 @@
         isFirebaseLive = true;
 
         dot.className = "w-2 h-2 rounded-full bg-emerald-400";
-        label.textContent = `Firebase: ${cfg.projectId}`;
-        modalLabel.textContent = `Connected to ${cfg.projectId}`;
+        label.textContent = `Firebase Live (${cfg.projectId})`;
+        modalLabel.textContent = `Firebase Live • ${cfg.projectId}`;
         modalLabel.className = "text-emerald-300";
-        document.getElementById("footerSyncStatus").textContent = `108+ Playable Worlds • Live Firebase (${cfg.projectId})`;
+        document.getElementById("footerSyncStatus").textContent = `100 Exact Worlds • Firebase Live (${cfg.projectId})`;
 
         onAuthStateChanged(fbAuth, async (user) => {
           if (user) {
@@ -942,31 +907,126 @@
       } catch (err) {
         console.error("Firebase init failed:", err);
         isFirebaseLive = false;
-        showToast("Firebase config error — running in Local Sync mode", "error");
+        dot.className = "w-2 h-2 rounded-full bg-rose-400";
+        label.textContent = "Firebase Config Error";
+        showToast("Firebase config error — check your JSON keys", "error");
         return false;
       }
     }
 
     // =========================================================================
-    // 3. GENERATE 108 DISTINCT PLAYABLE GAMES (3D WebGL & 2D Canvas Engines)
+    // 3. EXACT 100 USER-PROVIDED GAMES CATALOG + SIMULATED BOT PLAYERS
     // =========================================================================
-    const COSMIC_ADJ = [
-      "Nebula", "Pulsar", "Hyper", "Void", "Solar", "Quantum", "Astral", "Cryo",
-      "Nova", "Eclipse", "Vortex", "Zenith", "Orbit", "Plasma", "Comet", "Titan",
-      "Starlight", "Gravity"
-    ];
-    const COSMIC_NOUN = [
-      "Starfighter", "Obby", "Drifter", "Blaster", "Reactor", "Runner",
-      "Arena", "Hopper", "Interceptor", "Slicer", "Colony", "Racer"
+    const EXACT_100_GAMES_RAW = [
+      [1, "Cloud-City Cargo Logistics", "3D", "Multiplayer", "Players manage competing sky-docks tethered to floating islands high above an endless sea of clouds. You must build automated conveyor belts, crane systems, and dirigible refueling stations to sort, pack, and ship fragile magical goods between islands before turbulent windstorms blow your cargo off the platforms."],
+      [2, "Subterranean Mushroom Terrarium", "2D", "Singleplayer", "Set inside a giant glass jar buried beneath an ancient forest, you cultivate rare bioluminescent fungi. You must balance humidity, soil acidity, and nutrient drips while breeding exotic spores that glow in different colors, attracting tiny underground insects that help pollinate your rarer species."],
+      [3, "Galactic Laundromat", "3D", "Multiplayer", "Run a cosmic rest-stop laundromat on the edge of a nebula where alien travelers drop off bizarre garments covered in space-slime, stardust, and anti-gravity static. You and your friends must sort clothes by dimensional fabric type, operate zero-G washing machines, and fold items before impatient alien captains warp away."],
+      [4, "Clockwork Toymaker’s Workshop", "3D", "Singleplayer", "Inherit a dusty Victorian toy shop where every creation is powered by intricate brass gears and mainsprings. Players design custom wind-up automatons, paint wooden shells, test them on miniature obstacle courses, and sell them to townsfolk whose happiness levels visibly brighten the snowy streets outside."],
+      [5, "Deep-Sea Trench Research Base", "2D", "Singleplayer", "Manage a modular underwater habitat bolted to the wall of the Mariana Trench. You must expand glass observation domes, deploy tethered robotic submersibles to scan uncharted thermal vents, manage oxygen scrubbers, and balance power distribution so the crushing ocean pressure doesn't crack your hull."],
+      [6, "Prehistoric Amber Museum", "3D", "Singleplayer", "Build and curate the world’s premier museum dedicated to ancient amber. You fund expeditions into petrified forests, carefully polish raw amber chunks using precision tools to reveal trapped prehistoric insects and feathers, and arrange dramatic spotlight exhibits to draw wealthy collectors."],
+      [7, "Haunted Hotel Hospitality", "3D", "Multiplayer", "Manage a grand, creaky mountainside resort catering exclusively to eccentric ghosts, polite poltergeists, and exhausted banshees. Instead of cleaning rooms, you have to strategically apply cobwebs, chill the hallways, serve spectral tea, and prevent living tourists from accidentally wandering in and ruining the spooky ambiance."],
+      [8, "Automated Bonsai Sanctuary", "3D", "Singleplayer", "A relaxing factory-builder where you construct delicate brass irrigation channels, miniature sun-lamps, and robotic pruning arms to nurture hundreds of miniature bonsai trees simultaneously. As trees mature, you harvest their mystical blossoms to power larger, more intricate botanical greenhouses."],
+      [9, "Interdimensional Post Office", "3D", "Multiplayer", "Work the night shift at a chaotic sorting facility where mail arrives from parallel universes. Packages might be heavier than lead, float toward the ceiling, or duplicate every ten seconds. Players must stamp, weigh, and toss parcels into the correct dimensional pneumatic tubes before the shift timer expires."],
+      [10, "Volcanic Glassblower’s Forge", "3D", "Singleplayer", "Set up a workshop directly over a cooling lava river. You harvest molten obsidian and silica, blow massive ornamental glass sculptures, temper them in cooling chambers, and build automated rail carts to transport your fragile masterpieces down the mountain to royal buyers."],
+      [11, "Cyber-Beehive Apiary", "2D", "Singleplayer", "Manage a futuristic rooftop apiary in a neon-lit solarpunk city. You engineer robotic and organic bees to pollinate vertical skyscraper gardens, harvest high-energy nectar, refine it into glowing honey batteries, and expand your rooftop oasis across neighboring towers."],
+      [12, "Train Station Sushi Express", "3D", "Multiplayer", "Build and operate a bustling sushi restaurant built directly onto a moving bullet train. As the train speeds through scenic landscapes, you must catch fresh ingredients launched from passing supply stations, roll sushi on high-speed conveyors, and serve hungry passengers before their stop arrives."],
+      [13, "Cloud-Seeding Weather Tycoon", "3D", "Singleplayer", "Pilot a fleet of weather-control airships over an arid archipelago. You mix chemical salts and atmospheric condensers to build custom rainclouds, guiding them over thirsty farms and reservoirs while avoiding creating accidental super-storms that could flood coastal villages."],
+      [14, "Miniature Aquarium Architect", "3D", "Singleplayer", "Design breathtaking freshwater and saltwater aquascapes inside oversized household objects like vintage TVs, glass teapots, and hollow pianos. You balance water chemistry, sculpt driftwood, plant underwater carpets, and breed rare shimmering fish to win international aquascaping trophies."],
+      [15, "Asteroid Belt Recycling Plant", "3D", "Multiplayer", "Operate a massive zero-gravity salvage station that catches drifting space junk and retired satellites. Players use magnetic grapples, plasma cutters, and sorting smelters to break down old tech into pure metals, assembling sleek new spacecraft hulls for passing explorers."],
+      [16, "Medieval Cheese Cave Maturation", "2D", "Singleplayer", "Carve out a sprawling network of limestone caves beneath a monastery to age artisan cheeses. Different cave depths have unique temperatures, molds, and air currents. You must turn wheels of cheese on schedule, protect them from hungry cave mice, and sell rare aged varieties at the regional fair."],
+      [17, "Solar-Sail Yacht Shipyard", "3D", "Singleplayer", "Run an orbital drydock constructing luxury solar-sail yachts for space tourists. You weld lightweight carbon hulls, weave massive golden reflective sails, install zero-gravity lounges, and test-fly each yacht around lunar rings before handing over the keys."],
+      [18, "Dream-Catcher Weaving Studio", "2D", "Singleplayer", "Operate a cozy nocturnal workshop where townsfolk bring jars filled with restless sleep. You spin luminous threads on wooden looms, weave intricate geometric patterns, and attach enchanted feathers and beads to filter out bad dreams and bottle pure inspiration."],
+      [19, "Geothermal Hot Spring Resort", "3D", "Singleplayer", "Carve terraced rock pools into a snowy volcanic mountainside. You pipe mineral-rich hot water from underground geysers, blend soothing herbal bath salts, build cedar relaxation pavilions, and cater to weary travelers and local snow monkeys."],
+      [20, "Neon Aquarium Arcade", "3D", "Multiplayer", "Combine a retro 1980s arcade with a massive glowing jellyfish aquarium. You place classic cabinet games, maintain jellyfish tanks that pulse to the beat of synthwave music, fix jammed token machines, and customize your venue’s neon lighting to maximize visitor hype."],
+      [21, "Botanical Perfume Distillery", "2D", "Singleplayer", "Cultivate fields of night-blooming jasmine, wild lavender, and rare mountain orchids. You harvest petals at peak aromatic potency, run copper steam-distillers, blend base and top notes in glass flasks, and bottle signature scents for prestigious fashion houses."],
+      [22, "Paper Airplane Factory", "3D", "Singleplayer", "Build an absurdly complex factory inside a giant bedroom dedicated entirely to folding, creasing, and launching aerodynamic paper airplanes. You unlock cardstock materials, rubber-band catapults, and wind-tunnel testers to hit target hoops across the room."],
+      [23, "Coral Reef Restoration Drone", "3D", "Multiplayer", "Operate a floating solar barge and deploy underwater builder drones to revive bleached coral reefs. You 3D-print calcium carbonate reef structures, transplant vibrant coral polyps, clear away tangled fishing nets, and watch schools of colorful marine life return."],
+      [24, "Tectonic Plate Theme Park", "3D", "Singleplayer", "Build thrilling roller coasters and observation towers across active geological fault lines. You must engineer shock-absorbing track supports, harness steam geysers to boost coaster speeds, and reroute rides whenever the ground shifts to create new canyons."],
+      [25, "Celestial Lighthouse Keeper", "3D", "Singleplayer", "Maintain a towering brass lighthouse perched on a lonely asteroid along a busy hyperspace shipping lane. You polish massive crystal lenses, align prism mirrors to cut through cosmic dust storms, and guide lost cargo freighters safely into port."],
+      [26, "Origami Zoo Sanctuary", "3D", "Singleplayer", "Fold sheets of enchanted parchment into living paper animals—cranes, foxes, elephants, and turtles. You build habitats out of cardboard, colored tape, and pastel blocks, keeping your paper critters dry and entertained so they attract visitors."],
+      [27, "Alchemical Bakery", "2D", "Multiplayer", "Run a bustling fantasy bakery where every loaf of bread grants a temporary quirk, like floating three inches off the floor or speaking in rhymes. Players knead enchanted dough, stoke dragon-fire ovens, and fill rush orders for local wizards and villagers."],
+      [28, "Subway Tunnel Mushroom Farm", "2D", "Singleplayer", "Convert abandoned, tiled metro stations beneath a bustling metropolis into high-tech vertical farms. You repurpose old train cars into hydroponic chambers, tap into stray electrical lines for grow lights, and deliver fresh produce to surface markets via cargo handcars."],
+      [29, "Giant Treehouse Village", "3D", "Singleplayer", "Construct a thriving, multi-tiered wooden village wrapped around the trunk and branches of a colossal ancient redwood. You build rope bridges, water-wheel elevators, sap-collecting refineries, and cozy acorn-shaped cottages high above the forest floor."],
+      [30, "Iceberg Carving & Export", "3D", "Singleplayer", "Captain a fleet of heavy tugboats and thermal saws in polar waters. You carve pure, ancient glacier ice into massive blocks, tow them to processing rigs, sculpt luxury ice-hotel components, and ship crystal-clear ice spheres to desert resorts."],
+      [31, "Mechanical Bird Aviary", "3D", "Singleplayer", "Assemble delicate clockwork songbirds out of silver wire, sapphire lenses, and copper feathers. You program custom musical melodies into their brass cylinders, release them into a giant glass conservatory, and let visitors listen to their synchronized symphonies."],
+      [32, "Sandcastle Kingdom Engineer", "3D", "Multiplayer", "On a sprawling sunny beach, players race against the incoming tide to sculpt towering, intricate sandcastles. You mix seawater ratios, reinforce walls with driftwood and seashells, and dig complex moat networks to divert waves away from your citadel."],
+      [33, "Sunken Galleon Salvage Co.", "3D", "Multiplayer", "Operate a crane barge above a graveyard of historic wooden shipwrecks. Players dive in atmospheric suits to attach inflatable lift bags to cannons, porcelain crates, and treasure chests, carefully hoisting them to the surface without snapping corroded ropes."],
+      [34, "Telescope Observatory Network", "2D", "Singleplayer", "Build high-altitude observatories on mountain peaks around the globe. You upgrade mirror arrays, filter out city light pollution, track passing comets, discover new exoplanets, and publish star charts to secure research grants."],
+      [35, "Floating Lantern Festival", "3D", "Singleplayer", "Organize a breathtaking nighttime river festival. You craft bamboo frames, stretch painted rice paper over them, calibrate miniature hot-air burners, and launch thousands of glowing lanterns onto the water and sky to form giant illuminated patterns."],
+      [36, "Kinetic Sculpture Garden", "3D", "Singleplayer", "Design an outdoor wind-powered art museum. You weld balanced aluminum wings, rolling marble tracks, and water-tipping pendulums that move gracefully in the breeze, chaining their motions together to create mesmerizing mechanical rhythms."],
+      [37, "Maglev Mail Tube Tycoon", "2D", "Singleplayer", "Construct a subterranean pneumatic and magnetic capsule network beneath a sprawling steampunk city. You route brass canisters through pressurized switches, upgrade vacuum pumps, and ensure urgent telegrams and parcels reach every skyscraper on time."],
+      [38, "Arctic Seed Vault Curator", "3D", "Singleplayer", "Manage a high-security botanical vault buried inside a frozen mountain. You receive rare plant specimens from around the world, dry and cryogenically seal their seeds, maintain backup generators during blizzards, and sprout samples to verify viability."],
+      [39, "Bamboo Scaffolding Builders", "3D", "Multiplayer", "Work together as agile builders constructing towering bamboo scaffolding frameworks around massive skyscrapers and giant statues. You tie knots, hoist heavy planks with pulleys, and balance on swaying poles to complete exterior restorations before deadlines."],
+      [40, "Stained Glass Cathedral Restorer", "2D", "Singleplayer", "Piece together shattered antique stained-glass windows in a sunlit workshop. You cut colored glass sheets with diamond scribes, melt lead came channels, solder joints, and hoist the finished rose windows into place to watch colored light flood the stone floor."],
+      [41, "Kite-Powered Wind Farm", "3D", "Singleplayer", "Harness high-altitude jet streams by launching massive, autonomous figure-eight kites tethered to ground generators. You adjust tether lengths, avoid migrating bird flocks, and store megawatts of clean energy into giant flywheel batteries."],
+      [42, "Miniature Train Tabletop World", "3D", "Singleplayer", "Build a sprawling model railway inside a massive attic. You sculpt plaster mountains, lay down brass tracks, wire working miniature streetlights, and run intricate passenger and freight schedules across tiny towns and trestle bridges."],
+      [43, "Tidal Pool Sanctuary", "2D", "Singleplayer", "Shape coastal rock formations to trap ocean water during high tide, creating thriving intertidal ecosystems. You introduce sea stars, anemones, hermit crabs, and kelp, balancing salinity and temperature to nurture rare marine species."],
+      [44, "Cloud-Top Coffee Roastery", "3D", "Singleplayer", "Grow high-altitude coffee beans on terraced volcanic cliffs above the fog line. You harvest red cherries, operate vintage drum roasters, dial in espresso grind sizes, and serve passing airship pilots at your cliffside café."],
+      [45, "Solar-Thermal Salt Tower", "3D", "Singleplayer", "Manage thousands of motorized mirrors in a sunlit desert arranged in concentric rings around a central receiver tower. You angle mirrors to track the sun, superheat molten salt tanks, and generate continuous power through the night."],
+      [46, "Fossil Excavation & Articulation", "3D", "Singleplayer", "Lead paleontological digs in badlands canyons. After carefully chiseling dinosaur bones out of sandstone blocks, you return to your lab to clean, scan, 3D-print missing fragments, and wire full skeletons into dynamic museum poses."],
+      [47, "Bioluminescent Cave Cruises", "3D", "Singleplayer", "Operate silent electric tour boats through vast subterranean glowworm caverns. You build wooden docks, install subtle ambient walkways, manage boat spacing so wakes don't disturb the ceiling creatures, and guide awe-struck tourists through dark rivers."],
+      [48, "Automated Pottery Kiln", "2D", "Singleplayer", "Run an industrial ceramics studio producing fine porcelain and stoneware. You mix clay bodies, program robotic throwing wheels, apply mineral glazes that transform colors under high heat, and load massive tunnel kilns."],
+      [49, "Skyscraper Window Washers", "3D", "Multiplayer", "Operate suspended scaffolding rigs on the exteriors of dizzyingly tall glass megastructures. You and a partner control independent winch motors to keep the platform level, squeegee away grime, avoid gusty updrafts, and rescue stranded drones."],
+      [50, "Acoustic Bell Foundry", "3D", "Singleplayer", "Cast massive bronze church and clocktower bells from scratch. You sculpt loam molds, pour molten metal, and carefully shave thin layers of bronze from the inside of each cooled bell using a lathe to tune its harmonic overtones to musical perfection."],
+      [51, "Solar Sailer of the Dune Sea", "3D", "Singleplayer", "Pilot a sleek, wind-powered sand-skiff across a boundless desert of golden dunes and ancient petrified coral reefs. You read wind currents, surf massive sand swells, uncover buried clockwork ruins, and piece together the history of a vanished civilization."],
+      [52, "The Shifting Staircase Tower", "3D", "Singleplayer", "Explore an infinite, non-Euclidean library tower where staircases rotate, doorways lead to upside-down courtyards, and gravity shifts depending on which wall you walk onto. You collect luminous bookmarks to anchor rooms in place and reach the summit."],
+      [53, "Micro-Scale Backyard Odyssey", "3D", "Multiplayer", "Shrunk to the size of a ladybug, you and your friends explore an overgrown suburban backyard that feels like a towering jungle. You ride dandelion seeds across koi ponds, climb towering stalks of grass, and build gliders out of dry maple leaves."],
+      [54, "Fog-Horn Archipelago", "3D", "Singleplayer", "Captain a sturdy wooden tugboat through a mysterious archipelago shrouded in thick, enchanted fog. Your ship’s brass foghorn acts as sonar—blowing it sends out sound waves that briefly illuminate hidden rocks, sunken buoys, and secret island harbors."],
+      [55, "Cartographer of the Floating Isles", "3D", "Singleplayer", "Equipped with a grappling hook, a glider, and a blank parchment atlas, you leap between drifting sky-islands. You must manually sketch coastlines, triangulate landmarks using a brass sextant, and name newly discovered waterfalls and ruins to complete your map."],
+      [56, "Subterranean Crystal Caverns", "3D", "Multiplayer", "Descend into a miles-deep cave network lit entirely by resonant quartz crystals. Striking different crystals with your tuning hammer produces musical notes that open stone doors, grow temporary crystal bridges, and illuminate hidden subterranean lakes."],
+      [57, "Aurora Borealis Chaser", "3D", "Singleplayer", "Drive a customized Arctic expedition snowcat across frozen tundra, pine forests, and ice roads during a polar night. You track geomagnetic storms using dashboard instruments, set up tripods to photograph rare aurora ribbons, and help stranded researchers."],
+      [58, "Clockwork Planetarium", "3D", "Singleplayer", "Explore a colossal, hollow mechanical planet where giant brass gears rotate continents and massive pendulums swing across the sky. You travel via rail-bikes along the planet’s inner rings to oil seized mechanisms and realign constellations."],
+      [59, "Botanical Ghost Hunter", "2D", "Singleplayer", "Wander through mist-covered botanical conservatories at midnight with a specialized spectral camera. Rare plants only bloom when friendly spirits pass by; you must photograph both the flora and the gentle apparitions to document a complete supernatural herbarium."],
+      [60, "Paper-Craft River Expedition", "3D", "Singleplayer", "Paddle a folded origami canoe down a winding river set inside a pop-up storybook world. Every bend in the river causes cardboard mountains, paper-mâché trees, and origami wildlife to unfold dynamically in front of you."],
+      [61, "Zero-G Coral Nebula", "3D", "Multiplayer", "Float freely through a breathtaking space nebula filled with colossal, slow-moving space whales and bioluminescent asteroid gardens. Using magnetic tether lines and thrusters, players harvest stardust spores and ride solar winds between ancient derelict stations."],
+      [62, "Echoes of the Sunken City", "3D", "Singleplayer", "Free-dive through the flooded marble plazas and overgrown amphitheaters of a sunken Mediterranean metropolis. You collect air pockets from giant underwater clam shells, decipher mosaic murals, and raise ancient bronze statues back to the sunlight."],
+      [63, "Train Hopping Across the Cloud-Bridge", "3D", "Singleplayer", "Board an endless, slow-moving freight train that travels across a colossal stone viaduct spanning an ocean. You explore dozens of uniquely themed train cars—greenhouses, libraries, observatories—solving environmental puzzles to reach the locomotive at the front."],
+      [64, "Tumbleweed Courier", "3D", "Singleplayer", "Play as a nimble, wind-powered tumbleweed rolling across an expansive canyon landscape. You catch desert gusts to launch off red-rock ramps, collect lost letters scattered by a mail-coach accident, and deliver them to remote desert outposts."],
+      [65, "Shadow-Puppet Theatre World", "2D", "Singleplayer", "A side-scrolling adventure set entirely on a backlit screen of intricately cut shadow puppets. By adjusting lanterns and moving background silhouettes, you change the shape of shadows in the foreground to create bridges, ladders, and doorways."],
+      [66, "Glacier Cave Ice-Climber", "3D", "Multiplayer", "Tethered together by a physical climbing rope, two players ascend glittering blue ice walls inside shifting glacier crevasses. You must place ice screws, swing across frozen chasms, and shelter inside snow caves when blizzards howl overhead."],
+      [67, "The Giant’s Abandoned Study", "3D", "Singleplayer", "Play as a tiny porcelain figurine exploring the sprawling wooden desk, towering bookshelves, and sprawling tabletops of a whimsical wizard’s study. You use rulers as bridges, ride toy trains across bookshelves, and mix inkwell pigments to unlock secret drawers."],
+      [68, "Wind-Chime Valley", "3D", "Singleplayer", "Roam a peaceful, grassy valley dotted with thousands of hanging bamboo, glass, and metal wind chimes. Listening to the harmonic tones carried by the breeze guides you toward hidden shrines, where tuning giant chimes awakens dormant stone guardians."],
+      [69, "Bioluminescent Swamp Kayak", "3D", "Singleplayer", "Paddle a wooden kayak through a serene, starlit cypress swamp where the water glows electric blue with every stroke of your paddle. You follow glowing fireflies, map winding bayous, and photograph rare nocturnal frogs and owls."],
+      [70, "Kite-Surfer of the Sky Archipelago", "3D", "Multiplayer", "Strap into a harness attached to a massive stunt kite and soar between floating rock spires. You chain air currents, perform mid-air flips, skim across cloud tops, and race friends through floating ring courses high above the earth."],
+      [71, "Ancient Sundial Desert", "3D", "Singleplayer", "Explore a vast desert dominated by monumental stone sundials. By rotating mirrors and waiting for the sun’s angle to shift, you cast long shadows across canyon floors that solidify into walkable shadow-bridges leading to high cliff temples."],
+      [72, "Submarine Post-Office Route", "3D", "Singleplayer", "Pilot a cozy, yellow brass-plated submarine along an underwater sea-floor highway. You deliver parcels to underwater glass domes, pearl farms, and deep-sea weather stations while navigating hydrothermal vents and curious octopuses."],
+      [73, "Rooftop Pigeon Messenger", "3D", "Singleplayer", "Fly freely as a carrier pigeon soaring over a sprawling, sun-drenched European coastal city. You ride warm thermal updrafts above terracotta roofs, dodge flocks of seagulls, perch on clocktowers, and deliver tiny rolled notes between residents."],
+      [74, "Magnetic Monorail Explorer", "3D", "Singleplayer", "Operate a single-car inspection pod traveling along an abandoned magnetic monorail winding through an overgrown rainforest. You stop at rusted stations, clear vines from track switches, and restore power to dormant weather towers."],
+      [75, "Porcelain Teacup Archipelago", "3D", "Singleplayer", "Sail a tiny origami boat across a warm, aromatic sea of swirling Earl Grey tea dotted with islands made of giant sugar cubes, biscuits, and tilted porcelain teacups. You solve whimsical puzzles to brew the ultimate pot of celestial tea."],
+      [76, "Starlight Ice-Skater", "3D", "Singleplayer", "Glide effortlessly across an endless frozen lake that reflects the entire Milky Way galaxy beneath the clear ice. As you skate, your blades carve glowing constellations into the ice surface, unlocking musical notes and peaceful Aurora displays."],
+      [77, "Desert Glass Oasis", "3D", "Singleplayer", "Explore a surreal desert where lightning strikes have fused sand into towering, translucent fulgurite glass spires. You use prism lenses to refract sunlight through the glass formations, revealing hidden underground springs and ancient murals."],
+      [78, "Hot-Air Balloon Vagabond", "3D", "Multiplayer", "Live aboard a customizable hot-air balloon house drifting lazily over a procedural continent. You manage burner fuel, drop anchor on mountain plateaus to forage rare herbs, trade with passing sky-merchants, and navigate gentle weather fronts."],
+      [79, "Cave Painting Time-Traveler", "2D", "Singleplayer", "Explore modern limestone caves where touching ancient ochre handprints transports you seamlessly into the vibrant, painted world of the prehistoric artists, allowing you to solve puzzles across two eras simultaneously."],
+      [80, "Tide-Pool Submarine", "3D", "Singleplayer", "Pilot a thimble-sized remote sub through a single massive coastal tide pool. To you, sea anemones are towering swaying forests, barnacles are volcanic mountains, and hermit crabs are bustling mobile fortresses."],
+      [81, "Cloud-Forest Canopy Walker", "3D", "Singleplayer", "Traverse a high-altitude rainforest without ever touching the ground. You walk along mossy branches, swing on elastic vines, slide down giant wet leaves, and document colorful tree frogs and orchids living in the mist."],
+      [82, "Magnetic Polarity Cave", "3D", "Singleplayer", "Equipped with magnetic boots and gloves, you explore an iron-rich asteroid cavern. Switching your suit’s polarity lets you launch yourself across zero-G chasms or walk effortlessly upside down along ceiling veins of magnetite."],
+      [83, "The Infinite Greenhouse", "3D", "Singleplayer", "Wander through a sprawling, glass-domed Victorian conservatory that stretches for miles, where each glass wing houses a different surreal climate—from a zero-gravity fern room to a perpetual autumn maple forest."],
+      [84, "Snow-Globe Collector", "3D", "Singleplayer", "Explore an antique shop filled with hundreds of intricate snow globes. Picking up and shaking a globe shrinks you inside its miniature winter wonderland, where you solve cozy festive puzzles to unlock the shop’s central grand clock."],
+      [85, "Solar-Powered Desert Rover", "3D", "Singleplayer", "Drive an autonomous six-wheeled rover across an alien red-rock planet. You must park in sunlit craters to recharge your solar panels, deploy drill arms to sample colorful mineral layers, and navigate dust devils."],
+      [86, "Origami Crane Migration", "3D", "Multiplayer", "Join hundreds of other players as a flock of glowing paper cranes migrating across a stylized watercolor landscape. Flying in V-formations boosts everyone’s wind speed as you glide over ink-wash mountains and lantern-lit rivers."],
+      [87, "Sunken Metro Diver", "3D", "Singleplayer", "Scuba dive through a peaceful, flooded subway system where crystal-clear rainwater has filled the tiled tunnels and schools of goldfish swim through vintage train cars. You restore underwater power relays to illuminate neon station signs."],
+      [88, "Giant Musical Instrument World", "3D", "Singleplayer", "Traverse a landscape built entirely out of colossal musical instruments—bouncing across giant drumheads, sliding down harp strings, and navigating inside the wooden chambers of an enormous pipe organ to tune the world’s symphony."],
+      [89, "Sand-Dune Surfboarder", "3D", "Singleplayer", "Carve fluid, high-speed lines down towering desert dunes on a frictionless magnetic sandboard. You chain momentum from slope to slope, launch off ancient stone arches, and chase migrating sky-manta rays across the horizon."],
+      [90, "Lighthouse Archipelago Zip-Lines", "3D", "Multiplayer", "Connect a chain of rocky sea stacks by firing harpoon zip-lines between islands. Players ride pulleys across crashing ocean waves, repair ancient wind turbines, and light signal beacons along the coast."],
+      [91, "Stained-Glass Labyrinth", "3D", "Singleplayer", "Navigate a towering outdoor maze made entirely of colored stained-glass walls. As the sun moves across the sky, the colored shadows cast onto the white marble floor shift, revealing hidden pathways and optical illusions."],
+      [92, "Floating Seed-Pod Explorer", "3D", "Singleplayer", "Drift gently on the breeze inside a translucent, dandelion-like seed pod floating high above a peaceful valley. You adjust ballast weights to catch rising warm thermals or descend into misty valleys to collect rare dew drops."],
+      [93, "Clockwork Train Detective", "3D", "Singleplayer", "Aboard a luxurious transcontinental steam train, you interview eccentric animal passengers, examine misplaced luggage, and inspect mechanical clues in the dining car to solve lighthearted mysteries like missing golden tickets or swapped briefcases."],
+      [94, "Coral Reef Bioluminescence Photographer", "3D", "Singleplayer", "Night-dive over a vibrant tropical reef equipped with specialized UV flashlights that make corals and sea creatures fluoresce in neon pinks, greens, and blues. You frame artistic underwater shots for a marine biology magazine."],
+      [95, "Perpetual Sunset Highway", "3D", "Singleplayer", "Drive a classic convertible along an endless coastal highway where the sun always sits right on the horizon. You tune into atmospheric radio stations, stop at scenic cliffside overlooks, collect vintage postcards, and customize your car’s dashboard trinkets."],
+      [96, "Treetop Canopy Gondola", "3D", "Singleplayer", "Operate a hand-cranked wooden gondola gliding along steel cables strung high between giant sequoia trees. You stop at treetop research platforms, feed friendly squirrels, and repair wind-speed gauges above the clouds."],
+      [97, "Ice-Cave Acoustic Explorer", "3D", "Singleplayer", "Explore labyrinthine glacial caves beneath an ice sheet. By singing or playing a wooden flute, the resonant echoes bounce off ice formations, highlighting safe paths across thin ice and shattering fragile icicle barriers."],
+      [98, "Terrarium Planetoid", "3D", "Singleplayer", "Walk around the curved surface of a miniature, lush planetoid small enough to circle in five minutes. You plant trees, dig streams, and watch how your small landscaping changes immediately affect the tiny world’s weather clouds."],
+      [99, "Lantern-Lit Bamboo Forest", "3D", "Singleplayer", "Wander through a towering, misty bamboo grove at dusk carrying a paper lantern. Lighting stone shrines along forgotten paths reveals gentle forest spirits who guide you through shifting bamboo mazes toward a serene mountain temple."],
+      [100, "Cloud-Sculpting Airship", "3D", "Multiplayer", "Fly an airship equipped with giant silver fans and vapor cannons. You and your friends sculpt fluffy cumulus clouds into giant animals, bridges, and castles in the sky, then hop out with parachutes to walk across your cloud creations."],
     ];
 
-    const ENGINE_ARCHETYPES = [
-      { dim: "3D", engine: "flight3d", genre: "3D Space Flight", desc: "Steer your starcraft through asteroid gates in 3D deep space with floating nametags." },
-      { dim: "3D", engine: "obby3d", genre: "3D Cosmic Obby", desc: "Leap across floating orbital platforms in 3D space! Jump with Space/W/Up and steer with A/D." },
-      { dim: "3D", engine: "arena3d", genre: "3D Hover Arena", desc: "Collect plasma crystals across a 3D hover-grid while dodging roaming sentry drones." },
-      { dim: "2D", engine: "shooter2d", genre: "2D Star Blaster", desc: "Auto-firing starfighter! Weave through incoming meteor swarms and blast cosmic cruisers." },
-      { dim: "2D", engine: "runner2d", genre: "2D Warp Runner", desc: "High-speed neon warp lane! Dodge crimson plasma barriers and collect energy cells." },
-      { dim: "2D", engine: "gravity2d", genre: "2D Orbit Flip", desc: "Tap Space/Up or click to invert gravity between ceiling and floor thrusters!" },
+    const BOT_ROSTER_NAMES = [
+      "[BOT] NovaBot",
+      "[BOT] OrbitKid",
+      "[BOT] DriftUnit",
+      "[BOT] PulseDrone",
+      "[BOT] CometBot",
+      "[BOT] IonUnit",
     ];
 
     const PALETTES = [
@@ -978,88 +1038,106 @@
       { primary: 0xf472b6, secondary: 0x22d3ee, hex: "#f472b6", bgHex: "#150614" },
     ];
 
-    function build108DistinctGames() {
-      const catalog = [];
-      for (let i = 0; i < 108; i++) {
-        const adj = COSMIC_ADJ[i % COSMIC_ADJ.length];
-        const noun = COSMIC_NOUN[(i * 5 + Math.floor(i / 6)) % COSMIC_NOUN.length];
-        const arch = ENGINE_ARCHETYPES[i % ENGINE_ARCHETYPES.length];
-        const pal = PALETTES[(i * 3) % PALETTES.length];
-        const speedMult = Number((0.85 + ((i % 7) * 0.14)).toFixed(2));
-        const density = 3 + (i % 6);
-        const multiplayer = i % 3 !== 2; // 2/3 of all 108 games support multiplayer servers
-        const codeNum = String(i + 1).padStart(3, "0");
+    function build100ExactGames() {
+      return EXACT_100_GAMES_RAW.map(([num, title, dim, mode, description], idx) => {
+        const isMp = mode.toLowerCase().includes("multi");
+        const pal = PALETTES[idx % PALETTES.length];
+        const speedMult = Number((0.88 + ((idx % 6) * 0.12)).toFixed(2));
+        const density = 3 + (idx % 5);
+        const engine =
+          dim === "3D"
+            ? idx % 3 === 0
+              ? "flight3d"
+              : idx % 3 === 1
+              ? "obby3d"
+              : "arena3d"
+            : idx % 3 === 0
+            ? "shooter2d"
+            : idx % 3 === 1
+            ? "runner2d"
+            : "gravity2d";
 
-        catalog.push({
-          id: `m3-world-${codeNum}`,
-          title: i === 0 ? "Nebula Starfighter 3D" : i === 1 ? "Pulsar Sky Obby 3D" : i === 2 ? "Void Interceptor 2D" : `${adj} ${noun} ${arch.dim}`,
-          dim: arch.dim,
-          engine: arch.engine,
-          genre: arch.genre,
-          multiplayer,
-          studio: i % 4 === 0 ? "M3rcury 3D Lab" : i % 4 === 1 ? "M3rcury Core" : i % 4 === 2 ? "Orbital Works" : "Nebula Forge",
-          rating: (4.3 + ((i % 7) * 0.1)).toFixed(1),
+        return {
+          id: `m3-exact-${String(num).padStart(3, "0")}`,
+          number: num,
+          title,
+          dim,
+          mode,
+          multiplayer: isMp,
+          engine,
+          genre: `${dim} • ${mode}`,
+          studio: isMp ? "M3rcury Squad Lab" : "M3rcury Solo Forge",
+          rating: (4.4 + ((idx % 6) * 0.1)).toFixed(1),
           palette: pal,
           speedMult,
           density,
-          description: `${arch.desc} [Sector #${codeNum} • Speed ${speedMult}x]`,
+          description,
           isCustomStudio: false,
-        });
-      }
-      return catalog;
+        };
+      });
     }
 
-    const BUILTIN_108_GAMES = build108DistinctGames();
+    const BUILTIN_100_GAMES = build100ExactGames();
 
     // =========================================================================
-    // 4. APPLICATION STATE (Strict Guest Restrictions + Account Persistence)
+    // 4. APPLICATION STATE (ZERO Fake Friends, Friend Removal, Bots, Live FB)
     // =========================================================================
     function loadLocalDb() {
       try {
         const raw = localStorage.getItem(LOCAL_DB_KEY);
-        if (raw) return JSON.parse(raw);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          // Ensure no fake pre-populated friends exist in any stored account
+          if (parsed && parsed.accounts) {
+            for (const k of Object.keys(parsed.accounts)) {
+              if (!Array.isArray(parsed.accounts[k].friends)) parsed.accounts[k].friends = [];
+              if (!Array.isArray(parsed.accounts[k].pendingRequests)) parsed.accounts[k].pendingRequests = [];
+            }
+          }
+          return parsed;
+        }
       } catch (e) {
         console.warn("Local DB parse error:", e);
       }
       return {
-        accounts: {}, // email -> { uid, email, passwordHash, handle, avatar, motto, friendCode, savedScore, gamesPlayed, bestByGame, friends, pendingRequests, studioGames }
+        accounts: {},
         activeSessionEmail: null,
         servers: [
           {
-            id: "srv-orion-1",
-            name: "Orion Vanguard #1",
-            gameId: "m3-world-001",
-            gameTitle: "Nebula Starfighter 3D",
-            host: "StarDrifter",
+            id: "srv-cloud-1",
+            name: "Sky-Dock Cargo Sector",
+            gameId: "m3-exact-001",
+            gameTitle: "Cloud-City Cargo Logistics",
+            host: "[BOT] NovaBot",
             region: "US-East",
             privacy: "public",
             players: 3,
             maxPlayers: 8,
-            peers: ["StarDrifter", "NovaKite", "CosmoByte"],
+            peers: ["[BOT] NovaBot", "[BOT] OrbitKid"],
           },
           {
-            id: "srv-pulsar-2",
-            name: "Zero-G Parkour Tower",
-            gameId: "m3-world-002",
-            gameTitle: "Pulsar Sky Obby 3D",
-            host: "LunaValkyrie",
+            id: "srv-laundromat-2",
+            name: "Nebula Wash Bay #2",
+            gameId: "m3-exact-003",
+            gameTitle: "Galactic Laundromat",
+            host: "[BOT] DriftUnit",
             region: "EU-Orbit",
             privacy: "public",
             players: 2,
             maxPlayers: 8,
-            peers: ["LunaValkyrie", "AstroZen"],
+            peers: ["[BOT] DriftUnit"],
           },
           {
-            id: "srv-void-3",
-            name: "Hyper Blaster Squadron",
-            gameId: "m3-world-003",
-            gameTitle: "Void Interceptor 2D",
-            host: "QuasarRex",
+            id: "srv-hotel-3",
+            name: "Midnight Spectral Wing",
+            gameId: "m3-exact-007",
+            gameTitle: "Haunted Hotel Hospitality",
+            host: "[BOT] PulseDrone",
             region: "US-West",
             privacy: "public",
-            players: 4,
+            players: 3,
             maxPlayers: 8,
-            peers: ["QuasarRex", "VegaPulse", "IonDrift", "Solaris"],
+            peers: ["[BOT] PulseDrone", "[BOT] CometBot"],
           },
         ],
       };
@@ -1075,7 +1153,6 @@
       }
     }
 
-    // Current runtime session state
     let session = {
       isGuest: true,
       uid: "guest",
@@ -1087,11 +1164,11 @@
       savedScore: 0,
       gamesPlayed: 0,
       bestByGame: {},
-      friends: [],
-      pendingRequests: [],
+      friends: [],          // Strictly empty until user adds real friends
+      pendingRequests: [],  // Strictly empty until incoming requests arrive
       studioGames: [],
       activeView: "hub",
-      activeGameId: "m3-world-001",
+      activeGameId: "m3-exact-001",
       joinedServerId: null,
       catalogFilter: "ALL",
       catalogSearch: "",
@@ -1125,9 +1202,19 @@
       session.savedScore = acc.savedScore || 0;
       session.gamesPlayed = acc.gamesPlayed || 0;
       session.bestByGame = acc.bestByGame || {};
-      session.friends = acc.friends || [];
-      session.pendingRequests = acc.pendingRequests || [];
-      session.studioGames = acc.studioGames || [];
+      session.friends = Array.isArray(acc.friends) ? acc.friends : [];
+      session.pendingRequests = Array.isArray(acc.pendingRequests) ? acc.pendingRequests : [];
+      session.studioGames = Array.isArray(acc.studioGames) ? acc.studioGames : [];
+    }
+
+    function handleFirestorePermissionError(err, actionLabel) {
+      console.error(`Firestore error during ${actionLabel}:`, err);
+      const locked = err?.code === "permission-denied" || String(err?.message || "").toLowerCase().includes("permission");
+      if (locked) {
+        showToast("Firestore is in Locked Mode! Update Rules in Firebase Console to allow public/auth access.", "error");
+      } else {
+        showToast(`Cloud sync error (${actionLabel}): ${err?.message || "check connection"}`, "error");
+      }
     }
 
     async function loadCloudUserProfile(firebaseUser) {
@@ -1148,25 +1235,20 @@
             savedScore: 0,
             gamesPlayed: 0,
             bestByGame: {},
-            friends: [
-              { handle: "StarDrifter", avatar: "🪐", status: "In Server", roomId: "srv-orion-1" },
-              { handle: "LunaValkyrie", avatar: "☄️", status: "In Server", roomId: "srv-pulsar-2" },
-            ],
-            pendingRequests: [
-              { handle: "NovaKite", avatar: "⚡", note: "Ready for 3D space co-op" },
-            ],
+            friends: [],
+            pendingRequests: [],
             studioGames: [],
           };
           await setDoc(userRef, freshProfile);
           applyAccountRecordToSession(freshProfile);
         }
       } catch (err) {
-        console.error("Cloud profile fetch error:", err);
+        handleFirestorePermissionError(err, "load profile");
       }
     }
 
     async function syncCurrentAccountToStorage() {
-      if (session.isGuest) return; // Guests NEVER save progress or profile changes!
+      if (session.isGuest) return;
       const record = {
         uid: session.uid,
         email: session.email,
@@ -1186,7 +1268,7 @@
         try {
           await setDoc(doc(fbDb, "users", fbAuth.currentUser.uid), record, { merge: true });
         } catch (err) {
-          console.error("Firestore profile save error:", err);
+          handleFirestorePermissionError(err, "save profile");
         }
       } else if (session.email && localDb.accounts[session.email]) {
         localDb.accounts[session.email] = {
@@ -1197,13 +1279,12 @@
       }
     }
 
-    // Restore local account session if present on load
     if (!getSavedFirebaseConfig() && localDb.activeSessionEmail && localDb.accounts[localDb.activeSessionEmail]) {
       applyAccountRecordToSession(localDb.accounts[localDb.activeSessionEmail]);
     }
 
     // =========================================================================
-    // 5. TOAST NOTIFICATIONS & MODALS
+    // 5. TOASTS, PASSWORD CHECKS & AUTHENTICATION MODALS
     // =========================================================================
     let toastTimeout = null;
     function showToast(msg, kind = "info") {
@@ -1229,21 +1310,52 @@
       text.textContent = msg;
       card.classList.remove("hidden");
       clearTimeout(toastTimeout);
-      toastTimeout = setTimeout(() => card.classList.add("hidden"), 3400);
+      toastTimeout = setTimeout(() => card.classList.add("hidden"), 3600);
     }
 
     document.getElementById("toastCloseBtn").addEventListener("click", () => {
       document.getElementById("toastCard").classList.add("hidden");
     });
 
-    // Auth Modal Logic (With Password Support)
     const authModal = document.getElementById("authModal");
+    const pwInput = document.getElementById("authPasswordInput");
+    const pwConfirmInput = document.getElementById("authPasswordConfirmInput");
     let isSignupMode = false;
+
+    function updatePasswordStrengthUI() {
+      const val = pwInput.value || "";
+      const wrap = document.getElementById("passwordStrengthMeterWrap");
+      const lbl = document.getElementById("passwordStrengthLabel");
+      if (!isSignupMode) {
+        wrap.classList.add("hidden");
+        return;
+      }
+      wrap.classList.remove("hidden");
+      const hasNumOrSym = /[0-9!@#$%^&*]/.test(val);
+      const hasUpper = /[A-Z]/.test(val);
+      if (val.length >= 10 && hasNumOrSym && hasUpper) {
+        lbl.textContent = "Strong";
+        lbl.className = "text-emerald-300 font-bold";
+      } else if (val.length >= 6 && (hasNumOrSym || hasUpper)) {
+        lbl.textContent = "Good";
+        lbl.className = "text-cyan-300 font-bold";
+      } else {
+        lbl.textContent = "Basic (6+ chars)";
+        lbl.className = "text-amber-300 font-bold";
+      }
+    }
+
+    pwInput.addEventListener("input", updatePasswordStrengthUI);
 
     function openAuthModal(signup = false) {
       isSignupMode = signup;
       document.getElementById("authErrorText").classList.add("hidden");
       document.getElementById("signupUsernameWrap").classList.toggle("hidden", !signup);
+      document.getElementById("signupConfirmWrap").classList.toggle("hidden", !signup);
+      pwConfirmInput.required = signup;
+      pwConfirmInput.value = "";
+      updatePasswordStrengthUI();
+
       document.getElementById("authModalHeading").textContent = signup ? "Create M3rcury Account" : "Sign In to M3rcury";
       document.getElementById("authActionSubmitBtn").textContent = signup ? "Create Account & Launch" : "Sign In";
 
@@ -1279,8 +1391,20 @@
       errBox.classList.add("hidden");
 
       const email = document.getElementById("authEmailInput").value.trim().toLowerCase();
-      const password = document.getElementById("authPasswordInput").value;
+      const password = pwInput.value;
       const handleRaw = document.getElementById("authHandleInput").value.trim();
+
+      if (password.length < 6) {
+        errBox.textContent = "Password must be at least 6 characters.";
+        errBox.classList.remove("hidden");
+        return;
+      }
+
+      if (isSignupMode && password !== pwConfirmInput.value) {
+        errBox.textContent = "Passwords do not match. Please re-enter both passwords.";
+        errBox.classList.remove("hidden");
+        return;
+      }
 
       if (isFirebaseLive && fbAuth) {
         try {
@@ -1300,13 +1424,12 @@
           authModal.classList.add("hidden");
           renderAllUI();
         } catch (err) {
-          errBox.textContent = err.message || "Authentication failed.";
+          errBox.textContent = err.message || "Firebase Authentication failed.";
           errBox.classList.remove("hidden");
         }
         return;
       }
 
-      // Local Password-Protected Account Fallback (when Firebase config isn't connected yet)
       if (isSignupMode) {
         if (localDb.accounts[email]) {
           errBox.textContent = "An account with that email already exists. Switch to Sign In.";
@@ -1326,13 +1449,8 @@
           savedScore: 0,
           gamesPlayed: 0,
           bestByGame: {},
-          friends: [
-            { handle: "StarDrifter", avatar: "🪐", status: "In Server", roomId: "srv-orion-1" },
-            { handle: "LunaValkyrie", avatar: "☄️", status: "In Server", roomId: "srv-pulsar-2" },
-          ],
-          pendingRequests: [
-            { handle: "NovaKite", avatar: "⚡", note: "Wants to squad up in 3D Orbit" },
-          ],
+          friends: [],
+          pendingRequests: [],
           studioGames: [],
         };
         localDb.accounts[email] = newAcc;
@@ -1341,11 +1459,11 @@
         applyAccountRecordToSession(newAcc);
         authModal.classList.add("hidden");
         renderAllUI();
-        showToast(`Account created for ${handle}! Progress saving unlocked.`, "success");
+        showToast(`Account created for ${handle}! Progress saving & friends unlocked.`, "success");
       } else {
         const existing = localDb.accounts[email];
         if (!existing || existing.password !== password) {
-          errBox.textContent = "Invalid email or password. Create an account if you are new.";
+          errBox.textContent = "Invalid email or password.";
           errBox.classList.remove("hidden");
           return;
         }
@@ -1358,7 +1476,7 @@
       }
     });
 
-    // Firebase Settings Modal
+    // Firebase Config Modal
     const firebaseModal = document.getElementById("firebaseModal");
     document.getElementById("openFirebaseSettingsBtn").addEventListener("click", () => {
       const existing = getSavedFirebaseConfig();
@@ -1376,7 +1494,7 @@
         localStorage.setItem(FB_CONFIG_KEY, JSON.stringify(parsed));
         firebaseModal.classList.add("hidden");
         initFirebaseIfConfigured();
-        showToast(`Connected to Firebase project: ${parsed.projectId}`, "success");
+        showToast(`Connected to Firebase Live: ${parsed.projectId}`, "success");
       } catch (e) {
         showToast("Please paste a valid JSON Firebase config object", "error");
       }
@@ -1386,11 +1504,11 @@
       localStorage.removeItem(FB_CONFIG_KEY);
       firebaseModal.classList.add("hidden");
       initFirebaseIfConfigured();
-      showToast("Reverted to Local Sync Engine", "info");
+      showToast("Switched back to Local Preview Mode", "info");
     });
 
     // =========================================================================
-    // 6. NAVIGATION & CATALOG HELPERS
+    // 6. NAVIGATION & 100-GAME CATALOG HELPERS
     // =========================================================================
     function switchWorkspaceView(viewName) {
       session.activeView = viewName;
@@ -1416,23 +1534,25 @@
     document.getElementById("goToStudioBtn").addEventListener("click", () => switchWorkspaceView("studio"));
 
     function getCombinedGamesList() {
-      const customEntries = session.studioGames.map((sg) => ({
+      const customEntries = session.studioGames.map((sg, idx) => ({
         id: sg.id,
+        number: 101 + idx,
         title: sg.title,
-        dim: sg.dim || "2D",
-        engine: "custom_code",
-        genre: sg.dim === "3D" ? "3D Stud!o Code" : "2D Stud!o Code",
+        dim: sg.dim || "3D",
+        mode: "Multiplayer",
         multiplayer: true,
+        engine: "custom_code",
+        genre: `${sg.dim || "3D"} • Stud!o`,
         studio: `Stud!o • ${sg.author}`,
         rating: "5.0",
         palette: PALETTES[1],
         speedMult: 1.0,
         density: 4,
-        description: `User-coded M3rcury Stud!o world created by ${sg.author}.`,
+        description: `Custom M3rcury Stud!o creation by ${sg.author}.`,
         isCustomStudio: true,
-        code: sg.code,
+        studioBundle: sg,
       }));
-      return [...customEntries, ...BUILTIN_108_GAMES];
+      return [...customEntries, ...BUILTIN_100_GAMES];
     }
 
     function getCurrentGame() {
@@ -1441,7 +1561,7 @@
     }
 
     // =========================================================================
-    // 7. DUAL 2D + 3D WEBGL GAME ENGINE WITH FLOATING PLAYER NAMETAGS
+    // 7. DUAL 2D + 3D PERSPECTIVE/WIREFRAME ENGINE WITH BOT PLAYERS & NAMETAGS
     // =========================================================================
     const canvas2D = document.getElementById("canvas2DStage");
     const ctx2D = canvas2D.getContext("2d");
@@ -1453,25 +1573,24 @@
     let isPaused = false;
     let liveScore = 0;
     let keysDown = {};
-    let pointerNormX = 0; // -1 to 1
+    let pointerNormX = 0;
     let pointerActive = false;
 
-    // Three.js 3D scene references
     let threeRenderer = null;
     let threeScene = null;
     let threeCamera = null;
     let threeState = null;
     let state2D = null;
 
-    function getRoomPeersList() {
+    function getRoomBotPlayers() {
       const srv = localDb.servers.find((s) => s.id === session.joinedServerId);
       if (srv && Array.isArray(srv.peers)) {
-        return srv.peers.filter((p) => p.toLowerCase() !== session.handle.toLowerCase());
+        const bots = srv.peers.filter((p) => p.startsWith("[BOT]"));
+        if (bots.length) return bots;
       }
-      // Show live orbital wingmen in multiplayer worlds even before joining a server
       const game = getCurrentGame();
       if (game.multiplayer) {
-        return ["StarDrifter", "NovaKite"];
+        return [BOT_ROSTER_NAMES[0], BOT_ROSTER_NAMES[1]];
       }
       return [];
     }
@@ -1481,15 +1600,14 @@
     }
 
     function renderProjectedNametags(tags) {
-      // tags: [{ name, x, y, isSelf, isFriend }]
       nametagLayer.innerHTML = tags
         .map((t) => {
           const badgeClass = t.isSelf
             ? "bg-cyan-950/90 border-cyan-400 text-cyan-200 shadow-cyan-500/30"
-            : t.isFriend
+            : t.isBot
             ? "bg-purple-950/90 border-purple-400 text-purple-200 shadow-purple-500/30"
-            : "bg-slate-950/85 border-slate-600 text-slate-200";
-          const prefix = t.isSelf ? session.avatar : t.isFriend ? "🛸" : "👾";
+            : "bg-emerald-950/90 border-emerald-400 text-emerald-200";
+          const prefix = t.isSelf ? session.avatar : t.isBot ? "🤖" : "🛸";
           return `
             <div style="left:${Math.round(t.x)}px; top:${Math.round(t.y)}px; transform:translate(-50%, -120%);"
                  class="absolute px-2 py-0.5 rounded-full border text-[10px] sm:text-[11px] font-mono font-bold whitespace-nowrap shadow-lg ${badgeClass}">
@@ -1526,24 +1644,21 @@
       const savedBest = session.isGuest ? 0 : (session.bestByGame[game.id] || 0);
       document.getElementById("hudBestVal").textContent = session.isGuest ? "Guest (Locked)" : String(savedBest);
 
-      const peers = getRoomPeersList();
-      document.getElementById("hudPeersVal").textContent = `${1 + peers.length} Active`;
+      const bots = getRoomBotPlayers();
+      document.getElementById("hudPeersVal").textContent = `${1 + bots.length} (${bots.length} Bots)`;
 
       if (game.dim === "3D" && typeof THREE !== "undefined") {
         canvas2D.classList.add("hidden");
         container3D.classList.remove("hidden");
-        initThreeEngine(game, peers);
+        initThreeEngine(game, bots);
       } else {
         container3D.classList.add("hidden");
         canvas2D.classList.remove("hidden");
-        initCanvas2DEngine(game, peers);
+        initCanvas2DEngine(game, bots);
       }
     }
 
-    // -------------------------------------------------------------------------
-    // 3D WEBGL ENGINE (Flight 3D, Sky Obby 3D, Hover Arena 3D + Floating Tags)
-    // -------------------------------------------------------------------------
-    function initThreeEngine(game, peers) {
+    function initThreeEngine(game, bots) {
       const rect = document.getElementById("gameViewportContainer").getBoundingClientRect();
       const w = Math.max(300, rect.width);
       const h = Math.max(180, rect.height);
@@ -1561,18 +1676,15 @@
       threeRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
       container3D.appendChild(threeRenderer.domElement);
 
-      // Cosmic lighting
       threeScene.add(new THREE.AmbientLight(0xffffff, 0.55));
       const dirLight = new THREE.DirectionalLight(game.palette.primary, 1.3);
       dirLight.position.set(8, 16, 10);
       threeScene.add(dirLight);
 
-      // Neon grid floor
       const gridHelper = new THREE.GridHelper(90, 36, game.palette.primary, game.palette.secondary);
       gridHelper.position.y = -1.2;
       threeScene.add(gridHelper);
 
-      // Player 3D Craft / Avatar Mesh
       const playerGroup = new THREE.Group();
       const hullMat = new THREE.MeshStandardMaterial({
         color: game.palette.primary,
@@ -1590,26 +1702,26 @@
       playerGroup.position.set(0, 0, 2);
       threeScene.add(playerGroup);
 
-      // Peer 3D ships / avatars with floating nametags
-      const peerActors = peers.map((peerName, idx) => {
-        const pGroup = new THREE.Group();
-        const pMat = new THREE.MeshStandardMaterial({
-          color: idx % 2 === 0 ? 0xa855f7 : 0xf59e0b,
-          emissive: idx % 2 === 0 ? 0xa855f7 : 0xf59e0b,
+      // Simulated Bot Players with 3D wireframe/emissive craft & floating nametags
+      const botActors = bots.map((botName, idx) => {
+        const bGroup = new THREE.Group();
+        const bMat = new THREE.MeshStandardMaterial({
+          color: 0xa855f7,
+          emissive: 0xa855f7,
           emissiveIntensity: 0.35,
+          wireframe: idx % 2 === 1,
         });
-        const pMesh = new THREE.Mesh(new THREE.OctahedronGeometry(0.85), pMat);
-        pGroup.add(pMesh);
-        pGroup.position.set((idx === 0 ? -3.4 : 3.4), 0.3, -1.5 - idx * 2.5);
-        threeScene.add(pGroup);
-        const isFriend = session.friends.some((f) => f.handle.toLowerCase() === peerName.toLowerCase());
-        return { name: peerName, mesh: pGroup, phase: idx * 2.1, isFriend };
+        const bMesh = new THREE.Mesh(new THREE.OctahedronGeometry(0.85), bMat);
+        bGroup.add(bMesh);
+        bGroup.position.set((idx === 0 ? -3.4 : 3.4), 0.3, -1.5 - idx * 2.5);
+        threeScene.add(bGroup);
+        return { name: botName, mesh: bGroup, phase: idx * 2.1, isBot: true };
       });
 
       threeState = {
         game,
         playerGroup,
-        peerActors,
+        botActors,
         gridHelper,
         obstacles: [],
         crystals: [],
@@ -1618,7 +1730,6 @@
         grounded: true,
       };
 
-      // Render initial preview frame
       threeRenderer.render(threeScene, threeCamera);
       projectThreeNametags(w, h);
     }
@@ -1636,18 +1747,16 @@
         };
       };
 
-      // Self nametag
       const selfPos = threeState.playerGroup.position.clone().add(new THREE.Vector3(0, 1.35, 0));
       const sp = projectPoint(selfPos);
       if (sp) {
-        tags.push({ name: session.handle, x: sp.x, y: sp.y, isSelf: true, isFriend: false });
+        tags.push({ name: session.handle, x: sp.x, y: sp.y, isSelf: true, isBot: false });
       }
 
-      // Peer nametags
-      for (const peer of threeState.peerActors) {
-        const pp = projectPoint(peer.mesh.position.clone().add(new THREE.Vector3(0, 1.35, 0)));
-        if (pp) {
-          tags.push({ name: peer.name, x: pp.x, y: pp.y, isSelf: false, isFriend: peer.isFriend });
+      for (const bot of threeState.botActors) {
+        const bp = projectPoint(bot.mesh.position.clone().add(new THREE.Vector3(0, 1.35, 0)));
+        if (bp) {
+          tags.push({ name: bot.name, x: bp.x, y: bp.y, isSelf: false, isBot: true });
         }
       }
 
@@ -1667,7 +1776,6 @@
       const st = threeState;
       const spd = 0.24 * st.game.speedMult;
 
-      // Player steering
       if (keysDown["ArrowLeft"] || keysDown["KeyA"]) st.playerGroup.position.x -= 0.18;
       if (keysDown["ArrowRight"] || keysDown["KeyD"]) st.playerGroup.position.x += 0.18;
       if (pointerActive) {
@@ -1675,7 +1783,6 @@
       }
       st.playerGroup.position.x = Math.max(-6.5, Math.min(6.5, st.playerGroup.position.x));
 
-      // Jump physics for 3D Obby / Hover
       if ((keysDown["Space"] || keysDown["ArrowUp"] || keysDown["KeyW"]) && st.grounded) {
         st.vy = 0.26;
         st.grounded = false;
@@ -1692,15 +1799,13 @@
       st.playerGroup.rotation.z = -st.playerGroup.position.x * 0.08;
       st.gridHelper.position.z = (st.gridHelper.position.z + spd) % 2.5;
 
-      // Animate multiplayer peer ships
       const now = performance.now() * 0.002;
-      for (const peer of st.peerActors) {
-        peer.mesh.position.x = Math.sin(now + peer.phase) * 4.4;
-        peer.mesh.position.y = 0.4 + Math.abs(Math.cos(now * 1.4 + peer.phase)) * 0.7;
-        peer.mesh.rotation.y += 0.03;
+      for (const bot of st.botActors) {
+        bot.mesh.position.x = Math.sin(now + bot.phase) * 4.4;
+        bot.mesh.position.y = 0.4 + Math.abs(Math.cos(now * 1.4 + bot.phase)) * 0.7;
+        bot.mesh.rotation.y += 0.03;
       }
 
-      // Spawn obstacles & plasma orbs
       st.spawnTick += 1;
       const interval = Math.max(18, Math.round(36 - st.game.density * 2));
       if (st.spawnTick >= interval) {
@@ -1726,7 +1831,6 @@
         }
       }
 
-      // Update crystals
       for (let i = st.crystals.length - 1; i >= 0; i--) {
         const c = st.crystals[i];
         c.position.z += spd * 1.6;
@@ -1743,7 +1847,6 @@
         }
       }
 
-      // Update hazards
       for (let i = st.obstacles.length - 1; i >= 0; i--) {
         const ob = st.obstacles[i];
         ob.position.z += spd * 1.65;
@@ -1766,9 +1869,6 @@
       projectThreeNametags(w, h);
     }
 
-    // -------------------------------------------------------------------------
-    // 2D CANVAS ENGINE (Star Blaster, Warp Runner, Gravity Flip, Custom Stud!o)
-    // -------------------------------------------------------------------------
     function sync2DSize() {
       const rect = document.getElementById("gameViewportContainer").getBoundingClientRect();
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -1782,7 +1882,7 @@
       return { w, h };
     }
 
-    function initCanvas2DEngine(game, peers) {
+    function initCanvas2DEngine(game, bots) {
       const { w, h } = sync2DSize();
       state2D = {
         game,
@@ -1794,26 +1894,14 @@
         enemies: [],
         pickups: [],
         tick: 0,
-        customUpdateFn: null,
-        peers: peers.map((name, i) => ({
+        bots: bots.map((name, i) => ({
           name,
           x: w * (0.25 + i * 0.45),
           y: h - 42,
           phase: i * 1.9,
-          isFriend: session.friends.some((f) => f.handle.toLowerCase() === name.toLowerCase()),
+          isBot: true,
         })),
       };
-
-      // If custom M3rcury Stud!o script, compile its update(ctx, state) hook safely
-      if (game.engine === "custom_code" && game.code) {
-        try {
-          const factory = new Function("ctx", "state", "keys", `${game.code}\nif (typeof update === "function") return update;`);
-          state2D.customUpdateFn = factory(ctx2D, state2D, keysDown);
-        } catch (err) {
-          console.error("Custom Stud!o game compile error:", err);
-        }
-      }
-
       draw2DIdleFrame(w, h);
     }
 
@@ -1821,8 +1909,8 @@
       ctx2D.fillStyle = state2D.game.palette.bgHex;
       ctx2D.fillRect(0, 0, w, h);
       const tags = [
-        { name: session.handle, x: state2D.px, y: state2D.py - 12, isSelf: true, isFriend: false },
-        ...state2D.peers.map((p) => ({ name: p.name, x: p.x, y: p.y - 12, isSelf: false, isFriend: p.isFriend })),
+        { name: session.handle, x: state2D.px, y: state2D.py - 12, isSelf: true, isBot: false },
+        ...state2D.bots.map((b) => ({ name: b.name, x: b.x, y: b.y - 12, isSelf: false, isBot: true })),
       ];
       renderProjectedNametags(tags);
     }
@@ -1835,7 +1923,6 @@
       ctx2D.fillStyle = g.palette.bgHex;
       ctx2D.fillRect(0, 0, w, h);
 
-      // Subtle warp grid
       ctx2D.strokeStyle = "rgba(56, 189, 248, 0.08)";
       ctx2D.lineWidth = 1;
       for (let x = 0; x < w; x += 42) {
@@ -1845,23 +1932,6 @@
         ctx2D.stroke();
       }
 
-      // Custom user-coded Stud!o game execution
-      if (st.customUpdateFn) {
-        try {
-          st.tick += 1;
-          st.w = w;
-          st.h = h;
-          const res = st.customUpdateFn(ctx2D, st, keysDown);
-          if (typeof res === "number") liveScore = res;
-          renderProjectedNametags([{ name: session.handle, x: st.px, y: st.py - 16, isSelf: true, isFriend: false }]);
-          return;
-        } catch (err) {
-          endGameSession();
-          return;
-        }
-      }
-
-      // Horizontal movement
       const speed = 5.4 * g.speedMult;
       if (keysDown["ArrowLeft"] || keysDown["KeyA"]) st.px -= speed;
       if (keysDown["ArrowRight"] || keysDown["KeyD"]) st.px += speed;
@@ -1871,7 +1941,6 @@
       }
       st.px = Math.max(20, Math.min(w - 20, st.px));
 
-      // Gravity flip mode vs standard floor mode
       if (g.engine === "gravity2d") {
         if (keysDown["Space"] || keysDown["ArrowUp"] || keysDown["KeyW"]) {
           st.gravityDir = -1;
@@ -1886,7 +1955,6 @@
 
       st.tick += 1;
 
-      // Auto-laser in Shooter 2D mode
       if (g.engine === "shooter2d" && st.tick % 14 === 0) {
         st.bullets.push({ x: st.px, y: st.py - 16 });
       }
@@ -1899,7 +1967,6 @@
         if (b.y < -15) st.bullets.splice(i, 1);
       }
 
-      // Spawn hazards & energy cores
       const spawnRate = Math.max(15, Math.round(32 - g.density * 2));
       if (st.tick % spawnRate === 0) {
         const isPickup = Math.random() < 0.4;
@@ -1913,7 +1980,6 @@
         else st.enemies.push(item);
       }
 
-      // Update pickups
       for (let i = st.pickups.length - 1; i >= 0; i--) {
         const p = st.pickups[i];
         p.y += p.vy;
@@ -1930,7 +1996,6 @@
         if (p.y > h + 20) st.pickups.splice(i, 1);
       }
 
-      // Update hazards / enemies
       for (let i = st.enemies.length - 1; i >= 0; i--) {
         const en = st.enemies[i];
         en.y += en.vy;
@@ -1939,7 +2004,6 @@
         ctx2D.arc(en.x, en.y, en.r, 0, Math.PI * 2);
         ctx2D.fill();
 
-        // Check bullet hit in shooter2d
         let destroyed = false;
         for (let bi = st.bullets.length - 1; bi >= 0; bi--) {
           const b = st.bullets[bi];
@@ -1963,18 +2027,16 @@
         }
       }
 
-      // Draw peer ships
-      const tags = [{ name: session.handle, x: st.px, y: st.py - 14, isSelf: true, isFriend: false }];
-      for (const peer of st.peers) {
-        peer.x = w * 0.5 + Math.sin(st.tick * 0.025 + peer.phase) * (w * 0.34);
-        ctx2D.fillStyle = peer.isFriend ? "#a855f7" : "#f59e0b";
+      const tags = [{ name: session.handle, x: st.px, y: st.py - 14, isSelf: true, isBot: false }];
+      for (const bot of st.bots) {
+        bot.x = w * 0.5 + Math.sin(st.tick * 0.025 + bot.phase) * (w * 0.34);
+        ctx2D.fillStyle = "#a855f7";
         ctx2D.beginPath();
-        ctx2D.arc(peer.x, peer.y, 11, 0, Math.PI * 2);
+        ctx2D.arc(bot.x, bot.y, 11, 0, Math.PI * 2);
         ctx2D.fill();
-        tags.push({ name: peer.name, x: peer.x, y: peer.y - 12, isSelf: false, isFriend: peer.isFriend });
+        tags.push({ name: bot.name, x: bot.x, y: bot.y - 12, isSelf: false, isBot: true });
       }
 
-      // Draw player ship
       ctx2D.fillStyle = g.palette.hex;
       ctx2D.beginPath();
       ctx2D.moveTo(st.px, st.py - 15);
@@ -2030,10 +2092,10 @@
         await syncCurrentAccountToStorage();
         document.getElementById("hudBestVal").textContent = String(session.bestByGame[game.id]);
         document.getElementById("overlayHeadline").textContent = `Mission Complete — ${liveScore} PTS`;
-        document.getElementById("overlaySubtext").textContent = `+${earned} XP saved to Commander ${session.handle}'s orbital profile!`;
+        document.getElementById("overlaySubtext").textContent = `+${earned} XP saved to Commander ${session.handle}'s account!`;
       } else {
         document.getElementById("overlayHeadline").textContent = `Mission Complete — ${liveScore} PTS`;
-        document.getElementById("overlaySubtext").textContent = `Guest Orbit: Score not saved. Create an account to save progress & high scores!`;
+        document.getElementById("overlaySubtext").textContent = `Guest Orbit: Progress not saved. Sign in or create an account to save progress!`;
       }
 
       renderProfileView();
@@ -2041,7 +2103,6 @@
       document.getElementById("stageOverlay").classList.remove("hidden");
     }
 
-    // Stage input bindings
     window.addEventListener("keydown", (e) => {
       if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Space"].includes(e.code) && isPlaying && session.activeView === "hub") {
         e.preventDefault();
@@ -2082,12 +2143,12 @@
       const game = getCurrentGame();
       document.getElementById("stageTitle").textContent = game.title;
       document.getElementById("stageDescription").textContent = game.description;
-      document.getElementById("stageDimBadge").textContent = game.dim === "3D" ? "3D WEBGL • NAMETAGS ON" : "2D ARCADE • NAMETAGS ON";
-      document.getElementById("stageGenreBadge").textContent = game.genre;
-      document.getElementById("stageMpBadge").textContent = game.multiplayer ? "Multiplayer Server Ready" : "Solo Sector";
+      document.getElementById("stageDimBadge").textContent = game.dim === "3D" ? "3D VIEW • NAMETAGS ON" : "2D CANVAS • NAMETAGS ON";
+      document.getElementById("stageGenreBadge").textContent = `${game.dim} • ${game.mode}`;
+      document.getElementById("stageMpBadge").textContent = game.multiplayer ? "Multiplayer + Bots" : "Singleplayer";
       document.getElementById("hostTargetGameLabel").textContent = game.title;
 
-      document.getElementById("overlayKicker").textContent = `${game.dim} • ${game.genre.toUpperCase()}`;
+      document.getElementById("overlayKicker").textContent = `#${game.number} • ${game.dim} • ${game.mode.toUpperCase()}`;
       document.getElementById("overlayHeadline").textContent = game.title;
       document.getElementById("overlaySubtext").textContent = game.description;
       document.getElementById("overlayStartBtn").textContent = "🚀 Engage Thrusters";
@@ -2098,7 +2159,7 @@
     }
 
     // =========================================================================
-    // 8. LIVE MULTIPLAYER SERVERS & REAL FRIEND SYSTEM (ZERO CHAT)
+    // 8. MULTIPLAYER SERVERS (With Bots) & REAL FRIEND SYSTEM + REMOVAL
     // =========================================================================
     function subscribeLiveFirestoreServers() {
       if (!isFirebaseLive || !fbDb) return;
@@ -2113,19 +2174,19 @@
             renderFriendsSection();
           }
         },
-        (err) => console.warn("Server listener warning:", err)
+        (err) => handleFirestorePermissionError(err, "listen to servers")
       );
     }
 
     async function joinServerById(serverId) {
       const srv = localDb.servers.find((s) => s.id === serverId);
       if (!srv) {
-        showToast("That orbital server is no longer active.", "error");
+        showToast("That server room is no longer active.", "error");
         return;
       }
 
       session.joinedServerId = srv.id;
-      if (!Array.isArray(srv.peers)) srv.peers = [srv.host];
+      if (!Array.isArray(srv.peers)) srv.peers = [BOT_ROSTER_NAMES[0]];
       if (!srv.peers.includes(session.handle)) {
         srv.peers.push(session.handle);
         srv.players = Math.min(srv.maxPlayers || 8, srv.peers.length);
@@ -2137,8 +2198,8 @@
             peers: srv.peers,
             players: srv.players,
           });
-        } catch (e) {
-          console.warn("Could not update cloud server peers:", e);
+        } catch (err) {
+          handleFirestorePermissionError(err, "join server");
         }
       } else {
         persistLocalDb();
@@ -2149,7 +2210,7 @@
       switchWorkspaceView("hub");
       renderServersList();
       renderFriendsSection();
-      showToast(`Warped into "${srv.name}" (${srv.gameTitle})!`, "success");
+      showToast(`Joined "${srv.name}" (${srv.gameTitle})!`, "success");
     }
 
     document.getElementById("hostServerBtn").addEventListener("click", async () => {
@@ -2158,6 +2219,7 @@
       const region = document.getElementById("serverRegionSelect").value;
       const privacy = document.getElementById("serverPrivacySelect").value;
       const roomName = rawName || `${session.handle}'s ${game.title}`;
+      const roomBots = [BOT_ROSTER_NAMES[0], BOT_ROSTER_NAMES[2]];
 
       const newSrv = {
         id: `srv-${Date.now().toString(36)}`,
@@ -2167,17 +2229,17 @@
         host: session.handle,
         region,
         privacy,
-        players: 1,
+        players: 1 + roomBots.length,
         maxPlayers: 8,
-        peers: [session.handle],
+        peers: [session.handle, ...roomBots],
       };
 
       if (isFirebaseLive && fbDb) {
         try {
           const docRef = await addDoc(collection(fbDb, "servers"), newSrv);
           newSrv.id = docRef.id;
-        } catch (e) {
-          console.warn("Cloud server host fallback to local:", e);
+        } catch (err) {
+          handleFirestorePermissionError(err, "host server");
         }
       }
 
@@ -2188,7 +2250,7 @@
       document.getElementById("hudRoomVal").textContent = newSrv.name;
       selectWorldGame(game.id);
       renderServersList();
-      showToast(`Server "${roomName}" is live! Friends can join now.`, "success");
+      showToast(`Hosted "${roomName}" with simulated bot players!`, "success");
     });
 
     function renderServersList() {
@@ -2200,6 +2262,7 @@
         .map((srv) => {
           const joined = srv.id === session.joinedServerId;
           const friendInside = !session.isGuest && session.friends.some((f) => (srv.peers || []).includes(f.handle) || f.handle === srv.host);
+          const botCount = (srv.peers || []).filter((p) => p.startsWith("[BOT]")).length;
           return `
             <div class="rounded-2xl bg-slate-950/90 border ${joined ? "border-emerald-400/60" : friendInside ? "border-purple-400/50" : "border-slate-800"} p-3 flex items-center justify-between gap-2.5">
               <div class="min-w-0">
@@ -2208,7 +2271,7 @@
                   <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 border border-slate-700">${escapeHtml(srv.region)}</span>
                 </div>
                 <div class="text-[11px] text-slate-400 truncate mt-0.5">
-                  ${escapeHtml(srv.gameTitle)} • Host: <span class="text-slate-200">${escapeHtml(srv.host)}</span> • <span class="font-mono text-emerald-300">${srv.players}/${srv.maxPlayers}</span>
+                  ${escapeHtml(srv.gameTitle)} • <span class="text-purple-300">${botCount} Bots</span> • <span class="font-mono text-emerald-300">${srv.players}/${srv.maxPlayers}</span>
                 </div>
                 ${friendInside ? `<div class="text-[10px] font-mono text-purple-300 mt-0.5">🛸 Friend inside this room</div>` : ""}
               </div>
@@ -2229,7 +2292,7 @@
       });
     }
 
-    // Friend Requests & Roster (Strictly locked for Guests)
+    // Add & Remove Real Friends (Strictly Account-Gated, Zero Fake Friends)
     document.getElementById("sendFriendReqForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       if (session.isGuest) {
@@ -2247,11 +2310,10 @@
         return;
       }
       if (session.friends.some((f) => f.handle.toLowerCase() === targetHandle.toLowerCase())) {
-        showToast(`${targetHandle} is already in your squad!`, "info");
+        showToast(`${targetHandle} is already in your friends list.`, "info");
         return;
       }
 
-      // Check if handle matches a live server host so user can immediately join them
       const matchingRoom = localDb.servers.find((s) => s.host.toLowerCase() === targetHandle.toLowerCase());
       session.friends.push({
         handle: targetHandle,
@@ -2264,7 +2326,7 @@
       await syncCurrentAccountToStorage();
       renderFriendsSection();
       renderServersList();
-      showToast(`Added Commander ${targetHandle} to your friends!`, "success");
+      showToast(`Added ${targetHandle} to your friends list!`, "success");
     });
 
     function renderFriendsSection() {
@@ -2285,7 +2347,7 @@
 
       const reqBox = document.getElementById("incomingReqContainer");
       if (!session.pendingRequests.length) {
-        reqBox.innerHTML = `<p class="text-xs text-slate-400">No pending friend requests right now.</p>`;
+        reqBox.innerHTML = `<p class="text-xs text-slate-400">No incoming friend requests.</p>`;
       } else {
         reqBox.innerHTML = session.pendingRequests
           .map(
@@ -2313,15 +2375,10 @@
             const req = session.pendingRequests[idx];
             if (!req) return;
             session.pendingRequests.splice(idx, 1);
-            session.friends.push({
-              handle: req.handle,
-              avatar: req.avatar || "🚀",
-              status: "Online",
-              roomId: null,
-            });
+            session.friends.push({ handle: req.handle, avatar: req.avatar || "🚀", status: "Online", roomId: null });
             await syncCurrentAccountToStorage();
             renderFriendsSection();
-            showToast(`Accepted ${req.handle} into your squad!`, "success");
+            showToast(`Added ${req.handle} as a friend!`, "success");
           });
         });
 
@@ -2338,12 +2395,12 @@
 
       const rosterBox = document.getElementById("friendsRosterContainer");
       if (!session.friends.length) {
-        rosterBox.innerHTML = `<div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-5 text-xs text-slate-400 text-center">No friends added yet. Search a Commander handle on the left!</div>`;
+        rosterBox.innerHTML = `<div class="rounded-2xl bg-slate-950/90 border border-slate-800 p-5 text-xs text-slate-400 text-center">Your friends list is currently empty. Add a player handle on the left whenever you're ready.</div>`;
         return;
       }
 
       rosterBox.innerHTML = session.friends
-        .map((fr) => {
+        .map((fr, fIdx) => {
           const activeRoom =
             (fr.roomId && localDb.servers.find((s) => s.id === fr.roomId)) ||
             localDb.servers.find((s) => s.host.toLowerCase() === fr.handle.toLowerCase() || (s.peers || []).includes(fr.handle));
@@ -2373,12 +2430,15 @@
                 </div>
               </div>
 
-              <div>
+              <div class="flex items-center gap-2">
                 ${
                   activeRoom
-                    ? `<button type="button" data-join-friend-room="${activeRoom.id}" class="join-friend-srv-btn px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-400 to-purple-500 text-slate-950 hover:brightness-110 transition">Join Friend</button>`
-                    : `<span class="text-[11px] font-mono text-slate-500">Not in Server</span>`
+                    ? `<button type="button" data-join-friend-room="${activeRoom.id}" class="join-friend-srv-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-400 to-purple-500 text-slate-950 hover:brightness-110 transition">Join Friend</button>`
+                    : ""
                 }
+                <button type="button" data-remove-friend="${fIdx}" class="remove-friend-btn px-3 py-2 rounded-xl text-xs font-semibold bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/35 transition">
+                  Remove Friend
+                </button>
               </div>
             </div>
           `;
@@ -2388,10 +2448,23 @@
       rosterBox.querySelectorAll(".join-friend-srv-btn").forEach((btn) => {
         btn.addEventListener("click", () => joinServerById(btn.dataset.joinFriendRoom));
       });
+
+      rosterBox.querySelectorAll(".remove-friend-btn").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const idx = Number(btn.dataset.removeFriend);
+          const removed = session.friends[idx];
+          if (!removed) return;
+          session.friends.splice(idx, 1);
+          await syncCurrentAccountToStorage();
+          renderFriendsSection();
+          renderServersList();
+          showToast(`Removed ${removed.handle} from your friends list`, "info");
+        });
+      });
     }
 
     // =========================================================================
-    // 9. CATALOG RENDERING (108+ DISTINCT GAMES)
+    // 9. CATALOG RENDERING (ALL 100 USER GAMES + STUD!O CREATIONS)
     // =========================================================================
     function renderCatalogGrid() {
       const allGames = getCombinedGamesList();
@@ -2404,18 +2477,20 @@
           (f === "3D" && g.dim === "3D") ||
           (f === "2D" && g.dim === "2D") ||
           (f === "MP" && g.multiplayer) ||
+          (f === "SP" && !g.multiplayer && !g.isCustomStudio) ||
           (f === "STUDIO" && g.isCustomStudio);
         const matchQuery =
           !q ||
           g.title.toLowerCase().includes(q) ||
-          g.genre.toLowerCase().includes(q) ||
-          g.studio.toLowerCase().includes(q) ||
-          g.id.toLowerCase().includes(q);
+          g.description.toLowerCase().includes(q) ||
+          g.mode.toLowerCase().includes(q) ||
+          g.dim.toLowerCase().includes(q) ||
+          String(g.number).includes(q);
         return matchFilter && matchQuery;
       });
 
       const shown = filtered.slice(0, session.catalogLimit);
-      document.getElementById("catalogTotalPill").textContent = `${allGames.length} Distinct Games`;
+      document.getElementById("catalogTotalPill").textContent = `${allGames.length} Games (${BUILTIN_100_GAMES.length} Core)`;
       document.getElementById("catalogCountSummary").textContent = `Showing ${shown.length} of ${filtered.length} matching games`;
 
       const hasMore = shown.length < filtered.length;
@@ -2435,19 +2510,19 @@
                       ? "bg-purple-500/20 text-purple-300 border border-purple-400/35"
                       : "bg-cyan-500/20 text-cyan-300 border border-cyan-400/35"
                   }">
-                    ${g.dim} • ${escapeHtml(g.genre)}
+                    #${g.number} • ${g.dim} | ${escapeHtml(g.mode)}
                   </span>
                   <span class="text-slate-400">★ ${g.rating}</span>
                 </div>
                 <h3 class="font-display font-bold text-sm sm:text-base text-white mt-2.5">${escapeHtml(g.title)}</h3>
-                <p class="text-xs text-slate-400 mt-1 line-clamp-2">${escapeHtml(g.description)}</p>
+                <p class="text-xs text-slate-400 mt-1 line-clamp-3">${escapeHtml(g.description)}</p>
               </div>
               <div class="pt-2.5 border-t border-slate-800/80 flex items-center justify-between gap-2">
-                <span class="text-[11px] font-mono text-slate-400">
-                  ${g.multiplayer ? '<span class="text-emerald-300">● MP</span>' : "Solo"} • ${escapeHtml(g.studio)}
+                <span class="text-[11px] font-mono text-slate-400 truncate">
+                  ${g.multiplayer ? '<span class="text-emerald-300">● MP + Bots</span>' : "Solo"}
                 </span>
-                <button type="button" data-select-world="${g.id}" class="select-world-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-400/15 hover:bg-cyan-400 text-cyan-300 hover:text-slate-950 border border-cyan-400/40 transition">
-                  Launch
+                <button type="button" data-select-world="${g.id}" class="select-world-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-400/15 hover:bg-cyan-400 text-cyan-300 hover:text-slate-950 border border-cyan-400/40 transition shrink-0">
+                  Play
                 </button>
               </div>
             </article>
@@ -2459,7 +2534,7 @@
         btn.addEventListener("click", () => {
           selectWorldGame(btn.dataset.selectWorld);
           window.scrollTo({ top: 0, behavior: "smooth" });
-          showToast(`Loaded "${getCurrentGame().title}" into viewport`, "info");
+          showToast(`Loaded "${getCurrentGame().title}"`, "info");
         });
       });
     }
@@ -2494,131 +2569,130 @@
     });
 
     // =========================================================================
-    // 10. M3RCURY STUD!O — REAL MULTI-TAB CODE EDITOR & SANDBOX RUNNER
+    // 10. M3RCURY STUD!O — MULTI-FILE (HTML / CSS / JS) EDITOR + LIVE PREVIEW
     // =========================================================================
     const STUDIO_TEMPLATES = {
-      shooter2d: {
-        title: "Pulsar Laser Custom",
-        dim: "2D",
-        code: `// M3rcury Stud!o — 2D Laser Blaster Script
-// Available globals: ctx (2D Canvas), state (w, h, px, py, tick), keys
-let score = 0;
-const orbs = [];
-
-function update(ctx, state, keys) {
-  const { w, h } = state;
-  if (keys["ArrowLeft"] || keys["KeyA"]) state.px -= 6;
-  if (keys["ArrowRight"] || keys["KeyD"]) state.px += 6;
-  state.px = Math.max(20, Math.min(w - 20, state.px));
-
-  if (state.tick % 24 === 0) {
-    orbs.push({ x: 24 + Math.random() * (w - 48), y: -12, r: 11 });
-  }
-
-  for (let i = orbs.length - 1; i >= 0; i--) {
-    const o = orbs[i];
-    o.y += 3.8;
-    ctx.fillStyle = "#00f0ff";
-    ctx.beginPath();
-    ctx.arc(o.x, o.y, o.r, 0, Math.PI * 2);
-    ctx.fill();
-
-    if (Math.hypot(o.x - state.px, o.y - state.py) < o.r + 16) {
-      score += 25;
-      orbs.splice(i, 1);
-    } else if (o.y > h + 20) {
-      orbs.splice(i, 1);
-    }
-  }
-
-  // Draw custom starship
-  ctx.fillStyle = "#a855f7";
-  ctx.beginPath();
-  ctx.moveTo(state.px, state.py - 18);
-  ctx.lineTo(state.px - 16, state.py + 12);
-  ctx.lineTo(state.px + 16, state.py + 12);
-  ctx.closePath();
-  ctx.fill();
-
-  ctx.fillStyle = "#f8fafc";
-  ctx.font = "bold 13px JetBrains Mono, monospace";
-  ctx.fillText("CUSTOM SCORE: " + score, 14, 24);
-  return score;
-}`,
-      },
-      orbit3d: {
-        title: "Cosmic Cube Reactor 3D",
+      world3d: {
+        title: "Starlight Hovercraft 3D",
         dim: "3D",
-        code: `// M3rcury Stud!o — 3D Three.js Reactor Script
-// Available globals: THREE, scene, camera, renderer, keys
-const group = new THREE.Group();
-const core = new THREE.Mesh(
-  new THREE.IcosahedronGeometry(1.5, 0),
-  new THREE.MeshStandardMaterial({ color: 0x00f0ff, wireframe: true })
-);
-const ring = new THREE.Mesh(
-  new THREE.TorusGeometry(2.5, 0.14, 12, 48),
-  new THREE.MeshStandardMaterial({ color: 0xa855f7, emissive: 0xa855f7, emissiveIntensity: 0.5 })
-);
-group.add(core, ring);
-scene.add(group);
+        html: `<div class="hud">
+  <span class="tag">3D NAMETAG WORLD</span>
+  <span class="score" id="pts">SCORE: 0</span>
+</div>
+<canvas id="worldCanvas"></canvas>
+<div class="nametag" id="selfTag">🚀 Player</div>
+<div class="nametag bot" id="botTag">[BOT] NovaBot</div>`,
+        css: `body { margin: 0; background: #040712; color: #f8fafc; font-family: monospace; overflow: hidden; }
+canvas { display: block; width: 100vw; height: 100vh; }
+.hud { position: fixed; top: 10px; left: 10px; right: 10px; display: flex; justify-content: space-between; pointer-events: none; font-size: 12px; }
+.tag { background: rgba(168,85,247,0.25); border: 1px solid #c084fc; padding: 3px 8px; border-radius: 999px; color: #e9d5ff; }
+.score { color: #00f0ff; font-weight: bold; }
+.nametag { position: fixed; transform: translate(-50%, -120%); padding: 2px 8px; border-radius: 999px; font-size: 11px; background: rgba(8,47,73,0.9); border: 1px solid #22d3ee; color: #cffafe; pointer-events: none; }
+.nametag.bot { background: rgba(59,7,100,0.9); border-color: #c084fc; color: #f3e8ff; }`,
+        js: `const canvas = document.getElementById("worldCanvas");
+const ctx = canvas.getContext("2d");
+const selfTag = document.getElementById("selfTag");
+const botTag = document.getElementById("botTag");
+const ptsEl = document.getElementById("pts");
 
-function update(keys) {
-  const boost = keys["Space"] ? 0.08 : 0.02;
-  core.rotation.y += boost;
-  core.rotation.x += boost * 0.7;
-  ring.rotation.x += 0.025;
-  ring.rotation.y -= 0.02;
-}`,
-      },
-      pong2d: {
-        title: "Zero-G Plasma Bounce",
-        dim: "2D",
-        code: `// M3rcury Stud!o — Zero-G Plasma Bounce
-let bx = 160, by = 80, vx = 3.6, vy = 3.2, hits = 0;
+let px = 0, botX = -1.5, score = 0, t = 0;
+const keys = {};
+window.addEventListener("keydown", (e) => (keys[e.code] = true));
+window.addEventListener("keyup", (e) => (keys[e.code] = false));
 
-function update(ctx, state, keys) {
-  const { w, h } = state;
-  if (keys["ArrowLeft"] || keys["KeyA"]) state.px -= 7;
-  if (keys["ArrowRight"] || keys["KeyD"]) state.px += 7;
-  state.px = Math.max(45, Math.min(w - 45, state.px));
+function project(x, y, z, w, h) {
+  const fov = 260 / Math.max(1.2, z + 5);
+  return { sx: w * 0.5 + x * fov, sy: h * 0.58 - y * fov };
+}
 
-  bx += vx;
-  by += vy;
-  if (bx < 10 || bx > w - 10) vx *= -1;
-  if (by < 10) vy *= -1;
+function frame() {
+  const w = (canvas.width = window.innerWidth);
+  const h = (canvas.height = window.innerHeight);
+  t += 0.03;
+  if (keys["ArrowLeft"] || keys["KeyA"]) px -= 0.08;
+  if (keys["ArrowRight"] || keys["KeyD"]) px += 0.08;
+  px = Math.max(-2.6, Math.min(2.6, px));
+  botX = Math.sin(t) * 1.9;
+  score += 1;
+  ptsEl.textContent = "SCORE: " + score;
 
-  // Paddle bounce
-  if (by > h - 34 && Math.abs(bx - state.px) < 48) {
-    vy = -Math.abs(vy) * 1.03;
-    hits += 10;
-  } else if (by > h + 12) {
-    bx = w / 2; by = 50; vy = 3.2; hits = 0;
+  ctx.fillStyle = "#040712";
+  ctx.fillRect(0, 0, w, h);
+
+  // Perspective grid lines
+  ctx.strokeStyle = "rgba(0, 240, 255, 0.22)";
+  for (let gx = -4; gx <= 4; gx += 1) {
+    const a = project(gx, -0.6, 0, w, h);
+    const b = project(gx, -0.6, 14, w, h);
+    ctx.beginPath(); ctx.moveTo(a.sx, a.sy); ctx.lineTo(b.sx, b.sy); ctx.stroke();
   }
 
-  ctx.fillStyle = "#22c55e";
-  ctx.beginPath();
-  ctx.arc(bx, by, 10, 0, Math.PI * 2);
-  ctx.fill();
+  const pScreen = project(px, 0, 1.5, w, h);
+  ctx.fillStyle = "#00f0ff";
+  ctx.beginPath(); ctx.arc(pScreen.sx, pScreen.sy, 12, 0, Math.PI * 2); ctx.fill();
+  selfTag.style.left = pScreen.sx + "px";
+  selfTag.style.top = (pScreen.sy - 14) + "px";
 
-  ctx.fillStyle = "#38bdf8";
-  ctx.fillRect(state.px - 45, h - 24, 90, 10);
+  const bScreen = project(botX, 0.2, 2.2, w, h);
+  ctx.fillStyle = "#a855f7";
+  ctx.beginPath(); ctx.arc(bScreen.sx, bScreen.sy, 11, 0, Math.PI * 2); ctx.fill();
+  botTag.style.left = bScreen.sx + "px";
+  botTag.style.top = (bScreen.sy - 14) + "px";
 
-  ctx.fillStyle = "#e2e8f0";
-  ctx.font = "bold 13px JetBrains Mono, monospace";
-  ctx.fillText("BOUNCE SCORE: " + hits, 14, 24);
-  return hits;
-}`,
+  requestAnimationFrame(frame);
+}
+frame();`,
+      },
+      arcade2d: {
+        title: "Orbital Star Blaster 2D",
+        dim: "2D",
+        html: `<div class="bar"><span>2D ARCADE</span><span id="hud">PTS: 0</span></div>
+<canvas id="c2d"></canvas>`,
+        css: `body { margin: 0; background: #050918; color: #f8fafc; font-family: monospace; overflow: hidden; }
+canvas { display: block; width: 100vw; height: 100vh; }
+.bar { position: fixed; top: 8px; left: 10px; right: 10px; display: flex; justify-content: space-between; font-size: 12px; color: #38bdf8; pointer-events: none; }`,
+        js: `const c = document.getElementById("c2d");
+const ctx = c.getContext("2d");
+const hud = document.getElementById("hud");
+let x = 180, pts = 0, gems = [];
+const keys = {};
+window.addEventListener("keydown", (e) => (keys[e.code] = true));
+window.addEventListener("keyup", (e) => (keys[e.code] = false));
+
+function loop() {
+  const w = (c.width = window.innerWidth);
+  const h = (c.height = window.innerHeight);
+  if (keys["ArrowLeft"] || keys["KeyA"]) x -= 6;
+  if (keys["ArrowRight"] || keys["KeyD"]) x += 6;
+  x = Math.max(18, Math.min(w - 18, x));
+  if (Math.random() < 0.06) gems.push({ x: 20 + Math.random() * (w - 40), y: -10 });
+
+  ctx.fillStyle = "#050918";
+  ctx.fillRect(0, 0, w, h);
+
+  for (let i = gems.length - 1; i >= 0; i--) {
+    gems[i].y += 4;
+    ctx.fillStyle = "#22c55e";
+    ctx.beginPath(); ctx.arc(gems[i].x, gems[i].y, 8, 0, Math.PI * 2); ctx.fill();
+    if (Math.hypot(gems[i].x - x, gems[i].y - (h - 28)) < 22) {
+      pts += 20; hud.textContent = "PTS: " + pts; gems.splice(i, 1);
+    } else if (gems[i].y > h + 15) gems.splice(i, 1);
+  }
+
+  ctx.fillStyle = "#00f0ff";
+  ctx.fillRect(x - 14, h - 34, 28, 12);
+  requestAnimationFrame(loop);
+}
+loop();`,
       },
     };
 
     let studioFiles = {
-      main: STUDIO_TEMPLATES.shooter2d.code,
-      config: JSON.stringify({ maxPlayers: 8, nametags: true, gravity: 1.0, ambientColor: "#040816" }, null, 2),
+      html: STUDIO_TEMPLATES.world3d.html,
+      css: STUDIO_TEMPLATES.world3d.css,
+      js: STUDIO_TEMPLATES.world3d.js,
     };
-    let activeStudioFileTab = "main";
-    let studioSandboxRaf = null;
-    let studioSandbox3DRenderer = null;
+    let activeStudioFileTab = "js";
 
     const studioTextarea = document.getElementById("studioCodeTextarea");
     const studioLineNums = document.getElementById("studioLineNumbers");
@@ -2628,7 +2702,7 @@ function update(ctx, state, keys) {
       studioLineNums.innerHTML = Array.from({ length: lines }, (_, i) => i + 1).join("<br>");
     }
 
-    studioTextarea.value = studioFiles.main;
+    studioTextarea.value = studioFiles[activeStudioFileTab];
     updateCodeLineNumbers();
 
     studioTextarea.addEventListener("input", () => {
@@ -2674,11 +2748,10 @@ function update(ctx, state, keys) {
         if (!tpl) return;
         document.getElementById("studioProjectTitleInput").value = tpl.title;
         document.getElementById("studioProjectDimSelect").value = tpl.dim;
-        studioFiles.main = tpl.code;
-        activeStudioFileTab = "main";
-        studioTextarea.value = tpl.code;
+        studioFiles = { html: tpl.html, css: tpl.css, js: tpl.js };
+        studioTextarea.value = studioFiles[activeStudioFileTab];
         updateCodeLineNumbers();
-        logStudioConsole(`Loaded starter template: ${tpl.title} (${tpl.dim})`, "info");
+        logStudioConsole(`Loaded template: ${tpl.title} (${tpl.dim})`, "info");
       });
     });
 
@@ -2695,106 +2768,25 @@ function update(ctx, state, keys) {
       document.getElementById("studioConsoleOutput").innerHTML = "";
     });
 
-    function stopStudioSandbox() {
-      if (studioSandboxRaf) {
-        cancelAnimationFrame(studioSandboxRaf);
-        studioSandboxRaf = null;
-      }
-      if (studioSandbox3DRenderer) {
-        studioSandbox3DRenderer.dispose();
-        studioSandbox3DRenderer = null;
-      }
-      document.getElementById("studioSandbox3D").innerHTML = "";
-      document.getElementById("studioSandboxBadge").textContent = "SANDBOX STOPPED";
+    function buildCombinedStudioHtml(bundle) {
+      return `<!DOCTYPE html><html><head><style>${bundle.css || ""}</style></head><body>${bundle.html || ""}<script>
+        window.onerror = function(msg) { console.error(msg); };
+        try { ${bundle.js || ""} } catch (e) { console.error(e.message); }
+      <\/script></body></html>`;
     }
 
-    document.getElementById("studioStopCodeBtn").addEventListener("click", () => {
-      stopStudioSandbox();
-      logStudioConsole("Execution stopped.", "info");
+    document.getElementById("studioRunCodeBtn").addEventListener("click", () => {
+      studioFiles[activeStudioFileTab] = studioTextarea.value;
+      const iframe = document.getElementById("studioPreviewIframe");
+      iframe.srcdoc = buildCombinedStudioHtml(studioFiles);
+      document.getElementById("studioSandboxBadge").textContent = "LIVE PREVIEW RUNNING";
+      logStudioConsole("Rendered HTML + CSS + JS bundle in sandboxed preview.", "success");
     });
 
-    document.getElementById("studioRunCodeBtn").addEventListener("click", () => {
-      stopStudioSandbox();
-      studioFiles[activeStudioFileTab] = studioTextarea.value;
-      const code = studioFiles.main;
-      const dim = document.getElementById("studioProjectDimSelect").value;
-      const s2d = document.getElementById("studioSandbox2D");
-      const s3d = document.getElementById("studioSandbox3D");
-
-      try {
-        if (dim === "3D" && typeof THREE !== "undefined") {
-          s2d.classList.add("hidden");
-          s3d.classList.remove("hidden");
-          const rect = s3d.parentElement.getBoundingClientRect();
-          const w = Math.max(260, rect.width);
-          const h = Math.max(150, rect.height);
-
-          const scene = new THREE.Scene();
-          scene.background = new THREE.Color(0x040712);
-          const camera = new THREE.PerspectiveCamera(60, w / h, 0.1, 100);
-          camera.position.set(0, 2, 7);
-          const renderer = new THREE.WebGLRenderer({ antialias: true });
-          renderer.setSize(w, h);
-          s3d.appendChild(renderer.domElement);
-          studioSandbox3DRenderer = renderer;
-
-          scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-          const pLight = new THREE.PointLight(0x00f0ff, 1.5, 40);
-          pLight.position.set(4, 6, 6);
-          scene.add(pLight);
-
-          const buildFn = new Function("THREE", "scene", "camera", "renderer", "keys", `${code}\nif (typeof update === "function") return update;`);
-          const updateFn = buildFn(THREE, scene, camera, renderer, keysDown);
-
-          document.getElementById("studioSandboxBadge").textContent = "RUNNING 3D SCRIPT • LIVE";
-          logStudioConsole("Compiled & launched 3D Three.js script successfully.", "success");
-
-          const loop3D = () => {
-            try {
-              if (updateFn) updateFn(keysDown);
-              renderer.render(scene, camera);
-              studioSandboxRaf = requestAnimationFrame(loop3D);
-            } catch (runtimeErr) {
-              logStudioConsole(`Runtime Error: ${runtimeErr.message}`, "error");
-              stopStudioSandbox();
-            }
-          };
-          studioSandboxRaf = requestAnimationFrame(loop3D);
-        } else {
-          s3d.classList.add("hidden");
-          s2d.classList.remove("hidden");
-          const rect = s2d.parentElement.getBoundingClientRect();
-          const w = Math.max(260, Math.floor(rect.width));
-          const h = Math.max(150, Math.floor(rect.height));
-          s2d.width = w;
-          s2d.height = h;
-          const sctx = s2d.getContext("2d");
-
-          const sbState = { w, h, px: w / 2, py: h - 30, tick: 0 };
-          const buildFn = new Function("ctx", "state", "keys", `${code}\nif (typeof update === "function") return update;`);
-          const updateFn = buildFn(sctx, sbState, keysDown);
-
-          document.getElementById("studioSandboxBadge").textContent = "RUNNING 2D SCRIPT • LIVE";
-          logStudioConsole("Compiled & launched 2D Canvas script successfully.", "success");
-
-          const loop2D = () => {
-            try {
-              sbState.tick += 1;
-              sctx.fillStyle = "#040712";
-              sctx.fillRect(0, 0, w, h);
-              if (updateFn) updateFn(sctx, sbState, keysDown);
-              studioSandboxRaf = requestAnimationFrame(loop2D);
-            } catch (runtimeErr) {
-              logStudioConsole(`Runtime Error: ${runtimeErr.message}`, "error");
-              stopStudioSandbox();
-            }
-          };
-          studioSandboxRaf = requestAnimationFrame(loop2D);
-        }
-      } catch (syntaxErr) {
-        logStudioConsole(`Compile Error: ${syntaxErr.message}`, "error");
-        showToast("Code error — check Stud!o console", "error");
-      }
+    document.getElementById("studioStopCodeBtn").addEventListener("click", () => {
+      document.getElementById("studioPreviewIframe").srcdoc = "";
+      document.getElementById("studioSandboxBadge").textContent = "PREVIEW STOPPED";
+      logStudioConsole("Preview stopped.", "info");
     });
 
     document.getElementById("studioPublishGameBtn").addEventListener("click", async () => {
@@ -2813,7 +2805,9 @@ function update(ctx, state, keys) {
         title,
         dim,
         author: session.handle,
-        code: studioFiles.main,
+        html: studioFiles.html,
+        css: studioFiles.css,
+        js: studioFiles.js,
         createdAt: Date.now(),
       };
 
@@ -2823,7 +2817,7 @@ function update(ctx, state, keys) {
       renderProfileView();
       selectWorldGame(publishedObj.id);
       switchWorkspaceView("hub");
-      showToast(`Published "${title}" to the M3rcury Universe!`, "success");
+      showToast(`Published "${title}" to your M3rcury library!`, "success");
     });
 
     // =========================================================================
